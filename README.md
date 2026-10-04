@@ -38,9 +38,20 @@ CyberMail, ASP.NET Core 8.0 MVC ve ASP.NET Core Identity altyapısı kullanılar
 | **Kategoriye Göre Mesajlar** |
 <img width="1600" height="798" alt="MessageCategories" src="https://github.com/user-attachments/assets/b65b86e2-3d47-4f0b-9251-448e995b95d2" />
 
+| **Admin Anasayfa** |
+<img width="1600" height="800" alt="AdminDashboard" src="https://github.com/user-attachments/assets/babe1631-59db-4fe1-85d2-442492d62041" />
 
+| **Admin Kullanıcılar Yönetimi** |
+<img width="1600" height="800" alt="AdminUsers" src="https://github.com/user-attachments/assets/6ee7004e-d919-4465-808e-3e072f98cf59" />
 
+| **Admin Mesaj İstatistikleri** |
+<img width="1600" height="803" alt="AdminMessages" src="https://github.com/user-attachments/assets/d0fadbbd-49ec-4178-a713-0f392ed401ef" />
 
+| **Admin Şikayetler Yönetimi** |
+<img width="1600" height="800" alt="AdminComplaints" src="https://github.com/user-attachments/assets/3e3221f4-164d-4b1f-ba74-d46944c23ac8" />
+
+| **Admin Kategori Yönetimi** |
+<img width="1600" height="800" alt="AdminCategories" src="https://github.com/user-attachments/assets/d038d291-2fb0-40b9-b41c-acd33db9b2ff" />
 
 ## 🚀 Öne Çıkan Özellikler
 
