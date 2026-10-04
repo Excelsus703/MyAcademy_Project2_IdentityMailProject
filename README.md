@@ -1,15 +1,46 @@
-# MyAcademy_IdentityMailProject
+# 
 
-# ✉️ CyberMail - Kurumsal İç Mesajlaşma Platformu (Identity & Messaging Platform)
+# ✉️ MyAcademy_IdentityMailProject - CyberMail 
 
-CyberMail, ASP.NET Core 8.0 MVC ve ASP.NET Core Identity altyapısı kullanılarak geliştirilmiş, rol tabanlı yetkilendirme (RBAC), gelişmiş analitik panelleri, dosya ekleme özellikli mesajlaşma akışları ve otomatik sistem kurulumu (Data Seeding) mekanizmalarına sahip modüler bir kurumsal iletişim platformudur.
+CyberMail, ASP.NET Core 8.0 MVC ve ASP.NET Core Identity altyapısı kullanılarak geliştirilmiş, rol tabanlı yetkilendirme, gelişmiş analitik panelleri, dosya ekleme özellikli mesajlaşma akışları ve otomatik sistem kurulumu (Data Seeding) mekanizmalarına sahip modüler bir kurumsal iletişim platformudur.
 
 > **💡 Modern Tasarım Yaklaşımı:** Projenin tüm görsel tasarımı, UI elemanları ve CSS yapısı tamamen **Stitch AI** yapay zeka aracı ile işbirliği yapılarak geliştirilmiştir.
 
 ## 📸 Ekran Görüntüleri
 
-| **Kayıt Ol (Register)** | **E-Posta Doğrulama** | **Gelen Kutusu & Arama** | **Admin Paneli (Dashboard)** | 
-|  |  |  |  | 
+| **Giriş Yap** |
+<img width="1600" height="803" alt="Login" src="https://github.com/user-attachments/assets/6804e8c2-481f-4d62-b24b-dcdfb4395dbc" />
+
+| **Kayıt Ol** |
+<img width="1600" height="798" alt="Register" src="https://github.com/user-attachments/assets/5ed75580-fba4-4c81-afa7-d1ddd038bceb" />
+
+| **Doğrulama** |
+<img width="1600" height="798" alt="VerifyQuestion" src="https://github.com/user-attachments/assets/623a118b-99a0-42f3-9d79-09283ef777d0" />
+
+| **Doğrulama 2** |
+<img width="1600" height="799" alt="VerifyEmail" src="https://github.com/user-attachments/assets/75719f08-726d-4774-8c52-7ade9314b7fb" />
+
+| **Şifremi Unuttum** |
+<img width="1600" height="799" alt="ForgetPassword" src="https://github.com/user-attachments/assets/8a7944be-6bdc-43f6-ad3e-1f16f32df9ff" />
+
+| **Şifremi Unuttum 2** |
+<img width="1600" height="800" alt="ForgetPassword2" src="https://github.com/user-attachments/assets/b32639e9-430e-4971-b913-8dc639bf50f1" />
+
+| **Şifremi Unuttum 3** |
+<img width="1600" height="799" alt="ForgetPassword3" src="https://github.com/user-attachments/assets/740aba59-86b4-4708-a53e-df53f3ed8b50" />
+
+| **Kullanıcı Profili** |
+<img width="1600" height="803" alt="UserProfile" src="https://github.com/user-attachments/assets/e4afb06c-eb05-4aed-8d14-a7d76696ae21" />
+
+| **Mesajlar Sayfası** |
+<img width="1600" height="800" alt="MessageIndex" src="https://github.com/user-attachments/assets/fe02f3aa-eea5-4565-b29f-80b5fed041a5" />
+
+| **Kategoriye Göre Mesajlar** |
+<img width="1600" height="798" alt="MessageCategories" src="https://github.com/user-attachments/assets/b65b86e2-3d47-4f0b-9251-448e995b95d2" />
+
+
+
+
 
 ## 🚀 Öne Çıkan Özellikler
 
