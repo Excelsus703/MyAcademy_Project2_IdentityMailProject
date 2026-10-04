@@ -148,7 +148,7 @@ Sistemi hemen test etmek için `DbInitializer` tarafından otomatik oluşturulan
 
 * **E-Posta:** `auth@cybermail.com`
 
-* **Şifre:** `Admin123!`
+* **Şifre:** `Password12*`
 
 * **Rol:** `Süper Admin`
 
