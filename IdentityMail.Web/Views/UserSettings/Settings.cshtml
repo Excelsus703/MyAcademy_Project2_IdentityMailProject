@@ -1,0 +1,221 @@
+﻿@model UserSettingsViewModel
+
+@{
+    ViewData["Title"] = "Profil Ayarları";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<main class="w-full pt-20 px-4 md:px-6 flex flex-col gap-6 overflow-x-hidden">
+    <!-- Header -->
+    <header class="mb-stack-lg border-b-4 border-brutal-black pb-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="font-headline-lg text-headline-lg font-black text-brutal-black uppercase tracking-tight">@ViewData["Title"]</h1>
+            </div>
+        </div>
+    </header>
+    <!-- Profil Özeti / Avatar Kartı -->
+    <section class="bg-surface brutal-border-thick brutal-shadow p-6 mb-stack-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div class="relative">
+                <img alt="@ViewBag.fullName" class="w-28 h-28 object-cover brutal-border-thick brutal-shadow bg-surface-container-high" src="@Model.appUser.ProfileImageUrl" />
+                @if (Model.appUser.EmailConfirmed == true)
+                {
+                    <span class="absolute -bottom-2 -right-2 bg-brutal-yellow text-brutal-black p-1 brutal-border text-xs flex items-center justify-center" title="Doğrulanmış Profil">
+                        <span class="material-symbols-outlined text-sm font-bold">verified</span>
+                    </span>
+                }
+                else
+                {
+                    <span class="absolute -bottom-2 -right-2 bg-brutal-yellow text-brutal-black p-1 brutal-border text-xs flex items-center justify-center" title="Doğrulanmamış Profil">
+                        <span class="material-symbols-outlined text-sm font-bold">verified_off</span>
+                    </span>
+                }
+            </div>
+            <div class="relative">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <h2 class="font-headline-md text-headline-md font-black text-brutal-black">@ViewBag.fullName</h2>
+                    <span class="bg-brutal-yellow text-brutal-black font-black text-label-md uppercase px-2.5 py-0.5 brutal-border brutal-shadow-none tracking-wider">Kullanıcı Rolü</span>
+                </div>
+                <p class="font-body-md font-bold text-on-surface-variant">@Model.appUser.UserName</p>
+                <p class="font-body-md text-on-surface mt-1 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-base">mail</span>
+                    @Model.appUser.Email
+                </p>
+            </div>
+
+        </div>
+        <div class="flex flex-col items-center gap-3 w-full sm:w-auto">
+            <div class="flex flex-wrap items-center gap-3">
+                <form asp-controller="UserSettings" asp-action="UpdatePhoto" method="post" enctype="multipart/form-data" id="photoForm" class="m-0">
+                    <label class="cursor-pointer flex-1 sm:flex-initial px-5 py-2.5 bg-brutal-yellow text-brutal-black brutal-border brutal-shadow font-bold text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">photo_camera</span>
+                        Fotoğrafı Değiştir
+                        <input type="file" name="profileImage" class="hidden" accept="image/png, image/jpeg" onchange="document.getElementById('photoForm').submit();" />
+                    </label>
+                </form>
+                <form asp-controller="UserSettings" asp-action="RemovePhoto" method="post" class="m-0">
+                    <button type="submit" onclick="return confirm('Profil fotoğrafını kaldırmak istediğinize emin misiniz?');" class="flex-1 sm:flex-initial px-5 py-2.5 bg-surface text-brutal-red brutal-border brutal-shadow font-bold text-label-lg uppercase hover:bg-brutal-red hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                        Kaldır
+                    </button>
+                </form>
+            </div>
+            @if (TempData["ImageSuccessMessage"] != null)
+            {
+                <div class="inline-flex items-center gap-2 bg-brutal-yellow text-brutal-black border-2 border-brutal-black px-3 py-1.5 text-xs font-bold brutal-shadow w-fit">
+                    <span class="material-symbols-outlined text-sm text-black-600">check_circle</span>
+                    @TempData["ImageSuccessMessage"]
+                </div>
+            }
+
+            @if (TempData["ImageErrorMessage"] != null)
+            {
+                <div class="inline-flex items-center gap-2 bg-red-100 text-brutal-black border-2 border-brutal-black px-3 py-1.5 text-xs font-bold brutal-shadow w-fit">
+                    <span class="material-symbols-outlined text-sm text-red-600">error</span>
+                    @TempData["ImageErrorMessage"]
+                </div>
+            }
+        </div>
+    </section>
+    <!-- Form Izgarası (Grid Layout) -->
+    <div class="space-y-stack-lg">
+        <!-- Form Bölümü 1: Kişisel Bilgiler -->
+        <section class="bg-surface brutal-border-thick brutal-shadow p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-black">
+                <div class="w-10 h-10 bg-primary text-white brutal-border flex items-center justify-center font-bold">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+                <div>
+                    <h3 class="font-headline-md text-headline-md font-black text-brutal-black uppercase">Kişisel Bilgiler</h3>
+                    <p class="font-label-md text-on-surface-variant">Genel kimlik ve erişim bilgilerinizi güncelleyin.</p>
+                </div>
+            </div>
+            <form asp-controller="UserSettings" asp-action="UpdateInfos" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Ad</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" asp-for="appUser.FirstName" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Soyad</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" asp-for="appUser.LastName" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Kullanıcı Adı</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 font-black text-on-surface-variant">@@</span>
+                            <input class="w-full pl-9 pr-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" asp-for="appUser.UserName" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">E-posta</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <div class="relative flex-1">
+                                <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="email" asp-for="appUser.Email" readonly />
+                                @if (Model.appUser.EmailConfirmed == false)
+                                {
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 bg-brutal-yellow text-brutal-black text-sm-center font-black px-2 py-0.5 brutal-border select-none">
+                                        <span class="material-symbols-outlined text-sm font-bold">verified_off</span>
+                                        DOĞRULANMAMIŞ
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 bg-brutal-yellow text-brutal-black text-sm-center font-black px-2 py-0.5 brutal-border select-none">
+                                        <span class="material-symbols-outlined text-sm font-bold">verified</span>
+                                        DOĞRULANMIŞ
+                                    </span>
+                                }
+                            </div>
+                            @if (Model.appUser.EmailConfirmed == false)
+                            {
+                                <a asp-controller="Auth" asp-action="VerifyEmail" asp-route-email="@Model.appUser.Email" class="px-4 py-3 bg-brutal-yellow text-brutal-black brutal-border-thick brutal-shadow font-bold text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer">
+                                    <span class="material-symbols-outlined text-base font-bold">mark_email_read</span>
+                                    Doğrula
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Telefon</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="tel" asp-for="appUser.PhoneNumber" />
+                    </div>
+                </div>
+                <br />
+                <div class="flex items-center justify-end gap-4 w-full sm:w-auto">
+                    @if (TempData["InfoSuccessMessage"] != null)
+                    {
+                        <div class="inline-flex items-center gap-2 bg-brutal-yellow text-brutal-black border-2 border-brutal-black px-3 py-1.5 text-xs font-bold brutal-shadow w-fit">
+                            <span class="material-symbols-outlined text-sm text-black-600">check_circle</span>
+                            @TempData["InfoSuccessMessage"]
+                        </div>
+                    }
+
+                    @if (TempData["InfoErrorMessage"] != null)
+                    {
+                        <div class="inline-flex items-center gap-2 bg-red-100 text-brutal-black border-2 border-brutal-black px-3 py-1.5 text-xs font-bold brutal-shadow w-fit">
+                            <span class="material-symbols-outlined text-sm text-red-600">error</span>
+                            @TempData["InfoErrorMessage"]
+                        </div>
+                    }
+
+                    <button type="submit" class="flex-1 sm:flex-initial px-8 py-3 bg-brutal-yellow text-brutal-black brutal-border-thick brutal-shadow font-black text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base font-black">save</span>
+                        Değişiklikleri Kaydet
+                    </button>
+                </div>
+            </form>
+        </section>
+        <!-- Form Bölümü 2: Güvenlik ve Şifre -->
+        <section class="bg-surface brutal-border-thick brutal-shadow p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-black">
+                <div class="w-10 h-10 bg-brutal-blue text-white brutal-border flex items-center justify-center font-bold">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+                <div>
+                    <h3 class="font-headline-md text-headline-md font-black text-brutal-black uppercase">Güvenlik ve Şifre</h3>
+                    <p class="font-label-md text-on-surface-variant">Şifre değişimleri ve iki adımlı kimlik doğrulama ayarları.</p>
+                </div>
+            </div>
+            <form asp-controller="UserSettings" asp-action="UpdatePassword" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Mevcut Şifre</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="••••••••••••" asp-for="ChangePassword.CurrentPassword" type="password" required />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Yeni Şifre</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="Yeni şifreniz" asp-for="ChangePassword.NewPassword" type="password" required />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Şifre Tekrarı</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="Şifrenizi doğrulayın" asp-for="ChangePassword.ConfirmPassword" type="password" required />
+                    </div>
+                </div>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="my-lg p-md brutal-border bg-gray-100 border-l-[12px] border-l-brutal-red">
+                        <p class="font-bold uppercase text-brutal-red mb-2">Hay Aksi !!!:</p>
+                        @Html.ValidationSummary(false, string.Empty, new { @class = "list-disc pl-5 font-medium space-y-2" })
+                    </div>
+                }
+                <div class="flex items-center justify-end gap-4 w-full sm:w-auto">
+                    @if (TempData["PasswordSuccessMessage"] != null)
+                    {
+                        <div class="inline-flex items-center gap-2 bg-brutal-yellow text-brutal-black border-2 border-brutal-black px-3 py-1.5 text-xs font-bold brutal-shadow w-fit">
+                            <span class="material-symbols-outlined text-sm text-black-600">check_circle</span>
+                            @TempData["PasswordSuccessMessage"]
+                        </div>
+                    }
+                    <button type="submit" class="flex-1 sm:flex-initial px-8 py-3 bg-brutal-yellow text-brutal-black brutal-border-thick brutal-shadow font-black text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base font-black">save</span>
+                        Değişiklikleri Kaydet
+                    </button>
+                </div>
+            </form>
+        </section>
+        <br />
+    </div>
+</main>

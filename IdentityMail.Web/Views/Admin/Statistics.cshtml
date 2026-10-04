@@ -1,0 +1,240 @@
+﻿@using IdentityMail.Web.Entites.Enums
+@model List<AdminMessageStatistics>
+
+@{
+    ViewData["Title"] = "Mesaj İstatistikleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main class="flex-1 overflow-y-auto space-y-6 bg-white" data-purpose="role-permissions-dashboard">
+    <div class="flex flex-col w-full space-y-6">
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-3 border-black pb-5 bg-white">
+            <div class="flex items-center gap-3">
+                <span class="w-4 h-4 bg-brutal-yellow border-2 border-black inline-block"></span>
+                <h1 class="font-h1 text-h1 uppercase text-black tracking-tight">@ViewData["Title"]</h1>
+            </div>
+        </div>
+        <!-- 4 Clean Neobrutalist KPI Stat Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                    <span class="font-label text-label uppercase tracking-wider text-neutral-600">Toplam Mesaj Sayısı</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="font-mono text-3xl font-black tracking-tight text-black">@ViewBag.TotalMessages</div>
+                    <span class="material-symbols-outlined text-neutral-400 text-2xl">mail</span>
+                </div>
+            </div>
+            <div class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                    <span class="font-label text-label uppercase tracking-wider text-neutral-600">Son 24 Saat</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="font-mono text-3xl font-black tracking-tight text-black">@ViewBag.Last24Hours</div>
+                    <span class="material-symbols-outlined text-neutral-400 text-2xl">schedule</span>
+                </div>
+            </div>
+            <div class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                    <span class="font-label text-label uppercase tracking-wider text-neutral-600">Bu Hafta</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="font-mono text-3xl font-black tracking-tight text-black">@ViewBag.ThisWeek</div>
+                    <span class="material-symbols-outlined text-neutral-400 text-2xl">date_range</span>
+                </div>
+            </div>
+            <div class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                    <span class="font-label text-label uppercase tracking-wider text-neutral-600">Bu Ay</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="font-mono text-3xl font-black tracking-tight text-black">@ViewBag.ThisMonth</div>
+                    <span class="material-symbols-outlined text-neutral-400 text-2xl">calendar_month</span>
+                </div>
+            </div>
+        </section>
+        <!-- Main Content: Section 1 & Section 2 -->
+        <section class="bg-white border-3 border-black p-6 shadow-brutal">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-3 border-black pb-4 mb-5 gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-brutal-blue border-2 border-black inline-block"></span>
+                    <h2 class="font-h2 text-h2 uppercase text-black tracking-tight">MESAJLAR</h2>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[1100px]">
+                    <thead>
+                        <tr class="bg-black text-white font-label text-label uppercase border-b-3 border-black">
+                            <th class="p-3 border-r-2 border-neutral-700 tracking-wider">MESSAGE ID &amp; Tarih</th>
+                            <th class="p-3 border-r-2 border-neutral-700 tracking-wider">Gönderen</th>
+                            <th class="p-3 border-r-2 border-neutral-700 tracking-wider">Alıcı</th>
+                            <th class="p-3 border-r-2 border-neutral-700 tracking-wider">Konu &amp; Önizleme</th>
+                            <th class="p-3 border-r-2 border-neutral-700 tracking-wider">Kategori</th>
+                            <th class="p-3 text-right tracking-wider">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y-2 divide-black font-body-sm text-body-sm font-medium">
+                        @foreach (var item in Model)
+                        {
+                            <!-- ROW 1: Delivered Transactional -->
+                            <tr class="hover:bg-neutral-100 transition-colors group" ">
+                                <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                    <span class="font-black text-black">#ID @item.Id</span>
+                                    <div class="text-[11px] text-neutral-500 font-normal">@item.SendDate.ToLongDateString() • @item.SendDate.ToLongTimeString()</div>
+                                </td>
+                                <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="auth@emailpro.io">
+                                    <img src="@item.SenderProfileImageUrl" style="width:50px;height:50px;display:inline-flex;" />
+                                    <span>@item.SenderEmail</span>
+                                </td>
+                                <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="alex.reyes@cyberpulse.tech">
+                                    <img src="@item.ReceiverProfileImageUrl" style="width:50px;height:50px;display:inline-flex;" />
+                                    <span>@item.ReceiverEmail</span>
+                                </td>
+                                <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                    @{
+                                        var shortSubject = @item.Subject.Length > 60 ? @item.Subject.Substring(0, 55) + "..." : @item.Subject;
+                                    }
+                                    <div class="font-bold text-black truncate">@shortSubject</div>
+                                    <div class="font-mono text-[11px] text-neutral-600 truncate">
+                                        @{
+                                            var plainText = System.Text.RegularExpressions.Regex.Replace(item.Body ?? "", "<.*?>", string.Empty);
+                                            var preview = plainText.Length > 50 ? plainText.Substring(0, 90) + "..." : plainText;
+                                        }
+                                        @preview
+                                    </div>
+                                </td>
+                                <td class="p-3 border-r-2 border-neutral-300">
+                                    @{
+                                        // Temanın Badge için tanımlanmış Tailwind sınıflarını çekiyoruz
+                                        var themePreset = item.CategoryTheme.GetPreset();
+                                        var bgStyle = themePreset.CardBg;
+                                    }
+
+                                    <span class="inline-block px-2 py-0.5 border-2 border-black font-label text-[14px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000] @bgStyle">
+                                        @item.Category
+                                    </span>
+                                </td>
+                                <td class="p-3 text-right">
+                                    <div class="flex items-center justify-end gap-1.5">
+                                        <button type="button"
+                                                onclick="loadMessageDetail(@item.Id)"
+                                                class="px-2 py-1 bg-brutal-yellow text-black border-2 border-black font-label text-[14px] font-black uppercase shadow-[2px_2px_0px_#000] active:translate-y-0.5 transition-all"
+                                                title="Inspect Message Envelope">
+                                            İncele
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- PAGINATION FOOTER -->
+            <div class="p-4 bg-white border-t-3 border-black flex flex-col md:flex-row items-center justify-between gap-4 select-none">
+                <div class="flex items-center gap-4">
+                </div>
+                <!-- Page Nav Controls -->
+                <div class="flex items-center gap-1.5 flex-wrap">
+
+                    <!-- PREV Butonu -->
+                    @if (ViewBag.CurrentPage > 1)
+                    {
+                        <a asp-action="Statistics" asp-route-page="@(ViewBag.CurrentPage - 1)" class="px-3 py-1.5 bg-neutral-100 hover:bg-brutal-yellow border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">chevron_left</span> PREV
+                        </a>
+                    }
+
+                    @{
+                        int currentPage = ViewBag.CurrentPage;
+                        int totalPages = ViewBag.TotalPages;
+                        int startPage = Math.Max(1, currentPage - 1);
+                        int endPage = Math.Min(totalPages, currentPage + 1);
+                    }
+
+                    <!-- İLK SAYFA VE ÜÇ NOKTA -->
+                    @if (startPage > 1)
+                    {
+                        <a asp-action="Statistics" asp-route-page="1"
+                           class="min-w-8 h-8 px-2 bg-white text-black border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">
+                            1
+                        </a>
+                        @if (startPage > 2)
+                        {
+                            <span class="px-1 font-black text-sm">...</span>
+                        }
+                    }
+
+                    <!-- AKTİF SAYFA VE ETRAFINDAN SADECE 1 SAYFA -->
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        <a asp-action="Statistics" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "bg-brutal-yellow" : "bg-white") min-w-8 h-8 px-2  border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">@i</a>
+                    }
+
+                    <!-- SON SAYFA VE ÜÇ NOKTA -->
+                    @if (endPage < totalPages)
+                    {
+                        @if (endPage < totalPages - 1)
+                        {
+                            <span class="px-1 font-black text-sm">...</span>
+                        }
+                        <a asp-action="Statistics" asp-route-page="@totalPages"
+                           class="min-w-8 h-8 px-2 bg-white text-black border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">
+                            @totalPages
+                        </a>
+                    }
+
+                    <!-- NEXT / SONRAKİ -->
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <a asp-action="Statistics" asp-route-page="@(ViewBag.CurrentPage + 1)" class="px-3 py-1.5 bg-white hover:bg-brutal-yellow border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                            NEXT <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                        </a>
+                    }
+                </div>
+            </div>
+
+
+            <script>
+                function loadMessageDetail(messageId) {
+                    const container = document.getElementById("inspectorDrawer");
+                    if (!container) return;
+
+                    // 1. Yükleniyor durumunu bas
+                    container.innerHTML = `<div class="p-4 font-black">YÜKLENİYOR...</div>`;
+
+                    // 2. Butona tıklandığı an detaya kaydır
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    const url = '@Url.Action("GetMessageDetail", "Admin")' + '?id=' + messageId;
+
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) throw new Error("Veri çekilemedi.");
+                            return response.text();
+                        })
+                        .then(html => {
+                            container.innerHTML = html;
+
+                            // 3. İçerik geldikten sonra dikkat çekmek için kısa süreli sarı bir parlama efekti (Opsiyonel)
+                            container.classList.add("ring-4", "ring-yellow-400", "transition-all");
+                            setTimeout(() => {
+                                container.classList.remove("ring-4", "ring-yellow-400");
+                            }, 1000);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            container.innerHTML = `<div class="p-4 font-black text-red-600">Mesaj detayı yüklenirken bir hata oluştu.</div>`;
+                        });
+                }
+            </script>
+
+        </section>
+
+        <!-- QUICK INSPECTOR / PREVIEW DRAWER (EXPANDABLE DETAIL SECTION) -->
+        <section class="bg-white border-3 border-black p-5 shadow-[6px_6px_0px_#000]" id="inspectorDrawer">
+            @await Component.InvokeAsync("AdminMessageDetail")
+        </section>
+
+    </div>
+</main>

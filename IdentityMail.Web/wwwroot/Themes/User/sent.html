@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EmailPro - Sent</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fdf7ff",
+                        "on-surface": "#1d1b20",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e6e0e9",
+                        "on-secondary-fixed": "#1f1635",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-container": "#503d00",
+                        "inverse-primary": "#cfbcff",
+                        "inverse-surface": "#322f35",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#ded8e0",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#645a7d",
+                        "primary-container": "#6750a4",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-surface-variant": "#494551",
+                        "surface": "#fdf7ff",
+                        "secondary": "#63597c",
+                        "on-primary-fixed": "#22005d",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e6e0e9",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ece6ee",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f2ecf4",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#c9a74d",
+                        "surface-tint": "#6750a4",
+                        "tertiary": "#765b00",
+                        "primary-fixed": "#e9ddff",
+                        "secondary-container": "#e1d4fd",
+                        "on-background": "#1d1b20",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "on-primary-container": "#e0d2ff",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "primary": "#4f378a",
+                        "surface-container-low": "#f8f2fa",
+                        "secondary-fixed": "#e9ddff",
+                        "background": "#fdf7ff",
+                        "outline": "#7a7582",
+                        "outline-variant": "#cbc4d2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "layout-margin": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {},
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .neobrutalist-shadow {
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+
+        .neobrutalist-shadow-hover:hover {
+            box-shadow: 6px 6px 0px 0px #000000;
+            transform: translate(-2px, -2px);
+        }
+
+        .neobrutalist-shadow-active:active {
+            box-shadow: 2px 2px 0px 0px #000000;
+            transform: translate(2px, 2px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen overflow-hidden flex">
+    <!-- SideNavBar -->
+    <nav class="fixed left-0 top-0 h-screen w-[240px] bg-surface dark:bg-on-background border-r-2 border-on-surface shadow-[4px_0_0_0_#1d1b20] z-50 flex flex-col h-full py-lg px-md transition-all duration-200 ease-in-out hidden md:flex">
+        <div class="mb-xl flex items-center gap-sm">
+            <div class="w-10 h-10 bg-primary border-2 border-on-surface neobrutalist-shadow rounded-full flex items-center justify-center overflow-hidden">
+                <img class="w-full h-full object-cover" data-alt="A stylized, flat-vector avatar of a user profile in a neobrutalist style with bold black outlines and vibrant colors, minimal shading, clean shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFpUO8aSGaeCDdFietdPAD9PxqhhVZeC_W7nZEjBPwS3PDPWe-xRde2R9xbpJ19x68_zlwSbg3AP4cNdPwIOisgWJrbLLKJkdJTkKLm90pD3AINPWNFC7SgLlNd7Z0qh5UoqdId81F2OOM8s2taVJK1pk-mMxWrdE0mtxbZDj2hT1P0E5A9lC6AVjKIOXOFohABNTDUflkeNa3gogjqmWTBfoCpiWpxGFcxh6CsSEn8PXoptfVuztw" />
+            </div>
+            <div>
+                <h1 class="font-h2 text-h2 font-black text-on-surface uppercase tracking-tight">EmailPro</h1>
+                <p class="font-label text-label text-on-surface-variant font-bold">Modern Mail Management</p>
+            </div>
+        </div>
+        <button class="w-full bg-primary text-on-primary font-bold py-md px-lg border-2 border-on-surface neobrutalist-shadow neobrutalist-shadow-hover neobrutalist-shadow-active mb-xl transition-all font-h2 text-h2 uppercase">
+            Compose
+        </button>
+        <div class="flex-1 flex flex-col gap-xs overflow-y-auto">
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">inbox</span>
+                <span>Inbox</span>
+            </a>
+            <a class="flex items-center gap-md bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface neobrutalist-shadow px-md py-sm font-black transition-colors duration-200 ease-in-out transform -translate-y-1" href="#">
+                <span class="material-symbols-outlined font-black" style="font-variation-settings: 'FILL' 1;">send</span>
+                <span>Sent</span>
+            </a>
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">description</span>
+                <span>Drafts</span>
+            </a>
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">delete</span>
+                <span>Trash</span>
+            </a>
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">archive</span>
+                <span>Archive</span>
+            </a>
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">report</span>
+                <span>Spam</span>
+            </a>
+        </div>
+        <div class="mt-auto pt-lg border-t-2 border-on-surface flex flex-col gap-xs">
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">settings</span>
+                <span>Settings</span>
+            </a>
+            <a class="flex items-center gap-md text-on-surface border-2 border-transparent hover:border-on-surface hover:bg-surface-variant px-md py-sm font-bold transition-colors duration-200 ease-in-out" href="#">
+                <span class="material-symbols-outlined font-bold">palette</span>
+                <span>Styles</span>
+            </a>
+        </div>
+    </nav>
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col md:ml-[240px] w-full bg-[#f4f0ec]">
+        <!-- TopAppBar -->
+        <header class="fixed top-0 right-0 w-full md:w-[calc(100%-240px)] z-40 bg-surface dark:bg-on-background border-b-2 border-on-surface shadow-[0_4px_0_0_#1d1b20] flex justify-between items-center h-16 px-lg">
+            <div class="flex items-center gap-md w-1/3 md:w-1/2">
+                <div class="flex items-center w-full max-w-md bg-white border-2 border-on-surface neobrutalist-shadow px-sm py-xs">
+                    <span class="material-symbols-outlined text-on-surface-variant">search</span>
+                    <input class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md font-bold placeholder-on-surface-variant" placeholder="Search mail..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-sm">
+                <button class="w-10 h-10 border-2 border-on-surface bg-tertiary-fixed flex items-center justify-center neobrutalist-shadow neobrutalist-shadow-hover neobrutalist-shadow-active transition-all">
+                    <span class="material-symbols-outlined text-on-surface font-black">palette</span>
+                </button>
+                <button class="w-10 h-10 border-2 border-on-surface bg-primary-fixed flex items-center justify-center neobrutalist-shadow neobrutalist-shadow-hover neobrutalist-shadow-active transition-all">
+                    <span class="material-symbols-outlined text-on-surface font-black">notifications</span>
+                </button>
+                <button class="w-10 h-10 border-2 border-on-surface bg-secondary-fixed flex items-center justify-center neobrutalist-shadow neobrutalist-shadow-hover neobrutalist-shadow-active transition-all overflow-hidden p-0">
+                    <img class="w-full h-full object-cover" data-alt="A stylized, flat-vector avatar of a user profile in a neobrutalist style with bold black outlines and vibrant colors, minimal shading, clean shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0CUpr4OSJv24scsU46vY3MiN7ENSsVj-BoHkHhf3EoMYagN0u9MW05Xal0pUf3hHOwDRq1lrN0h_P6yg2JAp0R1zhMH7-tm9a3i4SRNBiwd3KYkPc9stejaQRFIft69xAo5I-G8-x-qZlS1z8qCRPdEr5hr854WGRcU1FiHW6CuegnXKyeQ4bPVVOlQmATYRgxS0hLCbk6Qvo5ybKD1NIwRZ93dpRFu8aWjIrQCzs_vLrENZpkzYQ" />
+                </button>
+            </div>
+        </header>
+        <!-- Empty State Canvas -->
+        <main class="flex-1 pt-16 flex flex-col items-center justify-center p-xl overflow-y-auto relative">
+            <!-- Abstract background elements to reinforce neobrutalism without being full backgrounds -->
+            <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-primary-container border-4 border-on-surface rounded-full opacity-20 -z-10 mix-blend-multiply"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-tertiary-container border-4 border-on-surface opacity-20 -z-10 mix-blend-multiply transform rotate-12"></div>
+            <div class="max-w-2xl w-full flex flex-col items-center text-center">
+                <!-- Main Illustration -->
+                <div class="w-64 h-64 md:w-96 md:h-96 mb-xl relative group">
+                    <div class="absolute inset-0 bg-on-surface translate-x-4 translate-y-4"></div>
+                    <img alt="Paper Airplane Illustration" class="w-full h-full object-cover border-4 border-on-surface relative z-10 transition-transform duration-300 group-hover:-translate-y-2 group-hover:-translate-x-2 bg-white p-sm" src="https://lh3.googleusercontent.com/aida/AP1WRLsDm22yQARjAHr5Top2PJgGjmB6QKpLzq5MLFxhkCrtvwc2tgU7Jk-8ycVzpxx6JJ7qUVy6mIovyeAPICaq9PGF2Llg7Gzqwkf3UwpTaEAiRVctd0KCfVO6cS4GrqbRfAVOIANvV1-WbRCkM6XULHXZELJAKdoJZv3XoQyHbwvvPPdNw6S2kR0-MpzJ_DA3bWa6j6HBtl3i0UgC3CChtjlNF61Dk1gVZwNSX7K6GWYI1byJMcy5-uD1eA" />
+                </div>
+                <!-- Title -->
+                <div class="bg-tertiary-fixed border-4 border-on-surface px-lg py-md mb-lg neobrutalist-shadow transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                    <h2 class="font-h1 text-h1 font-black text-on-surface uppercase tracking-tighter">HİÇ MESAJ GÖNDERİLMEMİŞ!</h2>
+                </div>
+                <!-- Description -->
+                <div class="bg-white border-2 border-on-surface p-md mb-xl neobrutalist-shadow max-w-lg">
+                    <p class="font-body-lg text-body-lg text-on-surface font-bold leading-relaxed">
+                        Henüz kimseye e-posta göndermediniz. İlk mesajınızı yazmaya ne dersiniz? Gönderilen tüm e-postalarınız burada listelenecek.
+                    </p>
+                </div>
+                <!-- CTA Action -->
+                <button class="bg-primary text-on-primary font-h1 text-h2 font-black uppercase py-md px-xl border-4 border-on-surface neobrutalist-shadow neobrutalist-shadow-hover neobrutalist-shadow-active transition-all tracking-wide flex items-center gap-sm">
+                    <span class="material-symbols-outlined text-3xl font-black">edit_square</span>
+                    MESAJ YAZ
+                </button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

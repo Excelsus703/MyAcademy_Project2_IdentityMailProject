@@ -1,0 +1,75 @@
+﻿@*
+    Admin Dashboard CategoryList
+*@
+
+@model List<AdminCategoryListViewModel>
+
+<section class="lg:col-span-5 flex flex-col gap-4">
+    <!-- Column Header Banner -->
+    <div class="bg-black text-white p-3.5 border-3 border-black shadow-brutal flex items-center justify-between">
+        <h2 class="text-xs md:text-sm font-black uppercase tracking-wider">
+            EMAIL CATEGORY DISTRIBUTION
+        </h2>
+        <a href="/Admin/Categories/">
+            <span class="text-[14px] bg-brutal-yellow text-black font-black px-1.5 py-0.5">
+                Kategori Sayfasına Git
+            </span>
+        </a>
+    </div>
+    <!-- Neobrutalist Stacked Cards for Categories -->
+    <div class="flex flex-col gap-3.5">
+        @{
+            string bgColor = "";
+            string textColor = "";
+        }
+        @foreach (var item in Model)
+        {
+            @if (item.ColorTheme == 1)
+            {
+                bgColor = "bg-primary-container";
+                textColor = "text-on-primary-container";
+            }
+            else if (item.ColorTheme == 2)
+            {
+                bgColor = "bg-brutal-blue";
+                textColor = "text-white";
+            }
+            else if (item.ColorTheme == 3)
+            {
+                bgColor = "bg-brutal-yellow";
+                textColor = "text-brutal-black";
+            }
+            else if (item.ColorTheme == 4)
+            {
+                bgColor = "bg-brutal-red";
+                textColor = "text-white";
+            }
+            else
+            {
+                bgColor = "bg-surface";
+                textColor = "text-brutal-black";
+            }
+
+
+            <!-- Category Item 1: WORK -->
+            <div class="@bgColor border-3 border-black p-3.5 shadow-brutal flex items-center justify-between transition-transform hover:-translate-x-1">
+                <div>
+                    <span class="text-sm @textColor uppercase tracking-wider block">@item.Name</span>
+                    <span class="text-sm @textColor font-bold text-neutral-800">@item.Description</span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xl @textColor font-bold font-mono block">@item.MessageCount.ToString("N0") Adet Mesaj</span>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- Critical Guidelines Notice Card matching screenshot structure -->
+    <div class="mt-2 border-3 border-black bg-white p-4 shadow-brutal border-l-8 border-l-red-500">
+        <h3 class="text-xs font-black uppercase tracking-wider text-red-600 mb-1">
+            Önemli Not
+        </h3>
+        <p class="text-xs font-bold leading-snug text-neutral-800">
+            Yukardaki Kategori Listesi bilgi amaçlıdır. Kategorileri yönetmek için kategoriler sayfasına geçiniz !
+        </p>
+    </div>
+</section>

@@ -1,0 +1,54 @@
+﻿@using IdentityMail.Web.Entites.Enums
+@model CategoryHomeViewModel
+
+@{
+    ViewData["Title"] = "Email Kategorileri";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<main class="w-full pt-16 px-4 md:px-6 flex flex-col gap-6 overflow-x-hidden">
+    <header class="mb-2 pt-2">
+        <h1 class="font-headline-lg text-headline-lg font-black text-brutal-black uppercase tracking-tight">@ViewData["Title"]</h1>
+    </header>
+    <!-- Category Bento Grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        @foreach (var item in Model.Categories)
+        {
+            var style = item.Theme.GetPreset();
+
+            <a asp-action="CategoryHome" asp-route-categoryId="@item.Id" class="@style.CardBg brutal-border-thick brutal-shadow p-6 flex flex-col cursor-pointer hover:-translate-y-2 hover:brutal-shadow-lg transition-transform active:translate-x-1 active:translate-y-1 active:brutal-shadow-none relative overflow-hidden group">
+
+                <div class="absolute @style.WatermarkPos transition-opacity">
+                    <span class="material-symbols-outlined text-8xl" data-icon="@item.Icon">@item.Icon</span>
+                </div>
+
+                <div class="w-12 h-12 @style.IconBox brutal-border flex items-center justify-center mb-4 z-10">
+                    <span class="material-symbols-outlined font-bold" data-icon="@item.Icon">@item.Icon</span>
+                </div>
+
+                <h3 class="font-headline-md text-headline-md font-bold mb-2 z-10">@item.Name</h3>
+
+                <p class="font-label-md text-label-md uppercase tracking-wider mt-auto z-10 self-start px-2 py-1 @style.Badge">
+                    @item.UnreadCount UNREAD
+                </p>
+            </a>
+        }
+    </section>
+    <!-- Message List Header -->
+    <div class="flex items-center justify-between mb-stack-md border-b-4 border-brutal-black pb-2">
+        <h2 class="font-headline-md text-headline-md font-bold uppercase tracking-widest bg-brutal-black text-white px-4 py-2 inline-block">Seçilen: @Model.SelectedCategoryName</h2>
+        <div class="flex gap-2">
+            <button class="w-8 h-8 brutal-border bg-surface flex items-center justify-center hover:bg-brutal-yellow transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none">
+                <span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+            </button>
+            <button class="w-8 h-8 brutal-border bg-surface flex items-center justify-center hover:bg-brutal-yellow transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none">
+                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+            </button>
+        </div>
+    </div>
+    <!-- Message List -->
+    <section class="flex flex-col gap-4">
+        @await Component.InvokeAsync("CategoryMessageList", new { categoryId = Model.SelectedCategoryId })
+    </section>
+    <br />
+</main>

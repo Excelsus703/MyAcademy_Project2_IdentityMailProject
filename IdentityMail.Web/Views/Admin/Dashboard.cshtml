@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- Top Title Bar with Neobrutalist Filter Action -->
+<section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-3 border-black" data-purpose="content-header">
+    <div>
+        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tight text-black flex items-center gap-3">
+            @ViewData["Title"]
+            <span class="inline-block bg-black text-white text-xs px-2.5 py-1 uppercase tracking-widest font-mono font-bold">
+                v4.2.0
+            </span>
+        </h1>
+        <p class="text-xs md:text-sm font-bold text-neutral-600 mt-1 uppercase tracking-wide">
+            Kullanıcı ve Mail istatistiklerini aşağıdaki tablolarda inceleyebilirsiniz.
+        </p>
+    </div>
+</section>
+<!-- KPI Summary Grid (4 Prominent Neobrutalist Cards) -->
+<!-- BEGIN: KPIGrid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 my-8" data-purpose="kpi-metrics-grid">
+    <!-- KPI Card 1: Total Users -->
+    <article class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between transition-all hover:bg-neo-yellow hover:-translate-y-0.5">
+        <div class="flex items-center justify-between">
+            <span class="text-sm font-black uppercase tracking-wider text-black">Toplam Kullanıcı</span>
+            <span class="w-3 h-3 bg-black"></span>
+        </div>
+        <div class="my-4">
+            <span class="text-4xl font-black tracking-tight text-black">@ViewBag.TotalUsers</span>
+        </div>
+        <div class="flex items-center">
+            <span class="bg-black text-yellow-300 text-[16px] font-black px-2 py-0.5 uppercase tracking-wide">
+                Aktif Kullanıcı Sayisi: @ViewBag.TotalActiveUsers
+            </span>
+        </div>
+    </article>
+    <!-- KPI Card 2: Sent Messages -->
+    <article class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between transition-all hover:bg-neo-yellow hover:-translate-y-0.5">
+        <div class="flex items-center justify-between">
+            <span class="text-sm font-black uppercase tracking-wider text-black">Toplam Mesaj Sayısı</span>
+            <span class="w-3 h-3 bg-black"></span>
+        </div>
+        <div class="my-4">
+            <span class="text-4xl font-black tracking-tight text-black">@ViewBag.TotalMessages</span>
+        </div>
+        <div class="flex items-center">
+            <span class="bg-black text-yellow-300 text-[16px] font-black px-2 py-0.5 uppercase tracking-wide">
+                Son 1 Ayda @ViewBag.TotalMessagesThisMonth Mesaj
+            </span>
+        </div>
+    </article>
+    <!-- KPI Card 3: Unread Inboxes -->
+    <article class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between transition-all hover:bg-neo-yellow hover:-translate-y-0.5">
+        <div class="flex items-center justify-between">
+            <span class="text-sm font-black uppercase tracking-wider text-black">Okunmamış Mesaj Sayısı</span>
+            <span class="w-3 h-3 bg-black"></span>
+        </div>
+        <div class="my-4">
+            <span class="text-4xl font-black tracking-tight text-black">@ViewBag.TotalUnreadMessages</span>
+        </div>
+        <div class="flex items-center">
+            <span class="bg-black text-yellow-300 text-[16px] font-black px-2 py-0.5 uppercase tracking-wide">
+                @if (ViewBag.TotalUnreadMessages > 0)
+                {
+                    <label>Yanıt Bekliyor</label>
+                }
+                else
+                {
+                    <label>Okunmamış Mesaj Yok</label>
+                }
+            </span>
+        </div>
+    </article>
+    <!-- KPI Card 4: System Load / Health -->
+    <article class="bg-white border-3 border-black p-5 shadow-brutal flex flex-col justify-between transition-all hover:bg-neo-yellow hover:-translate-y-0.5">
+        <div class="flex items-center justify-between">
+            <span class="text-sm font-black uppercase tracking-wider text-black">Çöp Mesaj Sayısı</span>
+            <span class="w-3 h-3 bg-black"></span>
+        </div>
+        <div class="my-4">
+            <span class="text-4xl font-black tracking-tight text-black">@ViewBag.TotalTrashMessages</span>
+        </div>
+        <div class="flex items-center">
+            <span class="bg-black text-yellow-300 text-[16px] font-black px-2 py-0.5 uppercase tracking-wide">
+                @if (ViewBag.TotalTrashMessages > 0)
+                {
+                    <label>Temizlenmeyi Bekliyor</label>
+                }
+                else
+                {
+                    <label>Çöp Mesaj Yok</label>
+                }
+            </span>
+        </div>
+    </article>
+</section>
+<!-- END: KPIGrid -->
+<!-- Lower Two-Column Section: Top Users Table & Category Distribution -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+
+
+    <!-- BEGIN: TopSendersColumn -->
+    @await Component.InvokeAsync("AdminDashboardTopSenders")
+
+    <!-- END: TopSendersColumn -->
+    <!-- BEGIN: CategoryDistributionColumn -->
+    @await Component.InvokeAsync("AdminDashboardCategoryList")
+    <!-- END: CategoryDistributionColumn -->
+</div>

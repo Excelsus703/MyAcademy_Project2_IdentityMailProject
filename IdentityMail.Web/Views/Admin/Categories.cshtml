@@ -1,0 +1,275 @@
+﻿@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<AdminCategoryListViewModel>
+
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto space-y-6 bg-[#f0f0f0]" data-purpose="complaints-incidents-dashboard">
+    <div class="flex flex-col w-full space-y-6 mx-auto">
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-paper-white p-5 md:p-6 border-3 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+            <div>
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="bg-primary text-on-primary font-mono text-[11px] px-2 py-0.5 font-bold uppercase tracking-wider border-2 border-black">
+                        TAKSONOMİ VE ETİKETLER
+                    </span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-hard-black font-grotesk">
+                    KATEGORİLER
+                </h1>
+                <p class="text-xs md:text-sm font-bold text-on-surface-variant font-body-md mt-1">
+                    Sistem ve kullanıcı e-posta kategorilerini yönetin.
+                </p>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+                <button class="px-5 py-3 bg-neo-yellow  text-hard-black font-black text-xs uppercase tracking-wider border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2" onclick="document.getElementById('newCategoryModal').classList.remove('hidden')">
+                    <span class="material-symbols-outlined text-base font-black">add_box</span>
+                    + YENİ KATEGORİ
+                </button>
+            </div>
+        </div>
+        <!-- Categories Main Table Container -->
+        <div class="bg-paper-white border-3 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+            <!-- Simplified & Clean Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container border-b-3 border-black font-mono text-xs font-black uppercase tracking-wider text-hard-black">
+                            <th class="p-3.5 border-r-2 border-black w-24 text-center">İKON & Renk</th>
+                            <th class="p-3.5 border-r-2 border-black">KATEGORİ ADI</th>
+                            <th class="p-3.5 border-r-2 border-black">AÇIKLAMA / KURAL ÖZETİ</th>
+                            <th class="p-3.5 border-r-2 border-black text-right">E-POSTA SAYISI</th>
+                            <th class="p-3.5 border-r-2 border-black text-center">Kategori Tipi</th>
+                            <th class="p-3.5 text-center w-48">EYLEMLER</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y-2 divide-black font-mono text-sm" id="categoriesTbody">
+                        @foreach (var item in Model)
+                        {
+                            <!-- Row 1: İş & Kurumsal -->
+                            <tr class="hover:bg-neutral-50 transition-colors cat-table-row" data-type="ÖZEL">
+                                <td class="p-3.5 border-r-2 border-black text-center">
+                                    @{
+                                        string color = "";
+                                    }
+                                    @if (item.ColorTheme == 1)
+                                    {
+                                        color = "bg-primary-container text-on-primary-container";
+                                    }
+                                    else if (item.ColorTheme == 2)
+                                    {
+                                        color = "bg-brutal-blue text-white";
+                                    }
+                                    else if (item.ColorTheme == 3)
+                                    {
+                                        color = "bg-brutal-yellow text-brutal-black";
+                                    }
+                                    else if (item.ColorTheme == 4)
+                                    {
+                                        color = "bg-brutal-red text-white";
+                                    }
+                                    else
+                                    {
+                                        color = "bg-surface text-brutal-black";
+                                    }
+                                    <div class="w-9 h-9 @color border-2 border-black flex items-center justify-center mx-auto shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                        <span class="material-symbols-outlined">@item.Icon</span>
+                                    </div>
+                                </td>
+                                <td class="p-3.5 border-r-2 border-black">
+                                    <div class="font-grotesk font-black text-sm text-hard-black uppercase">@item.Name</div>
+                                </td>
+                                <td class="p-3.5 border-r-2 border-black font-bold text-neutral-700">
+                                    @item.Description
+                                </td>
+                                <td class="p-3.5 border-r-2 border-black text-right font-black text-sm text-hard-black">
+                                    @item.MessageCount.ToString("N0")
+                                </td>
+                                <td class="p-3.5 border-r-2 border-black text-center">
+
+                                    @if (item.IsSystemProtected == true)
+                                    {
+                                        <span class="px-2.5 py-1 bg-brutal-red text-white border-2 border-black text-sm uppercase tracking-wider shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                                            Sistem Kategorisi
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="px-2.5 py-1 bg-neo-yellow text-hard-black border-2 border-black text-sm font-black uppercase tracking-wider shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                                            Özel
+                                        </span>
+                                    }
+                                </td>
+                                <td class="p-3.5 text-center">
+                                    <div class="flex items-center justify-center gap-2">
+                                        @if (item.IsSystemProtected == true)
+                                        {
+                                            <div class="flex items-center justify-end gap-2">
+                                                <button class="px-3 py-1.5 bg-neutral-200 border-3 border-black text-sm font-bold uppercase cursor-not-allowed opacity-80 flex items-center gap-1 shadow-brutal-sm">
+                                                    <span>Kilitli</span> <span>🔒</span>
+                                                </button>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <button class="px-3 py-1 bg-neo-yellow border-2 border-black font-black text-sm uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                                                    onclick="doldurVeAc('@item.Id', '@Html.Raw(item.Name)', '@Html.Raw(item.Description)', '@Html.Raw(item.Icon)', '@item.ColorTheme')">
+                                                DÜZENLE
+                                            </button>
+                                            <a href="/Admin/DeleteCategory/@item.Id" class="px-3 py-1 bg-brutal-red text-white border-2 border-black font-black text-sm uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+                                                SİL
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Simplified Quick-Add Modal -->
+        <div class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" id="newCategoryModal">
+            <div class="w-full max-w-lg bg-white border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <!-- Modal Header -->
+                <div class="px-5 py-3.5 bg-brutal-yellow border-b-3 border-black flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined font-black text-lg">add_box</span>
+                        <span class="font-black text-sm uppercase tracking-wide">YENİ KATEGORİ OLUŞTUR</span>
+                    </div>
+                    <button class="w-7 h-7 bg-white border-2 border-black font-black text-xs hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors" onclick="document.getElementById('newCategoryModal').classList.add('hidden')">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Modal Form Body -->
+                <form asp-controller="Admin" asp-action="AddCategory" class="p-5 space-y-4 font-mono text-xs bg-white" onsubmit="alert('Kategori başarıyla oluşturuldu!'); document.getElementById('newCategoryModal').classList.add('hidden');">
+                    <div>
+                        <label class="block font-black uppercase mb-1 text-black">KATEGORİ ADI *</label>
+                        <input class="w-full px-3 py-2 border-2 border-black font-bold uppercase bg-white text-black placeholder-neutral-400 focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]" placeholder="Örn: İnsan Kaynakları" required name="Name" type="text" />
+                    </div>
+
+                    <div>
+                        <label class="block font-black uppercase mb-1 text-black">AÇIKLAMA</label>
+                        <input class="w-full px-3 py-2 border-2 border-black font-bold uppercase bg-white text-black placeholder-neutral-400 focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]" placeholder="Örn: *@@ik.sirket.com, *bordro*" name="Description" type="text" />
+                    </div>
+
+                    <div>
+                        <label class="block font-black uppercase mb-1 text-black">Google Material Symbols İkonu</label>
+                        <input class="w-full px-3 py-2 border-2 border-black font-bold bg-white text-black placeholder-neutral-400 focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]" placeholder="Örn: bookmark_stacks" name="Icon" type="text" />
+                    </div>
+
+                    <div class="gap-3">
+                        <div>
+                            <label class="block font-black uppercase mb-1 text-black">RENK</label>
+                            <select name="Theme" class="w-full px-2.5 py-2 border-2 border-black font-bold uppercase bg-white text-black focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                <option value="1">1 - Mor Tema</option>
+                                <option value="2">2 - Mavi Tema</option>
+                                <option value="3">3 - Sarı Tema</option>
+                                <option value="4">4 - Kırmızı Tema</option>
+                                <option value="5">5 - Beyaz Tema</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Footer Buttons -->
+                    <div class="pt-3 border-t-2 border-black flex justify-end gap-2">
+                        <button class="px-4 py-2 bg-white border-2 border-black font-black uppercase hover:bg-neutral-100 active:translate-x-0.5 active:translate-y-0.5" onclick="document.getElementById('newCategoryModal').classList.add('hidden')" type="button">
+                            İPTAL
+                        </button>
+                        <button class="px-5 py-2 bg-brutal-yellow border-2 border-black font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" type="submit">
+                            KAYDET
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- DÜZENLEME MODALI -->
+        <div class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" id="editCategoryModal">
+            <div class="w-full max-w-lg bg-white border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <!-- Modal Header -->
+                <div class="px-5 py-3.5 bg-brutal-yellow border-b-3 border-black flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined font-black text-lg">edit</span>
+                        <span class="font-black text-sm uppercase tracking-wide">KATEGORİ DÜZENLE</span>
+                    </div>
+                    <button type="button"
+                            class="w-7 h-7 bg-white border-2 border-black font-black text-xs hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors"
+                            onclick="document.getElementById('editCategoryModal').classList.add('hidden')">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Form Body -->
+                <form asp-action="EditCategory" method="post" class="p-5 space-y-4 font-mono text-xs bg-white">
+                    <!-- Hangi kategoriyi güncelleyeceğimizi tutan gizli id -->
+                    <input type="hidden" id="editId" name="Id" />
+
+                    <div>
+                        <label class="block font-black uppercase mb-1">KATEGORİ ADI *</label>
+                        <input id="editName" name="Name" class="w-full px-3 py-2 border-2 border-black font-bold uppercase bg-white text-black" required type="text" />
+                    </div>
+
+                    <div>
+                        <label class="block font-black uppercase mb-1">AÇIKLAMA</label>
+                        <input id="editDescription" name="Description" class="w-full px-3 py-2 border-2 border-black font-bold uppercase bg-white text-black" type="text" />
+                    </div>
+
+                    <div>
+                        <label class="block font-black uppercase mb-1">İKON</label>
+                        <input id="editIcon" name="Icon" class="w-full px-3 py-2 border-2 border-black font-bold bg-white text-black" type="text" />
+                    </div>
+
+                    <div>
+                        <label class="block font-black uppercase mb-1">RENK (1-5)</label>
+                        <select id="editColorTheme" name="ColorTheme" class="w-full px-2.5 py-2 border-2 border-black font-bold bg-white text-black">
+                            <option value="1">1 - Mor Tema</option>
+                            <option value="2">2 - Mavi Tema</option>
+                            <option value="3">3 - Sarı Tema</option>
+                            <option value="4">4 - Kırmızı Tema</option>
+                            <option value="5">5 - Beyaz Tema</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-3 border-t-2 border-black flex justify-end gap-2">
+                        <button type="button"
+                                class="px-4 py-2 bg-white border-2 border-black font-black uppercase hover:bg-neutral-100 active:translate-x-0.5 active:translate-y-0.5"
+                                onclick="document.getElementById('editCategoryModal').classList.add('hidden')">
+                            İPTAL
+                        </button>
+                        <button class="px-5 py-2 bg-brutal-yellow border-2 border-black font-black shadow-[2px_2px_0px_#000]" type="submit">
+                            GÜNCELLE
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function doldurVeAc(id, name, description, icon, colorTheme) {
+            var modal = document.getElementById('editCategoryModal');
+            if (!modal) {
+                console.error('editCategoryModal bulunamadı!');
+                return;
+            }
+
+            if (document.getElementById('editId')) document.getElementById('editId').value = id;
+            if (document.getElementById('editName')) document.getElementById('editName').value = name;
+            if (document.getElementById('editDescription')) document.getElementById('editDescription').value = description || '';
+            if (document.getElementById('editIcon')) document.getElementById('editIcon').value = icon || '';
+            if (document.getElementById('editColorTheme')) document.getElementById('editColorTheme').value = colorTheme || 1;
+
+            // Modalı görünür yap
+            modal.classList.remove('hidden');
+        }
+    </script>
+
+
+</main>
+<!-- END: MainContent -->

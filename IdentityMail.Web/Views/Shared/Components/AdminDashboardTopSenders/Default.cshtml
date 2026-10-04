@@ -1,0 +1,85 @@
+﻿@*
+    Admin Dashboard TopSenders
+*@
+
+@model List<AdminDashboardTopSenderViewModel>
+
+<section class="lg:col-span-7 bg-white border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
+    <div>
+        <!-- Section Header Banner -->
+        <div class="bg-black text-white border-b-3 border-black p-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 bg-brutal-yellow inline-block border border-white"></span>
+                <h2 class="text-sm font-black uppercase tracking-wider font-mono">En Çok Mesaj Gönderen Kullanıcılar</h2>
+            </div>
+        </div>
+
+        <!-- Table Structure -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b-3 border-black text-[11px] uppercase tracking-wider bg-neutral-100 font-mono">
+                        <th class="p-4 font-black border-r-2 border-black">Kullanıcı</th>
+                        <th class="p-4 font-black border-r-2 border-black">Mesaj Sayısı</th>
+                        <th class="p-4 font-black border-r-2 border-black">Rolü</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y-2 divide-black text-sm font-bold font-mono">
+
+                    @{
+                        string color = "";
+                        string userCountColor = "";
+
+                    }
+
+                    @foreach (var item in Model)
+                    {
+
+                        switch (item.Role)
+                        {
+                            case "Süper Admin":
+                                color = "bg-[#FF6B6B]";
+                                userCountColor = "text-white";
+                                break;
+                            case "Admin":
+                                color = "bg-brutal-yellow";
+                                userCountColor = "text-black";
+                                break;
+                            case "Standart Kullanıcı":
+                                color = "bg-brutal-green";
+                                userCountColor = "text-black";
+                                break;
+                            default:
+                                color = "bg-brutal-blue-light";
+                                userCountColor = "text-black";
+                                break;
+                        }
+
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-yellow-50/60 transition-colors">
+                            <td class="p-4 border-r-2 border-black">
+                                <span class="text-black font-black text-sm">@item.UserName</span>
+                            </td>
+                            <td class="p-4 border-r-2 border-black">
+                                <span class="text-sm font-black">@item.MessageCount Adet</span>
+                            </td>
+                            <td class="p-4 border-r-2 border-black">
+                                <span class="@color @userCountColor border-2 border-black px-2.5 py-1 text-[14px] font-black uppercase shadow-[2px_2px_0px_#000] inline-block">
+                                    @item.Role
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table Bottom Footer Summary -->
+    <div class="border-t-3 border-black p-3.5 bg-neutral-100 flex items-center justify-between text-xs font-bold font-mono">
+        <span class="uppercase">@ViewBag.TotalUsers ADET KULLANICIDAN @Model.Count ADETİ GÖSTERİLİYOR.</span>
+        <a class="px-3 py-1 bg-brutal-yellow border-2 border-black text-black font-black hover:bg-black hover:text-white transition-colors uppercase shadow-[2px_2px_0px_#000]" href="/Admin/Users/">
+            Kullanıcı Sayfasına Git →
+        </a>
+    </div>
+</section>

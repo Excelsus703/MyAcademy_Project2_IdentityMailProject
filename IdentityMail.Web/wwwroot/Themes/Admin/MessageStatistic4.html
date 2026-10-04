@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>EmailPro Admin - Neobrutalist Dashboard</title>
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Space Mono, Space Grotesk & Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800;900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <!-- Unified Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Neobrutalist Vibrant Palette
+                        "brutal-yellow": "#FFDE59",
+                        "brutal-blue": "#2563EB",
+                        "brutal-blue-light": "#93C5FD",
+                        "brutal-green": "#86EFAC",
+                        "brutal-purple": "#D8B4FE",
+                        "brutal-red": "#FF2200",
+                        "brutal-coral": "#FF6B6B",
+                        "neo-yellow": "#FBBF24",
+                        // System & Surface Palette
+                        "surface-container-highest": "#e6e0e9",
+                        "primary-fixed-dim": "#cfbcff",
+                        "inverse-on-surface": "#f5eff7",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-surface": "#1d1b20",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-high": "#ece6ee",
+                        "on-secondary-container": "#645a7d",
+                        "on-primary-container": "#e0d2ff",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary": "#765b00",
+                        "inverse-primary": "#cfbcff",
+                        "inverse-surface": "#322f35",
+                        "secondary": "#63597c",
+                        "on-background": "#1d1b20",
+                        "surface-dim": "#ded8e0",
+                        "surface-variant": "#e6e0e9",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface": "#fdf7ff",
+                        "surface-tint": "#6750a4",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-surface-variant": "#494551",
+                        "background": "#fdf7ff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#4f378a",
+                        "surface-bright": "#fdf7ff",
+                        "on-tertiary-fixed": "#241a00",
+                        "outline": "#7a7582",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "secondary-container": "#e1d4fd",
+                        "surface-container": "#f2ecf4",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "primary-container": "#6750a4",
+                        "outline-variant": "#cbc4d2",
+                        "on-secondary-fixed": "#1f1635",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary-container": "#503d00"
+                    },
+                    boxShadow: {
+                        "brutal": "4px 4px 0px 0px #000000",
+                        "brutal-sm": "2px 2px 0px 0px #000000",
+                        "brutal-lg": "6px 6px 0px 0px #000000",
+                        "brutal-hover": "1px 1px 0px 0px #000000"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "layout-margin": "24px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "2xl": "48px"
+                    },
+                    fontFamily: {
+                        "grotesk": ['"Space Grotesk"', 'sans-serif'],
+                        "mono": ['"Space Mono"', 'monospace']
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Neobrutalist Styles & Overrides -->
+    <style>
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            letter-spacing: -0.015em;
+            background-color: #f0f0f0;
+            color: #000;
+        }
+        /* Neobrutalist Utility Classes */
+        .neobrutalist-shadow {
+            box-shadow: 8px 8px 0px 0px #000000;
+        }
+
+        .neobrutalist-border {
+            border: 3px solid #000000;
+        }
+
+        .neobrutalist-hover:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px 0px #000000;
+        }
+
+        .neobrutalist-active:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        /* Border Utility Classes */
+        .border-3 {
+            border-width: 3px;
+        }
+
+        .border-t-3 {
+            border-top-width: 3px;
+        }
+
+        .border-b-3 {
+            border-bottom-width: 3px;
+        }
+
+        .border-l-3 {
+            border-left-width: 3px;
+        }
+
+        .border-r-3 {
+            border-right-width: 3px;
+        }
+        /* Dark Mode Neobrutalism strictly requiring black text on light backgrounds */
+        .dark .text-on-surface,
+        .dark .text-primary-fixed-dim,
+        .dark .text-on-surface-variant {
+            color: #000 !important;
+        }
+
+        .dark .bg-surface {
+            background-color: #fff !important;
+        }
+
+        .dark .border-primary-fixed-dim {
+            border-color: #000 !important;
+        }
+    </style>
+    <meta content="web_dashboard" name="shell-type">
+</head>
+<body class="min-h-screen flex flex-col bg-white text-black font-grotesk">
+    <!-- BEGIN: TopNavbar -->
+    <header class="w-full bg-white border-b-3 border-black px-6 py-3.5 flex items-center justify-between sticky top-0 z-40" data-purpose="top-navigation-bar">
+        <!-- Brand & Portal Name -->
+        <div class="flex items-center gap-4">
+            <a class="text-3xl font-black tracking-tight text-black flex items-center gap-1 uppercase" href="#">
+                EMAILPRO
+            </a>
+            <div class="bg-brutal-yellow border-3 border-black px-2.5 py-0.5 font-black text-xs uppercase tracking-wider shadow-brutal-sm">
+                ADMIN PANEL
+            </div>
+        </div>
+        <!-- Search Bar -->
+        <div class="w-full max-w-xl mx-6 hidden md:block">
+            <div class="relative flex items-center">
+                <div class="absolute left-3.5 text-black flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-[20px] font-bold">search</span>
+                </div>
+                <input class="w-full pl-11 pr-4 py-2 border-3 border-black text-xs font-bold uppercase placeholder-neutral-500 bg-white tracking-wide focus:outline-none focus:ring-0 focus:shadow-brutal-sm transition-shadow" placeholder="SEARCH ROLES, PERMISSIONS, OR USERS..." type="text">
+            </div>
+        </div>
+        <!-- Utility / User Profile Actions -->
+        <div class="flex items-center gap-3.5">
+            <!-- Settings Icon Button -->
+            <button aria-label="Settings" class="w-10 h-10 bg-brutal-yellow border-3 border-black flex items-center justify-center font-bold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-transform" title="Quick Settings">
+                <span class="material-symbols-outlined text-[20px] font-bold">settings</span>
+            </button>
+            <!-- Notification Bell with Badge -->
+            <button aria-label="Notifications" class="w-10 h-10 bg-white border-3 border-black relative flex items-center justify-center font-bold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-transform" title="System Notifications">
+                <span class="material-symbols-outlined text-[20px] font-bold">notifications</span>
+                <span class="absolute -top-2 -right-2 bg-brutal-red border-2 border-black text-white text-[10px] font-black w-5 h-5 flex items-center justify-center">
+                    3
+                </span>
+            </button>
+            <!-- User Profile Badge -->
+            <button aria-label="User Profile" class="h-10 px-3.5 bg-brutal-blue text-white border-3 border-black flex items-center gap-2 font-bold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-transform">
+                <span class="material-symbols-outlined text-[20px] font-bold">person</span>
+                <span class="hidden sm:inline text-xs font-black tracking-wider uppercase">ADMIN</span>
+            </button>
+        </div>
+    </header>
+    <!-- END: TopNavbar -->
+    <!-- Body Content: Sidebar + Main Area -->
+    <div class="flex-1 flex overflow-hidden">
+        <!-- BEGIN: LeftSidebar -->
+        <aside class="w-64 bg-white border-r-3 border-black flex flex-col justify-between shrink-0 p-4 select-none overflow-y-auto" data-purpose="admin-navigation-sidebar">
+            <!-- Main Nav Items -->
+            <div class="flex flex-col space-y-2.5">
+                <!-- Broadcast Alert Button -->
+                <button class="w-full py-2.5 px-3 bg-brutal-blue hover:bg-blue-700 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 border-3 border-black shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-sm mb-3 transition-all">
+                    <span class="material-symbols-outlined text-[18px]">bolt</span>
+                    BROADCAST ALERT
+                </button>
+                <!-- Nav Item: Dashboard -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">grid_view</span>
+                    DASHBOARD
+                </a>
+                <!-- Nav Item: User Management -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">group</span>
+                    USER MANAGEMENT
+                </a>
+                <!-- Nav Item: ROLES & PERMISSIONS (Active) -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">lock</span>
+                    ROLES &amp; PERMISSIONS
+                </a>
+                <!-- Nav Item: Server Logs -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">description</span>
+                    SERVER LOGS
+                </a>
+                <!-- Nav Item: Spam Filters -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">security</span>
+                    SPAM FILTERS
+                </a>
+                <!-- Nav Item: Categories & Tags -->
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">sell</span>
+                    CATEGORIES &amp; TAGS
+                </a>
+                <!-- Nav Item: Analytics -->
+                <a aria-current="page" class="flex items-center gap-3 px-3 py-2.5 border-3 border-black font-black text-xs uppercase bg-brutal-yellow shadow-brutal tracking-wide" href="#">
+                    <span class="material-symbols-outlined text-[18px]">bar_chart</span>
+                    ANALYTICS
+                </a>
+            </div>
+            <!-- Bottom Nav Items -->
+            <div class="flex flex-col space-y-2 pt-6 border-t-3 border-black mt-6">
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-neutral-100 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">settings</span>
+                    SETTINGS
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 border-3 border-black font-bold text-xs uppercase bg-white hover:bg-red-50 text-red-600 transition-colors" href="#">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    LOGOUT
+                </a>
+            </div>
+        </aside>
+        <!-- END: LeftSidebar -->
+        <!-- BEGIN: MainContent -->
+        <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 bg-white" data-purpose="role-permissions-dashboard">
+            <div class="flex flex-col w-full space-y-6">
+                <!-- TOP HEADER & TITLE ROW -->
+                <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b-3 border-black">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="p-2 bg-black text-white flex items-center justify-center border-3 border-black shadow-[3px_3px_0px_#000]">
+                            <span class="material-symbols-outlined text-[24px]">terminal</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <h1 class="font-h1 text-h1 uppercase text-black tracking-tight">ALL MESSAGES / LOGS</h1>
+                                <span class="hidden sm:inline-flex bg-brutal-yellow border-3 border-black px-3 py-1 font-label text-label uppercase tracking-widest shadow-[3px_3px_0px_#000]">
+                                    1,428,940 TOTAL DISPATCHED
+                                </span>
+                            </div>
+                            <p class="font-body-sm text-body-sm text-neutral-700 uppercase tracking-wider font-mono mt-0.5">
+                                GLOBAL DISPATCH LOGS // CLUSTER RELAY: US-EAST-NODE-04
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Right Header Action Tools -->
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <button class="px-4 py-2 bg-white hover:bg-neutral-100 text-black border-3 border-black font-label text-label uppercase tracking-wider shadow-[4px_4px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center gap-2 transition-all" onclick="alert('Exporting sanitized EML/CSV logs stream...')">
+                            <span class="material-symbols-outlined text-[18px]">download</span>
+                            EXPORT CSV
+                        </button>
+                        <button class="px-4 py-2 bg-brutal-yellow hover:bg-yellow-400 text-black border-3 border-black font-label text-label uppercase tracking-wider shadow-[4px_4px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center gap-2 transition-all" onclick="toggleBatchPanel()">
+                            <span class="material-symbols-outlined text-[18px]">inventory</span>
+                            BATCH RESEND / ACTIONS
+                        </button>
+                    </div>
+                </section>
+                <!-- KPI SUMMARY ROW (4 NEOBRUTALIST CARDS) -->
+                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Card 1 -->
+                    <div class="bg-white border-3 border-black p-4 shadow-[4px_4px_0px_#000] flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                            <span class="font-label text-label uppercase font-black tracking-wider text-neutral-800">TOTAL INSPECTED</span>
+                            <span class="material-symbols-outlined text-[20px] text-neutral-800">database</span>
+                        </div>
+                        <div class="flex items-baseline justify-between">
+                            <span class="font-h1 text-h1 tracking-tighter">1,428,940</span>
+                            <span class="bg-black text-white font-mono text-[11px] px-2 py-0.5 font-bold border border-black">SYNCED</span>
+                        </div>
+                        <div class="mt-2 text-[11px] font-mono text-neutral-600 flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-black inline-block"></span> 100% INGEST BUFFER VERIFIED
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white border-3 border-black p-4 shadow-[4px_4px_0px_#000] flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                            <span class="font-label text-label uppercase font-black tracking-wider text-neutral-800">DELIVERED (98.2%)</span>
+                            <span class="material-symbols-outlined text-[20px] text-emerald-700">task_alt</span>
+                        </div>
+                        <div class="flex items-baseline justify-between">
+                            <span class="font-h1 text-h1 tracking-tighter">1,403,219</span>
+                            <span class="bg-brutal-green border-2 border-black text-black font-mono text-[11px] font-black px-2 py-0.5 shadow-[2px_2px_0px_#000]">SUCCESS</span>
+                        </div>
+                        <div class="mt-2 text-[11px] font-mono text-neutral-600 flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-emerald-600 inline-block"></span> AVG DELIV. LATENCY: 142MS
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white border-3 border-black p-4 shadow-[4px_4px_0px_#000] flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                            <span class="font-label text-label uppercase font-black tracking-wider text-neutral-800">IN QUEUE / RETRYING</span>
+                            <span class="material-symbols-outlined text-[20px] text-amber-700">pending</span>
+                        </div>
+                        <div class="flex items-baseline justify-between">
+                            <span class="font-h1 text-h1 tracking-tighter">20,290</span>
+                            <span class="bg-brutal-yellow border-2 border-black text-black font-mono text-[11px] font-black px-2 py-0.5 shadow-[2px_2px_0px_#000]">ACTIVE</span>
+                        </div>
+                        <div class="mt-2 text-[11px] font-mono text-neutral-600 flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-yellow-400 border border-black inline-block"></span> 4 POOLS DISPATCHING
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-white border-3 border-black p-4 shadow-[4px_4px_0px_#000] flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b-2 border-black pb-2 mb-3">
+                            <span class="font-label text-label uppercase font-black tracking-wider text-neutral-800">FAILED / BOUNCED</span>
+                            <span class="material-symbols-outlined text-[20px] text-red-600">report</span>
+                        </div>
+                        <div class="flex items-baseline justify-between">
+                            <span class="font-h1 text-h1 tracking-tighter">5,431</span>
+                            <span class="bg-brutal-red border-2 border-black text-white font-mono text-[11px] font-black px-2 py-0.5 shadow-[2px_2px_0px_#000]">DROP 0.38%</span>
+                        </div>
+                        <div class="mt-2 text-[11px] font-mono text-neutral-600 flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-red-600 inline-block"></span> 1,209 HARD BOUNCES
+                        </div>
+                    </div>
+                </section>
+                <!-- SEARCH & ADVANCED FILTERS BAR -->
+                <section class="bg-white border-3 border-black p-4 shadow-[4px_4px_0px_#000]">
+                    <div class="flex flex-col lg:flex-row gap-3">
+                        <!-- Search Input -->
+                        <div class="relative flex-1">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-black">
+                                <span class="material-symbols-outlined text-[20px] font-bold">search</span>
+                            </div>
+                            <input class="w-full pl-11 pr-4 py-2.5 bg-neutral-50 border-3 border-black font-body-sm text-body-sm font-bold placeholder-neutral-500 uppercase focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_#000] transition-all" id="logSearchInput" placeholder="SEARCH BY SUBJECT, SENDER, RECIPIENT, MESSAGE ID (#MSG-XXXX)..." type="text">
+                        </div>
+                        <!-- Filters Group -->
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <!-- Status Filter -->
+                            <div class="relative min-w-[140px]">
+                                <select class="w-full appearance-none py-2.5 pl-3 pr-8 bg-white border-3 border-black font-label text-label uppercase font-bold focus:outline-none shadow-[2px_2px_0px_#000] cursor-pointer">
+                                    <option>STATUS: ALL</option>
+                                    <option>DELIVERED</option>
+                                    <option>BOUNCED</option>
+                                    <option>QUEUED</option>
+                                    <option>FLAGGED / SPAM</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-2.5 top-3 pointer-events-none text-[18px]">arrow_drop_down</span>
+                            </div>
+                            <!-- Category Filter -->
+                            <div class="relative min-w-[150px]">
+                                <select class="w-full appearance-none py-2.5 pl-3 pr-8 bg-white border-3 border-black font-label text-label uppercase font-bold focus:outline-none shadow-[2px_2px_0px_#000] cursor-pointer">
+                                    <option>CATEGORY: ALL</option>
+                                    <option>TRANSACTIONAL</option>
+                                    <option>NEWSLETTER</option>
+                                    <option>SECURITY</option>
+                                    <option>SYSTEM</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-2.5 top-3 pointer-events-none text-[18px]">arrow_drop_down</span>
+                            </div>
+                            <!-- Date Range Filter -->
+                            <button class="px-3.5 py-2.5 bg-white border-3 border-black font-label text-label uppercase font-bold flex items-center gap-2 shadow-[2px_2px_0px_#000] hover:bg-neutral-100">
+                                <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                                <span class="">LAST 24 HOURS</span>
+                                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                            </button>
+                            <!-- Reset Button -->
+                            <button class="p-2.5 bg-neutral-100 hover:bg-neutral-200 border-3 border-black shadow-[2px_2px_0px_#000] flex items-center justify-center font-bold" title="Reset Filters">
+                                <span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Active Filter Tags Display -->
+                    <div class="mt-3 pt-3 border-t-2 border-neutral-200 flex items-center gap-2 flex-wrap">
+                        <span class="font-mono text-[11px] font-bold text-neutral-600 uppercase">ACTIVE FILTERS:</span>
+                        <span class="bg-neutral-200 border-2 border-black px-2 py-0.5 font-mono text-[11px] font-bold flex items-center gap-1">
+                            WINDOW: 24H
+                            <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-red-600">close</span>
+                        </span>
+                        <span class="bg-brutal-blue-light border-2 border-black px-2 py-0.5 font-mono text-[11px] font-bold flex items-center gap-1">
+                            CLUSTER: GLOBAL
+                            <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-red-600">close</span>
+                        </span>
+                        <button class="text-[11px] font-mono font-black uppercase text-red-600 underline ml-2">CLEAR ALL FILTERS</button>
+                    </div>
+                </section>
+                <!-- COMPREHENSIVE MESSAGES TABLE -->
+                <section class="bg-white border-3 border-black shadow-[6px_6px_0px_#000] overflow-hidden">
+                    <!-- Batch Action Toolbar (Toggled or inline) -->
+                    <div class="bg-neutral-100 border-b-3 border-black px-4 py-2.5 flex items-center justify-between flex-wrap gap-2 text-xs font-mono font-bold">
+                        <div class="flex items-center gap-3">
+                            <label class="flex items-center gap-2 cursor-pointer select-none">
+                                <input class="w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" id="selectAllCheckbox" onchange="toggleSelectAll(this)" type="checkbox">
+                                <span class="font-label text-label uppercase">SELECT ALL ON PAGE</span>
+                            </label>
+                            <span class="text-neutral-400">|</span>
+                            <span class="text-neutral-700" id="selectedCountText">0 ITEMS SELECTED</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="px-2.5 py-1 bg-white hover:bg-neutral-200 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000] flex items-center gap-1" onclick="alert('Force requeuing selected jobs...')">
+                                <span class="material-symbols-outlined text-[16px]">replay</span> BATCH RETRY
+                            </button>
+                            <button class="px-2.5 py-1 bg-white hover:bg-neutral-200 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000] flex items-center gap-1" onclick="alert('Marking selected items as false positive...')">
+                                <span class="material-symbols-outlined text-[16px]">verified_user</span> WHITELIST SENDER
+                            </button>
+                            <button class="px-2.5 py-1 bg-brutal-red text-white hover:bg-red-700 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000] flex items-center gap-1" onclick="alert('Purged selection from memory cache')">
+                                <span class="material-symbols-outlined text-[16px]">delete_sweep</span> PURGE
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Scrollable Table Container -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[1100px]">
+                            <thead>
+                                <tr class="bg-black text-white font-label text-label uppercase border-b-3 border-black">
+                                    <th class="p-3 w-10 text-center">
+                                        <span class="sr-only">Check</span>
+                                    </th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">MESSAGE ID &amp; TIME</th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">SENDER</th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">RECIPIENT</th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">SUBJECT &amp; PREVIEW</th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">CATEGORY</th>
+                                    <th class="p-3 border-r-2 border-neutral-700 tracking-wider">STATUS</th>
+                                    <th class="p-3 text-right tracking-wider">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y-2 divide-black font-body-sm text-body-sm font-medium">
+                                <!-- ROW 1: Delivered Transactional -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer" onclick="inspectRow('MSG-98241', 'auth@emailpro.io', 'alex.reyes@cyberpulse.tech', 'Your one-time login verification code is 481920', 'TRANSACTIONAL', 'DELIVERED', '142ms', '198.51.100.24', 'PASS', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98241</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">2 MINS AGO • 14:32:04</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="auth@emailpro.io">
+                                        auth@emailpro.io
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="alex.reyes@cyberpulse.tech">
+                                        alex.reyes@cyberpulse.tech
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">Your one-time login verification code is 481920</div>
+                                        <div class="font-mono text-[11px] text-neutral-600 truncate">Use this code within 10 minutes to authenticate your session...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-blue text-white px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            TRANSACTIONAL
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-green text-black px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-black inline-block"></span> DELIVERED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all" onclick="inspectRow('MSG-98241', 'auth@emailpro.io', 'alex.reyes@cyberpulse.tech', 'Your one-time login verification code is 481920', 'TRANSACTIONAL', 'DELIVERED', '142ms', '198.51.100.24', 'PASS', 'PASS')" title="Inspect Message Envelope">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all" onclick="alert('Viewing server raw postfix bounce/relay log for MSG-98241')" title="View Syslogs">
+                                                LOGS
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 2: Queued Security Alert -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer bg-neutral-50" onclick="inspectRow('MSG-98240', 'security@emailpro.io', 'm.hoffman@fintechcore.de', 'SECURITY NOTICE: New IP Login from Frankfurt (DE)', 'SECURITY', 'QUEUED', 'WAITING POOL', '198.51.100.31', 'PENDING', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98240</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">4 MINS AGO • 14:30:11</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="security@emailpro.io">
+                                        security@emailpro.io
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="m.hoffman@fintechcore.de">
+                                        m.hoffman@fintechcore.de
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">SECURITY NOTICE: New IP Login from Frankfurt (DE)</div>
+                                        <div class="font-mono text-[11px] text-neutral-600 truncate">We detected a dashboard session initiation from IP 185.22.1...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-purple text-black px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            SECURITY
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-yellow text-black px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-black inline-block animate-pulse"></span> QUEUED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98240', 'security@emailpro.io', 'm.hoffman@fintechcore.de', 'SECURITY NOTICE: New IP Login from Frankfurt (DE)', 'SECURITY', 'QUEUED', 'WAITING POOL', '198.51.100.31', 'PENDING', 'PASS')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-brutal-yellow hover:bg-yellow-400 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Priority expedited for #MSG-98240')">
+                                                FORCE
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 3: Bounced (Hard 550) Transactional -->
+                                <tr class="hover:bg-red-50 transition-colors group cursor-pointer" onclick="inspectRow('MSG-98239', 'billing@acme.corp', 'inactive_mailbox_99@vortex.org', 'Invoice #INV-2025-0918 for Acme Corp Services', 'TRANSACTIONAL', 'BOUNCED (550)', 'FAILED (0ms)', '198.51.100.12', 'FAIL', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98239</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">7 MINS AGO • 14:27:50</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="billing@acme.corp">
+                                        billing@acme.corp
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-red-600 font-bold truncate max-w-[190px]" title="inactive_mailbox_99@vortex.org">
+                                        inactive_mailbox_99@vortex.org
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">Invoice #INV-2025-0918 for Acme Corp Services</div>
+                                        <div class="font-mono text-[11px] text-red-600 truncate">SMTP error 550 5.1.1: Recipient address rejected: User unknown...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-blue text-white px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            TRANSACTIONAL
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-red text-white px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-white inline-block"></span> BOUNCED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98239', 'billing@acme.corp', 'inactive_mailbox_99@vortex.org', 'Invoice #INV-2025-0918 for Acme Corp Services', 'TRANSACTIONAL', 'BOUNCED (550)', 'FAILED (0ms)', '198.51.100.12', 'FAIL', 'PASS')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-red-100 hover:bg-red-200 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Suppressing recipient inactive_mailbox_99@vortex.org across cluster')">
+                                                SUPPRESS
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 4: Flagged Spam Newsletter -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer" onclick="inspectRow('MSG-98238', 'marketing@promo-deals.club', 'sarah.k@globalenterprise.io', 'URGENT: Claim your $500 Amazon Gift Card Now!', 'NEWSLETTER', 'SPAM FLAGGED', 'REJECTED', '203.0.113.88', 'FAIL', 'FAIL')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98238</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">11 MINS AGO • 14:23:18</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="marketing@promo-deals.club">
+                                        marketing@promo-deals.club
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="sarah.k@globalenterprise.io">
+                                        sarah.k@globalenterprise.io
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">URGENT: Claim your $500 Amazon Gift Card Now!</div>
+                                        <div class="font-mono text-[11px] text-red-600 truncate">SpamAssassin Score: 8.7 (BAYES_99, FREEMAIL_FORGED)...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-green text-black px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            NEWSLETTER
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-coral text-white px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-white inline-block"></span> SPAM FLAGGED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98238', 'marketing@promo-deals.club', 'sarah.k@globalenterprise.io', 'URGENT: Claim your $500 Amazon Gift Card Now!', 'NEWSLETTER', 'SPAM FLAGGED', 'REJECTED', '203.0.113.88', 'FAIL', 'FAIL')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-black text-white hover:bg-neutral-800 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Quarantined sender domain: promo-deals.club')">
+                                                BLOCK IP
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 5: Delivered Newsletter Digest -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer" onclick="inspectRow('MSG-98237', 'digest@techdispatch.daily', 'david.miller@startup.io', 'Weekly Engineering Digest: Distributed Actor Systems #114', 'NEWSLETTER', 'DELIVERED', '189ms', '198.51.100.44', 'PASS', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98237</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">14 MINS AGO • 14:20:00</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="digest@techdispatch.daily">
+                                        digest@techdispatch.daily
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="david.miller@startup.io">
+                                        david.miller@startup.io
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">Weekly Engineering Digest: Distributed Actor Systems #114</div>
+                                        <div class="font-mono text-[11px] text-neutral-600 truncate">Deep dive into consensus guarantees, Raft vs Paxos benchmark...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-green text-black px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            NEWSLETTER
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-green text-black px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-black inline-block"></span> DELIVERED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98237', 'digest@techdispatch.daily', 'david.miller@startup.io', 'Weekly Engineering Digest: Distributed Actor Systems #114', 'NEWSLETTER', 'DELIVERED', '189ms', '198.51.100.44', 'PASS', 'PASS')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Viewing telemetry payload MSG-98237')">
+                                                LOGS
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 6: Delivered System Alert -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer bg-neutral-50" onclick="inspectRow('MSG-98236', 'sysops@emailpro.internal', 'devops-lead@enterprise.com', '[CRITICAL] Kubernetes Node Pool Auto-Scaling Triggered (Region US-East)', 'SYSTEM', 'DELIVERED', '95ms', '10.0.14.92', 'PASS', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98236</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">18 MINS AGO • 14:16:32</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="sysops@emailpro.internal">
+                                        sysops@emailpro.internal
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="devops-lead@enterprise.com">
+                                        devops-lead@enterprise.com
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">[CRITICAL] Kubernetes Node Pool Auto-Scaling Triggered</div>
+                                        <div class="font-mono text-[11px] text-neutral-600 truncate">HPA threshold reached 88% memory saturation across worker pool...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-yellow text-black px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            SYSTEM
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-green text-black px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-black inline-block"></span> DELIVERED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98236', 'sysops@emailpro.internal', 'devops-lead@enterprise.com', '[CRITICAL] Kubernetes Node Pool Auto-Scaling Triggered (Region US-East)', 'SYSTEM', 'DELIVERED', '95ms', '10.0.14.92', 'PASS', 'PASS')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Viewing telemetry payload MSG-98236')">
+                                                LOGS
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ROW 7: Queued Password Reset -->
+                                <tr class="hover:bg-neutral-100 transition-colors group cursor-pointer" onclick="inspectRow('MSG-98235', 'accounts@cloudscale.io', 'r.chen@globalbank.ch', 'Confirm Password Reset Request for User ID #88412', 'SECURITY', 'QUEUED', 'THROTTLED (MX)', '198.51.100.9', 'PASS', 'PASS')">
+                                    <td class="p-3 text-center" onclick="event.stopPropagation()">
+                                        <input class="row-checkbox w-4 h-4 border-2 border-black rounded-none text-black focus:ring-0 cursor-pointer" type="checkbox">
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs">
+                                        <span class="font-black text-black">#MSG-98235</span>
+                                        <div class="text-[11px] text-neutral-500 font-normal">22 MINS AGO • 14:12:49</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]" title="accounts@cloudscale.io">
+                                        accounts@cloudscale.io
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 font-mono text-xs text-neutral-900 font-bold truncate max-w-[190px]" title="r.chen@globalbank.ch">
+                                        r.chen@globalbank.ch
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300 max-w-[280px]">
+                                        <div class="font-bold text-black truncate">Confirm Password Reset Request for User ID #88412</div>
+                                        <div class="font-mono text-[11px] text-neutral-600 truncate">If you did not initiate this reset request, immediately lock your...</div>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-block bg-brutal-purple text-black px-2 py-0.5 border-2 border-black font-label text-[10px] font-black tracking-wider uppercase shadow-[2px_2px_0px_#000]">
+                                            SECURITY
+                                        </span>
+                                    </td>
+                                    <td class="p-3 border-r-2 border-neutral-300">
+                                        <span class="inline-flex items-center gap-1.5 bg-brutal-yellow text-black px-2.5 py-0.5 border-2 border-black font-mono text-[11px] font-black uppercase shadow-[2px_2px_0px_#000]">
+                                            <span class="w-2 h-2 bg-black inline-block animate-pulse"></span> QUEUED
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-right" onclick="event.stopPropagation()">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            <button class="px-2 py-1 bg-white hover:bg-black hover:text-white border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="inspectRow('MSG-98235', 'accounts@cloudscale.io', 'r.chen@globalbank.ch', 'Confirm Password Reset Request for User ID #88412', 'SECURITY', 'QUEUED', 'THROTTLED (MX)', '198.51.100.9', 'PASS', 'PASS')">
+                                                INSPECT
+                                            </button>
+                                            <button class="px-2 py-1 bg-brutal-yellow hover:bg-yellow-400 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000] transition-all" onclick="alert('Priority rescheduled for MSG-98235')">
+                                                RESEND
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- PAGINATION FOOTER -->
+                    <div class="p-4 bg-white border-t-3 border-black flex flex-col md:flex-row items-center justify-between gap-4 select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-xs font-bold uppercase text-neutral-800">
+                                SHOWING 1 - 25 OF <span class="font-black text-black">1,428,940</span> MESSAGES
+                            </span>
+                            <div class="flex items-center gap-2 font-mono text-xs font-bold">
+                                <span class="text-neutral-500">ROWS:</span>
+                                <select class="border-2 border-black py-0.5 px-2 bg-neutral-50 font-bold focus:outline-none">
+                                    <option>25</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                    <option>250</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Page Nav Controls -->
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <button class="px-3 py-1.5 bg-neutral-100 hover:bg-neutral-200 border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">chevron_left</span> PREV
+                            </button>
+                            <button class="w-8 h-8 bg-brutal-yellow border-2 border-black font-mono text-xs font-black shadow-[2px_2px_0px_#000]">1</button>
+                            <button class="w-8 h-8 bg-white hover:bg-neutral-100 border-2 border-black font-mono text-xs font-bold shadow-[2px_2px_0px_#000]">2</button>
+                            <button class="w-8 h-8 bg-white hover:bg-neutral-100 border-2 border-black font-mono text-xs font-bold shadow-[2px_2px_0px_#000]">3</button>
+                            <span class="px-1 font-mono font-bold">...</span>
+                            <button class="w-8 h-8 bg-white hover:bg-neutral-100 border-2 border-black font-mono text-xs font-bold shadow-[2px_2px_0px_#000]">48</button>
+                            <button class="px-3 py-1.5 bg-white hover:bg-neutral-100 border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                                NEXT <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <!-- QUICK INSPECTOR / PREVIEW DRAWER (EXPANDABLE DETAIL SECTION) -->
+                <section class="bg-white border-3 border-black p-5 shadow-[6px_6px_0px_#000]" id="inspectorDrawer">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b-3 border-black gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-black text-white px-2 py-0.5 font-mono text-xs font-bold uppercase">LIVE ENVELOPE INSPECTION</span>
+                            <h2 class="font-h2 text-h2 uppercase text-black" id="inspectTitle">MSG #MSG-98241 (DETAIL)</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="px-3 py-1 bg-white hover:bg-neutral-100 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-all" onclick="alert('Downloading RFC 5322 MIME EML file...')">
+                                <span class="material-symbols-outlined text-[16px]">file_download</span>
+                                RAW EML / MIME
+                            </button>
+                            <button class="px-3 py-1 bg-brutal-blue text-white hover:bg-blue-700 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-all" onclick="togglePayloadModal()">
+                                <span class="material-symbols-outlined text-[16px]">visibility</span>
+                                HTML PREVIEW
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Inspector Metadata Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 pt-1">
+                        <div class="p-3 bg-neutral-50 border-2 border-black shadow-[2px_2px_0px_#000]">
+                            <div class="text-[10px] font-mono font-bold uppercase text-neutral-500">SMTP RELAY NODE IP</div>
+                            <div class="font-mono text-xs font-black mt-1" id="inspectIp">198.51.100.24 (us-east-cluster-04)</div>
+                            <div class="text-[10px] text-emerald-700 font-mono mt-0.5 font-bold flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 bg-emerald-600 inline-block"></span> REVERSE DNS PTR VERIFIED
+                            </div>
+                        </div>
+                        <div class="p-3 bg-neutral-50 border-2 border-black shadow-[2px_2px_0px_#000]">
+                            <div class="text-[10px] font-mono font-bold uppercase text-neutral-500">SECURITY CHECKS</div>
+                            <div class="flex items-center gap-2 mt-1 font-mono text-xs font-black">
+                                <span class="bg-emerald-100 border border-black px-1 text-emerald-800" id="inspectDkim">DKIM: PASS</span>
+                                <span class="bg-emerald-100 border border-black px-1 text-emerald-800" id="inspectSpf">SPF: PASS</span>
+                            </div>
+                            <div class="text-[10px] text-neutral-600 font-mono mt-0.5">DMARC POLICY: QUARANTINE (COMPLIANT)</div>
+                        </div>
+                        <div class="p-3 bg-neutral-50 border-2 border-black shadow-[2px_2px_0px_#000]">
+                            <div class="text-[10px] font-mono font-bold uppercase text-neutral-500">DISPATCH LATENCY &amp; ATTEMPTS</div>
+                            <div class="font-mono text-xs font-black mt-1" id="inspectLatency">142ms • ATTEMPT 1 OF 3</div>
+                            <div class="text-[10px] text-neutral-600 font-mono mt-0.5">TLS 1.3 CIPHER: ECDHE-RSA-AES128-GCM</div>
+                        </div>
+                        <div class="p-3 bg-neutral-50 border-2 border-black shadow-[2px_2px_0px_#000]">
+                            <div class="text-[10px] font-mono font-bold uppercase text-neutral-500">MESSAGE CLASSIFICATION</div>
+                            <div class="font-mono text-xs font-black mt-1 uppercase" id="inspectCategory">TRANSACTIONAL // SYSTEM</div>
+                            <div class="text-[10px] text-neutral-600 font-mono mt-0.5">RETENTION SCHEDULE: 90 DAYS ACTIVE</div>
+                        </div>
+                    </div>
+                    <!-- Inspector Raw Header Code Snippet Box -->
+                    <div class="mt-5 flex flex-col gap-4">
+                        <!-- GÖNDEREN VE ALICI BİLGİLERİ -->
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-surface-container-low border-3 border-black shadow-[4px_4px_0px_#000]">
+
+                            <!-- GÖNDEREN (FROM) -->
+                            <div class="flex items-center gap-3.5 flex-1 w-full bg-white border-3 border-black p-3.5 shadow-brutal-sm">
+                                <img class="w-14 h-14 rounded-full border-3 border-black object-cover shrink-0"
+                                     src="https://lh3.googleusercontent.com/aida/AEtjO1XdgZQyom3UxschdBDqep7dE0rRlniNdQFVxG9_xj7F7aPyykpL5SCjdD5Rg80p9Ioi03eQEQlPDoNOzViVhLW-AVCAxC2P9xFgyscFlZk9Fx05p0neCXON7xdcQGt4AS_O517BGdW6XALSM8BscSFmpO2Pb5lSxzM-FbuOGqsCa2aFgVpguBzTLp4Wg822iAMfdZTSMEut-o6qQP9aBlK4C3S-mz_ZfdMLp5FB3AmTgd6n-tF3nOxFjy8"
+                                     alt="Sender Avatar">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-mono text-xs font-black uppercase bg-brutal-yellow px-2 py-0.5 border-2 border-black">FROM (SENDER)</span>
+                                        <span class="inline-flex items-center gap-1 font-mono text-[10px] font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 border border-black uppercase">
+                                            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> VERIFIED DISPATCH
+                                        </span>
+                                    </div>
+                                    <div class="font-black text-sm uppercase truncate text-black">Alex Chen</div>
+                                    <div class="font-mono text-xs font-bold text-neutral-600 truncate">auth@emailpro.io</div>
+                                </div>
+                            </div>
+
+                            <!-- OK SİMGESİ -->
+                            <div class="shrink-0 flex items-center justify-center">
+                                <div class="w-10 h-10 rounded-full bg-brutal-yellow text-black border-3 border-black flex items-center justify-center shadow-brutal-sm font-black">
+                                    <span class="material-symbols-outlined text-[22px]">arrow_forward</span>
+                                </div>
+                            </div>
+
+                            <!-- ALICI (TO) -->
+                            <div class="flex items-center gap-3.5 flex-1 w-full bg-white border-3 border-black p-3.5 shadow-brutal-sm">
+                                <img class="w-14 h-14 rounded-full border-3 border-black object-cover shrink-0"
+                                     src="https://lh3.googleusercontent.com/aida/AEtjO1UIoBBgphwNbFZhzTlUNNA8oDooTL9PtvuPJOb2_7gvHdrarRezKRfyyB3gv2RJDB_t1_mCLOej1THBCU0DjonVZxcSgvhvYFbOdU7KAC56PjtT0sjUz913YaEeCs0tH9N35QCA2j7ScaMGmF0kpIzIzOEcO21qSscLQWHLqY-wyGGv7aFSCECGILotAd2-mBrvShQG0qDRmN-0oTa8pyLlem1gscnH3dFtymSjbx4jTJKLmkrS6IYHGkI"
+                                     alt="Recipient Avatar">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                        <span class="font-mono text-xs font-black uppercase bg-brutal-blue-light px-2 py-0.5 border-2 border-black">TO (RECIPIENT)</span>
+                                        <span class="inline-flex items-center gap-1 font-mono text-[10px] font-black text-black bg-neutral-200 px-2 py-0.5 border border-black uppercase">
+                                            <span class="w-2 h-2 rounded-full bg-brutal-blue inline-block"></span> PRIMARY INBOX
+                                        </span>
+                                    </div>
+                                    <div class="font-black text-sm uppercase truncate text-black">Sarah Connor</div>
+                                    <div class="font-mono text-xs font-bold text-neutral-600 truncate">alex.reyes@cyberpulse.tech</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MESAJ DETAYLARI VE İÇERİK -->
+                        <div class="bg-white border-3 border-black p-5 shadow-[4px_4px_0px_#000]">
+
+                            <!-- BAŞLIK VE GÜVENLİK ETİKETLERİ -->
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b-2 border-black gap-2">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="bg-brutal-blue text-white px-2 py-0.5 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000]">TRANSACTIONAL</span>
+                                        <span class="font-mono text-xs font-bold text-neutral-500">2 MINS AGO • 14:32:04</span>
+                                    </div>
+                                    <h3 class="font-h2 text-lg md:text-xl font-black text-black uppercase">Your one-time login verification code (OTP)</h3>
+                                </div>
+                                <div class="flex items-center gap-2 font-mono text-xs font-black flex-wrap">
+                                    <span class="bg-emerald-100 border-2 border-black px-2 py-0.5 text-emerald-800 shadow-[2px_2px_0px_#000]">DKIM: PASS</span>
+                                    <span class="bg-emerald-100 border-2 border-black px-2 py-0.5 text-emerald-800 shadow-[2px_2px_0px_#000]">SPF: PASS</span>
+                                </div>
+                            </div>
+
+                            <!-- MESAJ METNİ -->
+                            <div class="py-4 space-y-3">
+                                <p class="font-body-md text-sm md:text-base text-neutral-800 leading-relaxed">Hi Alex, here is your one-time verification passcode:</p>
+                                <div class="inline-flex items-center justify-center px-5 py-2.5 bg-brutal-yellow border-3 border-black font-mono text-2xl md:text-3xl font-black tracking-widest shadow-[4px_4px_0px_#000]">
+                                    849-201
+                                </div>
+                                <p class="font-body-sm text-sm text-neutral-700 leading-relaxed">Please enter this code within 10 minutes to verify your EmailPro session. If you did not request this, please secure your account immediately.</p>
+                            </div>
+
+                            <!-- ALT BUTONLAR VE SİSTEM BİLGİSİ -->
+                            <div class="pt-3 border-t-2 border-black flex flex-wrap items-center justify-between gap-3">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <button class="px-3 py-1.5 bg-white hover:bg-neutral-100 text-black border-2 border-black font-label text-xs uppercase font-bold shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5" onclick="alert('Downloading Raw EML...')">
+                                        <span class="material-symbols-outlined text-[16px]">file_download</span> Download Raw EML
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-brutal-yellow hover:bg-yellow-400 text-black border-2 border-black font-label text-xs uppercase font-bold shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5" onclick="alert('Resending message...')">
+                                        <span class="material-symbols-outlined text-[16px]">send</span> Resend Message
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 border-2 border-black font-label text-xs uppercase font-bold shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5" onclick="alert('Marked as spam!')">
+                                        <span class="material-symbols-outlined text-[16px]">report</span> Flag as Spam
+                                    </button>
+                                </div>
+                                <div class="text-[11px] font-mono text-neutral-600 font-bold uppercase">
+                                    CIPHER: TLS 1.3 // NODE: US-EAST-CLUSTER-04
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <!-- MODAL: PAYLOAD PREVIEW -->
+                <div class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] flex items-center justify-center p-4" id="payloadModal">
+                    <div class="bg-white border-3 border-black w-full max-w-2xl shadow-[8px_8px_0px_#000] flex flex-col max-h-[870px]">
+                        <div class="p-3 bg-brutal-yellow border-b-3 border-black flex items-center justify-between">
+                            <div class="font-h2 text-h2 uppercase text-black font-black flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[22px]">mail</span>
+                                MESSAGE PAYLOAD PREVIEW
+                            </div>
+                            <button class="w-8 h-8 bg-white border-2 border-black flex items-center justify-center font-black hover:bg-neutral-100" onclick="togglePayloadModal()">
+                                ✕
+                            </button>
+                        </div>
+                        <div class="p-4 border-b-2 border-black bg-neutral-50 font-mono text-xs space-y-1">
+                            <div class=""><strong>FROM:</strong> auth@emailpro.io</div>
+                            <div class=""><strong>TO:</strong> recipient-target@domain.ext</div>
+                            <div class=""><strong>SUBJECT:</strong> Instant Security Verification Notification</div>
+                        </div>
+                        <div class="p-6 overflow-y-auto flex-1 bg-white space-y-4 font-body-sm">
+                            <div class="border-2 border-black p-4 bg-neutral-50">
+                                <h3 class="font-bold text-lg mb-2">EmailPro Secure Authentication</h3>
+                                <p class="text-neutral-700 mb-3">Hello,</p>
+                                <p class="text-neutral-700 mb-4">We received a request to verify your identity for access to your administrative console. Please use the authorization token below:</p>
+                                <div class="p-3 bg-neutral-200 border-2 border-black inline-block font-mono text-2xl font-black tracking-widest my-2">
+                                    481-920
+                                </div>
+                                <p class="text-neutral-500 text-xs mt-3">This passcode will expire in precisely 10 minutes. If you did not initiate this dispatch, alert security ops.</p>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-neutral-100 border-t-3 border-black flex items-center justify-end gap-2">
+                            <button class="px-4 py-2 bg-white hover:bg-neutral-200 border-2 border-black font-label text-label uppercase shadow-[2px_2px_0px_#000]" onclick="togglePayloadModal()">
+                                CLOSE WINDOW
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Inspection detail row update
+                function inspectRow(id, sender, recipient, subject, category, status, latency, ip, dkim, spf) {
+                    document.getElementById('inspectTitle').textContent = 'MSG #' + id + ' (' + status + ')';
+                    document.getElementById('inspectIp').textContent = ip + ' (relay-edge)';
+                    document.getElementById('inspectDkim').textContent = 'DKIM: ' + dkim;
+                    document.getElementById('inspectSpf').textContent = 'SPF: ' + spf;
+                    document.getElementById('inspectLatency').textContent = latency + ' • DISPATCH OK';
+                    document.getElementById('inspectCategory').textContent = category + ' // CLUSTER';
+
+                    // Smooth scroll down to inspector
+                    document.getElementById('inspectorDrawer').scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // Select all checkbox functionality
+                function toggleSelectAll(master) {
+                    const checkboxes = document.querySelectorAll('.row-checkbox');
+                    checkboxes.forEach(cb => cb.checked = master.checked);
+                    updateSelectedCount();
+                }
+
+                // Row selection counter
+                document.querySelectorAll('.row-checkbox').forEach(cb => {
+                    cb.addEventListener('change', updateSelectedCount);
+                });
+
+                function updateSelectedCount() {
+                    const checked = document.querySelectorAll('.row-checkbox:checked').length;
+                    document.getElementById('selectedCountText').textContent = checked + ' ITEMS SELECTED';
+                }
+
+                // Batch action notice
+                function toggleBatchPanel() {
+                    const checked = document.querySelectorAll('.row-checkbox:checked').length;
+                    if (checked === 0) {
+                        alert('Please check one or more message rows from the table to run batch operations.');
+                    } else {
+                        alert('Batch Resend & Action Queue initiated for ' + checked + ' selected items.');
+                    }
+                }
+
+                // Payload modal toggle
+                function togglePayloadModal() {
+                    const modal = document.getElementById('payloadModal');
+                    modal.classList.toggle('hidden');
+                }
+
+                // Search filter simple trigger
+                document.getElementById('logSearchInput').addEventListener('keyup', function (e) {
+                    if (e.key === 'Enter') {
+                        alert('Searching indexed logs for query: "' + this.value + '" across 1,428,940 entries...');
+                    }
+                });
+            </script>
+        </main>
+        <!-- END: MainContent -->
+    </div>
+    <!-- BEGIN: FooterStatus -->
+    <footer class="bg-white border-t-3 border-black px-6 py-2 flex flex-col sm:flex-row items-center justify-between text-[11px] font-bold uppercase gap-2" data-purpose="system-status-footer">
+        <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 bg-emerald-500 border border-black inline-block"></span>
+                RBAC CLUSTER STATUS: NORMAL
+            </span>
+            <span class="text-neutral-400">|</span>
+            <span class="">SYNC ENGINE: 14.8 GB REPLICATED</span>
+        </div>
+        <div class="text-neutral-700 font-mono text-[11px]">
+            EMAILPRO ENGINE V4.2.0 • NEOBRUTALIST SYS-ADMIN
+        </div>
+    </footer>
+    <!-- END: FooterStatus -->
+
+
+
+
+</body>
+</html>

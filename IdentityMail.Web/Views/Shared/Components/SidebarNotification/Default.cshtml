@@ -1,0 +1,8 @@
+﻿@*
+    Sidebar Notification
+*@
+
+@if (ViewBag.TotalUnreadCount != null && (int)ViewBag.TotalUnreadCount > 0)
+{
+    <span class="absolute -top-2 -right-2 bg-brutal-red text-white text-xs font-black px-1.5 py-0.5 border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] select-none">@ViewBag.TotalUnreadCount</span>
+}

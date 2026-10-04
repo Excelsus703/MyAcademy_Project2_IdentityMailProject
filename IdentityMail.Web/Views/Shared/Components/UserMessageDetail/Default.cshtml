@@ -1,0 +1,151 @@
+﻿@model UserMessage
+@*
+    User Message Detail
+*@
+
+<div class="flex-1 flex flex-col bg-white h-full overflow-y-auto p-lg relative">
+    <!-- Action Bar -->
+    <div class="flex justify-between items-center mb-xl">
+        <div class="flex gap-sm">
+            <a href="/Message/Index/" title="Menüye Dön" class="p-2 brutal-border bg-white brutal-shadow hover:bg-brutal-blue hover:text-white transition-colors">
+                <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+            </a>
+            <form asp-action="ToggleImportant" asp-controller="Message" asp-route-id="@Model.Id" method="post" class="inline">
+                <button type="submit"
+                        title="@(Model.isImportant ? "Önemli işaretini kaldır" : "Önemli olarak işaretle")"
+                        class="flex items-center justify-center p-2 brutal-border brutal-shadow transition-colors @(Model.isImportant ? "bg-brutal-yellow text-black" : "bg-white text-black hover:bg-brutal-yellow")">
+
+                    <span class="material-symbols-outlined text-[2rem] @(Model.isImportant ? "[font-variation-settings:'FILL'_1] text-white" : "")">
+                        @(Model.isImportant ? "star" : "star_border")
+                    </span>
+
+                </button>
+            </form>
+            <form asp-action="MoveToTrash" asp-controller="Message" asp-route-id="@Model.Id" method="post" class="inline">
+                <button type="submit" title="Çöp Kutusuna Taşı" class="items-center p-2 brutal-border bg-white brutal-shadow hover:bg-brutal-red hover:text-white transition-colors">
+
+                    <span class="material-symbols-outlined">delete</span>
+
+                </button>
+            </form>
+            @if (Model.IsComplaint == false)
+            {
+                <button type="button" title="Çöp Kutusuna Taşı" class="flex items-center justify-center p-2 brutal-border brutal-shadow transition-colors hover:bg-brutal-red hover:text-white" onclick="document.getElementById('MessageComplaintModal').classList.remove('hidden')">
+
+                    <span class="material-symbols-outlined text-[2rem]">report</span>
+                    Mesajı Şikayet Et
+                </button>
+            }
+        </div>
+        <div class="font-label text-label font-bold uppercase border-2 border-black px-2 py-1 bg-brutal-blue text-white">
+            ID: MSG-9942
+        </div>
+    </div>
+    <!-- Headers -->
+    <div class="mb-lg brutal-border-b pb-lg">
+        <h1 class="font-h1 text-h1 font-black uppercase text-black mb-md bg-brutal-yellow inline-block brutal-border p-2 shadow-[8px_8px_0_0_#000]">@Model.Subject</h1>
+        <div class="flex justify-between items-center mt-xl">
+            <div class="flex items-center gap-md">
+                <div class="w-12 h-12 brutal-border bg-gray-200 overflow-hidden flex items-center justify-center">
+                    @{
+                        var photoPath = !string.IsNullOrEmpty(Model?.Sender.ProfileImageUrl) ? Model.Sender.ProfileImageUrl : "/images/default-avatar.jpg";
+                    }
+                    <img class="w-full h-full" data-alt="A bold, high-contrast neobrutalist style avatar illustration of a design professional. Sharp black lines, flat bright colors like electric blue and vibrant yellow. Minimalist geometry, aggressive styling. The background is a stark raw white." src="@photoPath">
+                </div>
+                <div>
+                    <p class="font-body-md text-body-md font-bold uppercase text-black">@Model.Sender.FirstName @Model.Sender.LastName &lt;@Model.Sender.Email&gt;</p>
+                    <p class="font-body-sm text-body-sm font-medium text-black">Kime: @Model.Receiver.FirstName @Model.Receiver.LastName</p>
+                </div>
+            </div>
+            <p class="font-label text-label font-bold text-black">@Model.SendDate.ToLongDateString(), @Model.SendDate.ToShortTimeString() AM</p>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="prose max-w-none font-body-md text-body-md text-black">
+        <p class="mb-4">@Html.Raw(Model.Body)</p>
+    </div>
+    @if (Model.MessageAttachments != null && Model.MessageAttachments.Any())
+    {
+        <div class="mt-5 pt-4 border-t-2 border-black">
+            <h4 class="font-bold text-sm mb-3 flex items-center gap-1.5 uppercase tracking-wide">
+                <span class="material-symbols-outlined text-base">attach_file</span>
+                EKLENEN DOSYALAR (@Model.MessageAttachments.Count)
+            </h4>
+
+            <div class="flex flex-wrap gap-3">
+                @foreach (var file in Model.MessageAttachments)
+                {
+                    var sizeFormatted = file.FileSize >= 1024 * 1024
+                    ? $"{(file.FileSize / (1024.0 * 1024.0)):F1} MB"
+                    : $"{(file.FileSize / 1024.0):F1} KB";
+
+                    <a href="@file.FilePath"
+                       download="@file.OriginalName"
+                       title="@file.OriginalName - İndirmek için tıklayın"
+                       class="flex items-center gap-2.5 px-4 py-2.5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-brutal-yellow hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all group">
+
+                        <span class="material-symbols-outlined text-xl shrink-0">description</span>
+
+                        <span class="font-bold text-sm max-w-[240px] truncate">@file.OriginalName</span>
+
+                        <span class="text-xs text-gray-600 font-medium shrink-0">(@sizeFormatted)</span>
+
+                        <span class="material-symbols-outlined text-base ml-1 shrink-0 group-hover:translate-y-0.5 transition-transform">download</span>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+    <!-- Reply Area -->
+    <form asp-action="SendMail" asp-controller="Message" method="post" class="mt-2xl brutal-border bg-white brutal-shadow p-md">
+
+        <input type="hidden" name="ReceiverMail" value="@Model.Sender?.Email" />
+        <input type="hidden" name="Subject" value="@(Model.Subject != null && Model.Subject.StartsWith("RE: ") ? Model.Subject : "RE: " + Model.Subject)" />
+        <input type="hidden" name="MessageCategoryId" value="@Model.MessageCategoryId" />
+
+        <textarea id="replyTextarea" name="Body" class="w-full h-24 bg-gray-50 brutal-border p-2 font-body-md text-body-md text-black focus:outline-none focus:bg-white resize-none" placeholder="YANITINI BURAYA YAZ..." required></textarea>
+
+        <div class="flex justify-end mt-md">
+            <button type="submit" class="bg-black text-white brutal-border brutal-shadow font-label text-label uppercase py-sm px-lg hover:bg-brutal-blue transition-colors">
+                Yanıtla
+            </button>
+        </div>
+    </form>
+
+    <!-- Simplified Complaint Modal -->
+    <div class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" id="MessageComplaintModal">
+        <div class="w-full max-w-lg bg-white border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <!-- Modal Header -->
+            <div class="px-5 py-3.5 bg-brutal-yellow border-b-3 border-black flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined font-black text-lg">report</span>
+                    <span class="font-black text-sm uppercase tracking-wide">ŞİKAYET OLUŞTUR</span>
+                </div>
+                <button class="w-7 h-7 bg-white border-2 border-black font-black text-xs hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors" onclick="document.getElementById('MessageComplaintModal').classList.add('hidden')">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Modal Form Body -->
+            <form asp-action="MarkAsComplaint" asp-controller="Message" asp-route-id="@Model.Id" method="post" class="p-5 space-y-4 font-mono text-xs bg-white" onsubmit="alert('Şikayet başarıyla oluşturuldu!'); document.getElementById('MessageComplaintModal').classList.add('hidden');">
+                <div>
+                    <label class="font-body-md mb-1 text-body-md font-bold uppercase text-black">Şikayet Sebebi</label>
+                    <input class="w-full px-3 py-2 border-2 border-black font-bold uppercase bg-white text-black placeholder-neutral-400 focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]" placeholder="Örn: Uygun Olmayan İçerik" required name="ComplaintReason" type="text" />
+
+                    <p class="font-body-md py-2 text-body-md font-bold uppercase text-black">Şikayet sebebinizi kısaca açıklayınız.</p>
+                </div>
+
+                <!-- Footer Buttons -->
+                <div class="pt-3 border-t-2 border-black flex justify-end gap-2">
+                    <button class="px-4 py-2 bg-white border-2 border-black font-black uppercase hover:bg-neutral-100 active:translate-x-0.5 active:translate-y-0.5" onclick="document.getElementById('MessageComplaintModal').classList.add('hidden')" type="button">
+                        İPTAL
+                    </button>
+                    <button class="px-5 py-2 bg-brutal-yellow border-2 border-black font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" type="submit">
+                        KAYDET
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

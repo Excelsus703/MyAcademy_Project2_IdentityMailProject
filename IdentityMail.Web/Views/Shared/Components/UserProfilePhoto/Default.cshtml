@@ -1,0 +1,12 @@
+﻿@*
+    User Profile Photo
+*@
+@{
+    var photoPath = !string.IsNullOrEmpty(Model?.ProfileImageUrl) ? Model.ProfileImageUrl : "/images/default-avatar.jpg";
+}
+
+<div class="mt-md flex justify-center">
+    <img src="@photoPath"
+         alt="@User.Identity.Name"
+         class="w-100 h-100 object-cover border-4 border-black shadow-[4px_4px_0_#000]" />
+</div>

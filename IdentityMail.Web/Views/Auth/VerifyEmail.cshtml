@@ -1,0 +1,161 @@
+﻿@{
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+
+<div class="w-full max-w-[500px] bg-white brutal-border-4 brutal-card-shadow p-6 sm:p-9 relative z-10">
+    <!-- Header / Brand matching Register Screen -->
+    <div class="flex items-center gap-3 mb-2">
+        <span class="material-symbols-outlined text-3xl font-black text-black">mail</span>
+        <span class="text-2xl sm:text-3xl font-black tracking-tight text-black uppercase">CyberMail</span>
+    </div>
+    <h1 class="text-xl sm:text-2xl font-black uppercase text-black tracking-tight mb-5">
+        E-POSTA DOĞRULAMA
+    </h1>
+    <div class="w-full h-[3px] bg-black mb-6"></div>
+    <!-- Envelope / Mail Icon Badge -->
+    <div class="flex items-center gap-3 bg-[#f0ecf4] p-3 brutal-border mb-6">
+        <div class="w-10 h-10 bg-brutal-yellow brutal-border flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-black text-2xl font-bold">mark_email_unread</span>
+        </div>
+        <div class="text-xs sm:text-sm text-black leading-snug">
+            <p class="font-bold">6 haneli doğrulama kodu gönderildi:</p>
+            <p class="font-bold text-[#4f378a] tracking-wide break-all">@ViewBag.Email</p>
+        </div>
+    </div>
+    <!-- Instruction Label (like AD, SOYAD tags in register screen) -->
+    <div class="mb-2">
+        <span class="inline-block bg-black text-white text-xs font-bold px-2 py-0.5 uppercase tracking-wider">
+            DOĞRULAMA KODU
+        </span>
+    </div>
+    <form method="post">
+        <!-- 6-digit OTP Inputs (Brutalist style) -->
+        <div class="grid grid-cols-6 gap-2 sm:gap-2.5 mb-6">
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" name="code" />
+        </div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="my-lg p-md brutal-border bg-gray-100 border-l-[12px] border-l-brutal-red">
+                <p class="font-bold uppercase text-brutal-red mb-2">Hay Aksi !!!:</p>
+                @Html.ValidationSummary(false, string.Empty, new { @class = "list-disc pl-5 font-medium space-y-2" })
+            </div>
+        }
+        <!-- Timer / Info Tag -->
+        <div class="flex items-center justify-between text-xs font-bold text-neutral-800 mb-6 bg-[#f8f6fa] p-2.5 brutal-border">
+            <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base">timer</span>
+                <span>Kalan Süre:</span>
+            </div>
+            <span id="timer" class="bg-black text-white px-2 py-0.5 font-mono text-xs">03:00</span>
+        </div>
+
+        <!-- KODU ONAYLA (Sarı Buton - Varsayılan Açık) -->
+        <button type="submit" id="btnSubmit" class="w-full bg-[#fdd985] hover:bg-[#fed36e] active:bg-[#eec45c] text-black font-black uppercase text-base sm:text-lg py-3.5 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wider mb-3">
+            <span>KODU ONAYLA</span>
+        </button>
+    </form>
+
+    <!-- KODU TEKRAR GÖNDER (Beyaz Buton - Varsayılan Gizli "hidden") -->
+    <form asp-action="SendCode" method="post">
+        <input type="hidden" name="email" value="@ViewBag.Email" />
+        <button type="submit" id="btnResend" class="hidden w-full bg-brutal-red text-white font-white uppercase text-base sm:text-lg py-3.5 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wider mb-3">
+            <span>Kodu Tekrar Gönder</span>
+        </button>
+    </form>
+
+    @* <div class="flex items-center justify-between text-xs font-bold text-neutral-800 mb-6 bg-[#f8f6fa] p-2.5 brutal-border">
+            <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base">timer</span>
+                <span>Kalan Süre:</span>
+            </div>
+            <span class="bg-black text-white px-2 py-0.5 font-mono text-xs">02:45</span>
+        </div> *@
+
+    <!-- Primary Action: Verify Button (Matching the KAYIT OL button in SCREEN_40) -->
+    @* <button type="submit" class="w-full bg-[#fdd985] hover:bg-[#fed36e] active:bg-[#eec45c] text-black font-black uppercase text-base sm:text-lg py-3.5 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wider mb-3">
+            <span>KODU ONAYLA</span>
+            <span class="material-symbols-outlined font-black">arrow_forward</span>
+        </button> *@
+</div>
+
+<!-- Script to auto-tab between OTP inputs -->
+<script>
+    const inputs = document.querySelectorAll('.otp-box');
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    const TIMER_KEY = 'otp_timer_end_time';
+    const DURATION_SECONDS = 180; // 3 dakika
+
+    const timerDisplay = document.getElementById('timer');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnResend = document.getElementById('btnResend');
+
+    // 1. Bitiş zamanını belirle veya hafızadan al
+    let endTime = localStorage.getItem(TIMER_KEY);
+
+    if (!endTime) {
+        // İlk defa gelindiyse şu anki zamana 3 dakika ekle
+        endTime = new Date().getTime() + DURATION_SECONDS * 1000;
+        localStorage.setItem(TIMER_KEY, endTime);
+    } else {
+        endTime = parseInt(endTime, 10);
+    }
+
+    // 2. Sayaç Döngüsü
+    const countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = Math.floor((endTime - now) / 1000);
+
+        if (distance > 0) {
+            let minutes = Math.floor(distance / 60);
+            let seconds = distance % 60;
+
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            if (timerDisplay) {
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+            }
+        } else {
+            // Süre Bittiğinde
+            clearInterval(countdown);
+            localStorage.removeItem(TIMER_KEY); // Hafızayı temizle
+
+            if (timerDisplay) timerDisplay.textContent = "00:00";
+
+            if (btnSubmit) {
+                btnSubmit.classList.add('hidden');
+            }
+
+            if (btnResend) {
+                btnResend.classList.remove('hidden');
+            }
+        }
+    }, 1000);
+
+    // Kodu Tekrar Gönder butonuna basıldığında hafızadaki süreyi temizle ki yeni sayaç başlasın
+    if (btnResend) {
+        btnResend.addEventListener('click', () => {
+            localStorage.removeItem(TIMER_KEY);
+        });
+    }
+</script>

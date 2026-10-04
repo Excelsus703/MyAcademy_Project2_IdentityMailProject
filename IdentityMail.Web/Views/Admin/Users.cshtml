@@ -1,0 +1,188 @@
+﻿@model List<UserListViewModel>
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- BEGIN: MainDashboardContent -->
+<main class="flex-1 overflow-y-auto bg-neutral-50">
+
+    <!-- Page Header Section -->
+    <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-3 border-black" data-purpose="content-header">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tight text-black flex items-center gap-3">
+                @ViewData["Title"]
+                <span class="inline-block bg-[#FBBF24] text-black text-sm px-2.5 py-1 uppercase tracking-widest font-mono font-black border-2 border-black shadow-brutal-sm">
+                    @ViewBag.TotalUsers Kullanıcı
+                </span>
+            </h1>
+            <div class="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs font-bold">
+                <span class="flex items-center gap-2 px-4 py-2 border-3 border-black shadow-brutal font-black text-sm uppercase">
+                    Toplam: @ViewBag.TotalUsers
+                </span>
+                <span class="flex items-center gap-2 px-4 py-2 bg-[#86EFAC] border-3 border-black shadow-brutal font-black text-sm uppercase">
+                    <span class="w-2 h-2 bg-green-600 border border-black inline-block"></span>
+                    Aktif: @ViewBag.TotalActiveUsers
+                </span>
+                <span class="flex items-center gap-2 px-4 py-2 bg-yellow-100 border-3 border-black shadow-brutal font-black text-sm uppercase">
+                    <span class="w-2 h-2 bg-yellow-400 border border-black inline-block"></span>
+                    Pasif: @ViewBag.TotalPassiveUsers
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white border-3 border-black shadow-brutal flex flex-col justify-between mb-8">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b-3 border-black text-[14px] uppercase tracking-wider text-black" style="background-color: rgb(237, 233, 254);">
+                        <th class="p-3.5 font-black border-r-2 border-black">Kullanıcı</th>
+                        <th class="p-3.5 font-black border-r-2 border-black">Email Adresi</th>
+                        <th class="p-3.5 font-black border-r-2 border-black">Rolü</th>
+                        <th class="p-3.5 font-black border-r-2 border-black">Durumu</th>
+                        <th class="p-3.5 font-black border-r-2 border-black">Gönderdiği Mesaj Sayısı</th>
+                        <th class="p-3.5 font-black text-right">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y-2 divide-black text-sm font-bold">
+                    @{
+                        string userState = "";
+                        string userStateBoxColor = "";
+                        string userStateMiniboxColor = "";
+
+                        string RoleBoxColor = "";
+                        string RoleBoxTextColor = "";
+
+                        string userStateActionText = "";
+                        string userStateActionBox = "";
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.IsPassive == false)
+                        {
+                            userState = "Aktif";
+                            userStateBoxColor = "bg-[#86EFAC]";
+                            userStateMiniboxColor = "bg-green-600";
+                            userStateActionText = "Hesabı Pasif Et";
+                            userStateActionBox = "bg-yellow-100";
+                        }
+                        else
+                        {
+                            userState = "Pasif";
+                            userStateBoxColor = "bg-yellow-100";
+                            userStateMiniboxColor = "bg-yellow-400";
+                            userStateActionText = "Hesabı Aktif Et";
+                            userStateActionBox = "bg-[#86EFAC]";
+                        }
+
+
+                        if (item.RoleName == "Süper Admin")
+                        {
+                            RoleBoxColor = "bg-[#FF6B6B]";
+                            RoleBoxTextColor = "text-white";
+                        }
+
+                        if (item.RoleName == "Admin")
+                        {
+                            RoleBoxColor = "bg-brutal-yellow";
+                            RoleBoxTextColor = "font-black";
+                        }
+
+                        if (item.RoleName == "Standart Kullanıcı")
+                        {
+                            RoleBoxColor = "bg-brutal-green";
+                            RoleBoxTextColor = "font-black";
+                        }
+
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-yellow-50 transition-colors">
+                            <td class="p-3.5 border-r-2 border-black font-mono">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 border-2 border-black flex items-center justify-center font-black text-sm shadow-brutal-sm flex-shrink-0 text-black" style="background-color: #fef08a;">
+                                        <img src="@item.ProfileImageUrl" />
+                                    </div>
+                                    <div>
+                                        <span class="text-black font-black block leading-none">@item.FirstName @item.LastName</span>
+                                        <span class="text-neutral-600 text-[12px]">@@ @item.UserName</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-3.5 border-r-2 border-black font-mono text-neutral-800">@item.Email</td>
+                            <td class="p-3.5 border-r-2 border-black">
+                                <span class="@RoleBoxColor border-2 border-black px-2 py-0.5 text-[14px] @RoleBoxTextColor uppercase shadow-brutal-sm">@item.RoleName</span>
+                            </td>
+                            <td class="p-3.5 border-r-2 border-black">
+                                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 @userStateBoxColor border border-black text-[14px] font-black uppercase text-black">
+                                    <span class="w-2 h-2 @userStateMiniboxColor rounded-none border border-black"></span> @userState
+                                </span>
+                            </td>
+                            <td class="p-3.5 border-r-2 border-black font-mono">@item.SentMessageCount Adet Mesajı Var</td>
+                            <td class="p-3.5 text-right space-x-1.5 whitespace-nowrap">
+                                @if (item.Email == "mustafa70310@gmail.com")
+                                {
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button class="px-3 py-1.5 bg-neutral-200 border-3 border-black text-sm font-bold uppercase cursor-not-allowed opacity-80 flex items-center gap-1 shadow-brutal-sm">
+                                            <span>Kilitli</span> <span>🔒</span>
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (item.RoleName == "Admin")
+                                    {
+                                        <a href="/Admin/RemoveFromAdminRole/@item.Id" class="px-2 py-1 bg-brutal-green border-2 border-black text-[14px] font-black uppercase shadow-brutal-sm transition-transform active:translate-x-0.5 active:translate-y-0.5">Admin Yetkisini Kaldır</a>
+                                    }
+
+                                    if (item.RoleName == "Standart Kullanıcı")
+                                    {
+                                        <a href="/Admin/AssignToAdminRole/@item.Id" class="px-2 py-1 bg-brutal-yellow border-2 border-black text-[14px] font-black uppercase shadow-brutal-sm transition-transform active:translate-x-0.5 active:translate-y-0.5">Admin Olarak Yetkilerdir</a>
+                                    }
+
+                                    <a href="/Admin/UserSetActivePasive/@item.Id" class="px-2 py-1 @userStateActionBox border-2 border-black text-[14px] font-black uppercase shadow-brutal-sm transition-transform active:translate-x-0.5 active:translate-y-0.5">@userStateActionText</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table Bottom Pagination Footer -->
+        <div class="border-t-3 border-black p-4 bg-yellow-50/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm font-bold">
+            <div class="flex items-center gap-1.5">
+
+                <!-- PREV Butonu -->
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <a asp-action="Users" asp-route-page="@(ViewBag.CurrentPage - 1)"
+                       class="px-3 py-1.5 bg-white border-2 border-black shadow-brutal-sm font-black text-sm uppercase hover:bg-brutal-yellow transition-all active:translate-x-0.5 active:translate-y-0.5">
+                        PREV
+                    </a>
+                }
+
+                <!-- Sayfa Numaraları -->
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <a asp-action="Users" asp-route-page="@i"
+                       class="w-8 h-8 @(i == ViewBag.CurrentPage ? "bg-brutal-yellow" : "bg-white") text-black border-2 border-black font-mono font-black text-sm flex items-center justify-center shadow-brutal-sm">
+                        @i
+                    </a>
+                }
+
+                <!-- NEXT Butonu -->
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <a asp-action="Users" asp-route-page="@(ViewBag.CurrentPage + 1)"
+                       class="px-3 py-1.5 bg-white border-2 border-black shadow-brutal-sm font-black text-sm uppercase hover:bg-brutal-yellow transition-all active:translate-x-0.5 active:translate-y-0.5">
+                        NEXT
+                    </a>
+                }
+
+            </div>
+        </div>
+    </section>
+</main>
+<!-- END: MainDashboardContent -->

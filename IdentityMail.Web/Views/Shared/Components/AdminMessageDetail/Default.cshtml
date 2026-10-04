@@ -1,0 +1,111 @@
+﻿@using IdentityMail.Web.Entites.Enums
+@*
+    Admin Message Detail
+*@
+
+@model UserMessage
+
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b-3 border-black gap-2">
+    <div class="flex items-center gap-2">
+        <span class="bg-black text-white px-2 py-0.5 font-mono text-xs font-bold uppercase">MESAJ İÇERİĞİ İNCELEME</span>
+        <h2 class="font-h2 text-h2 uppercase text-black" id="inspectTitle">#@Model.Id NUMARALI MESAJ (DETAY)</h2>
+    </div>
+</div>
+<!-- Inspector Raw Header Code Snippet Box -->
+<div class="mt-5 flex flex-col gap-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-surface-container-low border-3 border-black shadow-[4px_4px_0px_#000]">
+        <div class="flex items-center gap-3.5 flex-1 w-full bg-white border-3 border-black p-3.5 shadow-brutal-sm">
+            <img class="w-14 h-14 rounded-full border-3 border-black object-cover shrink-0" src="@Model.Sender.ProfileImageUrl" alt="Sender">
+            <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                    <span class="font-mono text-sm font-black uppercase bg-brutal-yellow px-2 py-0.5 border-2 border-black">
+                        GÖNDEREN
+                    </span>
+                </div>
+                <div class="font-black text-sm uppercase truncate text-black">@Model.Sender.FirstName @Model.Sender.LastName</div>
+                <div class="font-mono text-xs font-bold text-neutral-600 truncate">@Model.Sender.Email</div>
+            </div>
+        </div>
+        <div class="shrink-0 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-brutal-yellow text-black border-3 border-black flex items-center justify-center shadow-brutal-sm font-black">
+                <span class="material-symbols-outlined text-[22px]">arrow_forward</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-3.5 flex-1 w-full bg-white border-3 border-black p-3.5 shadow-brutal-sm">
+            <img class="w-14 h-14 rounded-full border-3 border-black object-cover shrink-0" src="@Model.Receiver.ProfileImageUrl" alt="Receiver">
+            <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                    <span class="font-mono text-sm font-black uppercase bg-brutal-blue-light px-2 py-0.5 border-2 border-black">
+                        ALICI
+                    </span>
+                </div>
+                <div class="font-black text-sm uppercase truncate text-black">@Model.Receiver.FirstName @Model.Receiver.LastName</div>
+                <div class="font-mono text-xs font-bold text-neutral-600 truncate">@Model.Receiver.Email</div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white border-3 border-black p-5 shadow-[4px_4px_0px_#000]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b-2 border-black gap-2">
+            <div class="space-y-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                    @{
+                        var themePreset = Model.MessageCategory.Theme.GetPreset();
+                        var bgStyle = themePreset.CardBg;
+                    }
+                    <span class="@bgStyle px-2 py-0.5 border-2 border-black font-label text-[10px] font-black uppercase shadow-[2px_2px_0px_#000]">@Model.MessageCategory.Name</span>
+                    <span class="font-mono text-xs font-bold text-neutral-500">@Model.SendDate.ToLongDateString() • @Model.SendDate.ToLongTimeString()</span>
+                </div>
+                <h3 class="font-h2 text-lg md:text-xl font-black text-black uppercase">@Model.Subject</h3>
+            </div>
+        </div>
+        <div class="py-4 space-y-3">
+            <p class="font-body-sm text-sm text-neutral-700 leading-relaxed">
+                @{
+                    var plainText = System.Text.RegularExpressions.Regex.Replace(Model.Body ?? "", "<.*?>", string.Empty);
+                }
+                @plainText
+            </p>
+        </div>
+        @if (Model.MessageAttachments != null && Model.MessageAttachments.Any())
+        {
+            <div class="mt-5 pt-4 border-t-2 border-black">
+                <h4 class="font-bold text-sm mb-3 flex items-center gap-1.5 uppercase tracking-wide">
+                    <span class="material-symbols-outlined text-base">attach_file</span>
+                    EKLENEN DOSYALAR (@Model.MessageAttachments.Count)
+                </h4>
+
+                <div class="flex flex-wrap gap-3">
+                    @foreach (var file in Model.MessageAttachments)
+                    {
+                        var sizeFormatted = file.FileSize >= 1024 * 1024
+                        ? $"{(file.FileSize / (1024.0 * 1024.0)):F1} MB"
+                        : $"{(file.FileSize / 1024.0):F1} KB";
+
+                        <a href="@file.FilePath"
+                           download="@file.OriginalName"
+                           title="@file.OriginalName - İndirmek için tıklayın"
+                           class="flex items-center gap-2.5 px-4 py-2.5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-brutal-yellow hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all group">
+
+                            <span class="material-symbols-outlined text-xl shrink-0">description</span>
+
+                            <span class="font-bold text-sm max-w-[240px] truncate">@file.OriginalName</span>
+
+                            <span class="text-xs text-gray-600 font-medium shrink-0">(@sizeFormatted)</span>
+
+                            <span class="material-symbols-outlined text-base ml-1 shrink-0 group-hover:translate-y-0.5 transition-transform">download</span>
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="mt-5 pt-4 border-t-2 border-black">
+                <h4 class="font-bold text-sm mb-3 flex items-center gap-1.5 uppercase tracking-wide">
+                    <span class="material-symbols-outlined text-base">attach_file</span>
+                    EKLENEN DOSYA YOK
+                </h4>
+            </div>
+        }
+    </div>
+</div>

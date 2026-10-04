@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EmailPro - E-posta Doğrulama</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f378a",
+                        "primary-container": "#6750a4",
+                        "brutal-yellow": "#FFD700",
+                        "brutal-blue": "#0055FF",
+                        "brutal-red": "#FF2200",
+                        "brutal-black": "#000000"
+                    },
+                    fontFamily: {
+                        "sans": ['Space Grotesk', 'sans-serif'],
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f6f3f8;
+            font-family: 'Space Grotesk', sans-serif;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .brutal-border {
+            border: 3px solid #000;
+        }
+
+        .brutal-border-4 {
+            border: 4px solid #000;
+        }
+
+        .brutal-card-shadow {
+            box-shadow: 10px 10px 0px 0px #000;
+        }
+
+        .brutal-btn-shadow {
+            box-shadow: 4px 4px 0px 0px #000;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+            .brutal-btn-shadow:hover {
+                transform: translate(-1px, -1px);
+                box-shadow: 5px 5px 0px 0px #000;
+            }
+
+            .brutal-btn-shadow:active {
+                transform: translate(3px, 3px);
+                box-shadow: 1px 1px 0px 0px #000;
+            }
+
+        /* OTP input focus styling */
+        .otp-box:focus {
+            outline: none;
+            background-color: #fff;
+            box-shadow: 3px 3px 0px 0px #000;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden select-none">
+    <!-- Decorative brutalist background shapes matching SCREEN_40 -->
+    <div class="absolute top-10 left-10 w-14 h-14 bg-[#4f378a] brutal-border rounded-xl -rotate-6 pointer-events-none hidden sm:block"></div>
+    <div class="absolute bottom-12 right-12 w-24 h-10 bg-[#FF2200] brutal-border rotate-12 pointer-events-none hidden sm:block"></div>
+    <div class="absolute top-24 right-16 w-8 h-8 bg-brutal-yellow brutal-border rotate-45 pointer-events-none hidden md:block"></div>
+    <!-- Main Card Container -->
+    <div class="w-full max-w-[500px] bg-white brutal-border-4 brutal-card-shadow p-6 sm:p-9 relative z-10">
+        <!-- Header / Brand matching Register Screen -->
+        <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-3xl font-black text-black">mail</span>
+            <span class="text-2xl sm:text-3xl font-black tracking-tight text-black uppercase">EMAILPRO</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-black uppercase text-black tracking-tight mb-5">
+            E-POSTA DOĞRULAMA
+        </h1>
+        <div class="w-full h-[3px] bg-black mb-6"></div>
+        <!-- Envelope / Mail Icon Badge -->
+        <div class="flex items-center gap-3 bg-[#f0ecf4] p-3 brutal-border mb-6">
+            <div class="w-10 h-10 bg-brutal-yellow brutal-border flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-black text-2xl font-bold">mark_email_unread</span>
+            </div>
+            <div class="text-xs sm:text-sm text-black leading-snug">
+                <p class="font-bold">6 haneli doğrulama kodu gönderildi:</p>
+                <p class="font-bold text-[#4f378a] tracking-wide break-all">johndoe@example.com</p>
+            </div>
+        </div>
+        <!-- Instruction Label (like AD, SOYAD tags in register screen) -->
+        <div class="mb-2">
+            <span class="inline-block bg-black text-white text-xs font-bold px-2 py-0.5 uppercase tracking-wider">
+                DOĞRULAMA KODU
+            </span>
+        </div>
+        <!-- 6-digit OTP Inputs (Brutalist style) -->
+        <div class="grid grid-cols-6 gap-2 sm:gap-2.5 mb-6">
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" type="text" value="4" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" type="text" value="8" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" type="text" value="2" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" type="text" value="9" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" />
+            <input class="otp-box w-full aspect-square text-center text-xl sm:text-2xl font-black bg-[#e5e0eb] brutal-border transition-all" maxlength="1" placeholder="•" type="text" />
+        </div>
+        <!-- Timer / Info Tag -->
+        <div class="flex items-center justify-between text-xs font-bold text-neutral-800 mb-6 bg-[#f8f6fa] p-2.5 brutal-border">
+            <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base">timer</span>
+                <span>Kalan Süre:</span>
+            </div>
+            <span class="bg-black text-white px-2 py-0.5 font-mono text-xs">02:45</span>
+        </div>
+        <!-- Primary Action: Verify Button (Matching the KAYIT OL button in SCREEN_40) -->
+        <button class="w-full bg-[#fdd985] hover:bg-[#fed36e] active:bg-[#eec45c] text-black font-black uppercase text-base sm:text-lg py-3.5 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wider mb-3" type="button">
+            <span>KODU ONAYLA</span>
+            <span class="material-symbols-outlined font-black">arrow_forward</span>
+        </button><div class="flex flex-col gap-3 mb-5"><button class="w-full bg-white hover:bg-[#f0ecf4] text-black font-bold uppercase text-sm sm:text-base py-3 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wide transition-all" type="button"><span>Şimdilik Atla (Daha Sonra Doğrula)</span><span class="material-symbols-outlined text-base font-bold">arrow_forward</span></button><div class="flex items-start gap-2 bg-[#f8f6fa] p-3 brutal-border text-xs text-neutral-800 leading-snug"><span class="material-symbols-outlined text-base text-[#4f378a] shrink-0 font-bold">info</span><p><span class="font-bold text-black">İpucu:</span> Doğrulamayı şimdi atlayabilirsiniz; gelen kutunuzu hemen inceleyebilir, hesabınızı daha sonra Ayarlar'dan doğrulayabilirsiniz.</p></div></div>
+        <!-- Secondary Actions: Resend & Change Email -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs font-semibold text-black">
+            <button class="hover:underline font-bold flex items-center gap-1" type="button">
+                <span class="material-symbols-outlined text-sm font-bold">refresh</span>
+                <span>Kodu Tekrar Gönder</span>
+            </button>
+            <a class="hover:underline text-neutral-600 font-bold" href="#">E-postayı Değiştir</a>
+        </div>
+        <!-- Footer link back to login -->
+        <div class="mt-6 pt-5 border-t-2 border-black text-center text-xs font-semibold text-neutral-800">
+            Zaten hesabınızı doğruladınız mı? <a class="font-bold underline text-black hover:text-[#4f378a]" href="#">Giriş Yap</a>
+        </div>
+    </div>
+    <!-- Script to auto-tab between OTP inputs -->
+    <script>
+        const inputs = document.querySelectorAll('.otp-box');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

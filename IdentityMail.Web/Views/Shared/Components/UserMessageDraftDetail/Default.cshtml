@@ -1,0 +1,157 @@
+﻿@*
+    User Message Draft Detail Default
+*@
+
+@model UserMessage
+
+<form method="post" enctype="multipart/form-data" class="w-full h-full flex flex-col">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="flex-1 flex flex-col bg-white h-full overflow-y-auto p-lg">
+        <div class="mb-xl">
+            <h1 class="font-h1 text-h1 font-black uppercase text-black bg-brutal-yellow inline-block brutal-border p-2 shadow-[8px_8px_0_0_#000]">
+                TASLAK DÜZENLE
+            </h1>
+        </div>
+
+        <div class="flex flex-col gap-md mb-xl">
+            <div class="flex flex-col gap-xs">
+                <label class="font-label text-label font-bold uppercase text-black">Alıcı:</label>
+                <input class="w-full bg-white brutal-border py-2 px-md font-body-md text-body-md font-bold text-black focus:outline-none focus:ring-0 focus:shadow-[4px_4px_0_0_#000] transition-shadow"
+                       placeholder="ALICİ@EMAIL.COM"
+                       type="text"
+                       name="ReceiverMail"
+                       value="@Model.Receiver?.Email">
+            </div>
+
+            <div class="flex flex-col gap-xs">
+                <label class="font-label text-label font-bold uppercase text-black">Konu:</label>
+                <input class="w-full bg-white brutal-border py-2 px-md font-body-md text-body-md font-bold text-black focus:outline-none focus:ring-0 focus:shadow-[4px_4px_0_0_#000] transition-shadow"
+                       placeholder="KONU YAZINIZ..."
+                       type="text"
+                       asp-for="Subject">
+            </div>
+
+            <div class="flex flex-col gap-xs">
+                <label class="font-label text-label font-bold uppercase text-black">Kategori:</label>
+                <select asp-for="MessageCategoryId" asp-items="@ViewBag.Categories" class="w-full bg-white brutal-border py-2 px-md font-body-md text-body-md font-bold text-black focus:outline-none focus:ring-0 focus:shadow-[4px_4px_0_0_#000] transition-shadow">
+                </select>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-1 brutal-border bg-white focus-within:shadow-[8px_8px_0_0_#000] transition-all">
+            <div class="flex items-center gap-sm p-2 brutal-border-b bg-gray-100 justify-between">
+
+                <div class="flex items-center gap-sm">
+                    <button type="button" onclick="formatText('bold')" class="flex font-bold transition-colors items-center gap-md text-black brutal-border px-md py-sm brutal-shadow shadow-[4px_4px_0_0_#000] hover:bg-brutal-yellow">B</button>
+                    <button type="button" onclick="formatText('italic')" class="flex italic transition-colors items-center gap-md text-black brutal-border px-md py-sm brutal-shadow shadow-[4px_4px_0_0_#000] hover:bg-brutal-yellow">I</button>
+                    <button type="button" onclick="formatText('underline')" class="flex underline transition-colors items-center gap-md text-black brutal-border px-md py-sm brutal-shadow shadow-[4px_4px_0_0_#000] hover:bg-brutal-yellow">U</button>
+
+                    <div class="w-px h-8 bg-black mx-1"></div>
+
+                    <button type="button" onclick="formatText('justifyLeft')" class="p-2 brutal-border bg-white hover:bg-brutal-yellow transition-colors active:translate-x-[2px] active:translate-y-[2px] brutal-shadow shadow-[4px_4px_0_0_#000] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] flex items-center justify-center">
+                        <span class="material-symbols-outlined">format_align_left</span>
+                    </button>
+
+                    <button type="button" onclick="formatText('justifyCenter')" class="p-2 brutal-border bg-white hover:bg-brutal-yellow transition-colors active:translate-x-[2px] active:translate-y-[2px] brutal-shadow shadow-[4px_4px_0_0_#000] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] flex items-center justify-center">
+                        <span class="material-symbols-outlined">format_align_center</span>
+                    </button>
+
+                    <button type="button" onclick="formatText('justifyRight')" class="p-2 brutal-border bg-white hover:bg-brutal-yellow transition-colors active:translate-x-[2px] active:translate-y-[2px] brutal-shadow shadow-[4px_4px_0_0_#000] transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] flex items-center justify-center">
+                        <span class="material-symbols-outlined">format_align_right</span>
+                    </button>
+                </div>
+
+                <div class="ml-auto">
+                    <input type="file" id="fileInput" name="Attachments" multiple class="hidden" style="display:none;" onchange="handleFileSelect(this)" />
+                    <button type="button" onclick="document.getElementById('fileInput').click()" class="flex font-bold transition-colors items-center gap-md text-black brutal-border px-md py-sm brutal-shadow shadow-[4px_4px_0_0_#000] hover:bg-brutal-yellow">
+                        <span class="material-symbols-outlined">attach_file</span>
+                        <span id="attachText">ATTACH</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="editor"
+                 contenteditable="true"
+                 data-placeholder="MESAJINIZI BURAYA YAZINIZ..."
+                 data-empty="@(string.IsNullOrEmpty(Model.Body) ? "true" : "false")"
+                 class="relative flex-1 w-full p-lg font-body-md text-body-md text-black bg-white focus:outline-none min-h-[150px]"
+                 oninput="syncEditor()">
+                @Html.Raw(Model.Body)
+            </div>
+
+            @if (Model.MessageAttachments != null && Model.MessageAttachments.Any())
+            {
+                <div class="flex flex-wrap gap-2 p-2 border-t border-black bg-gray-50">
+                    @foreach (var file in Model.MessageAttachments)
+                    {
+                        <div class="flex items-center gap-2 text-xs bg-gray-200 font-bold border border-black px-2 py-1">
+                            <span class="material-symbols-outlined text-sm">description</span>
+                            <span>Mevcut Ek</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div id="selectedFilesContainer" class="flex flex-wrap gap-2 p-2 display"></div>
+            <textarea id="realBody" name="Body" class="hidden" style="display:none;">@Model.Body</textarea>
+        </div>
+
+        <div class="flex justify-between items-center mt-xl">
+            <button type="submit" formaction="@Url.Action("DeleteDraft", "Message", new { id = Model.Id })" style="font-size:large;" class="bg-white text-black brutal-border brutal-shadow shadow-[6px_6px_0_0_#000] font-label text-label uppercase py-md px-lg hover:bg-brutal-red hover:text-white transition-colors flex items-center gap-xs">
+                <span class="material-symbols-outlined">delete</span> Kalıcı Olarak Sil
+            </button>
+
+            <button type="submit" formaction="@Url.Action("UpdateDraft", "Message", new { id = Model.Id })" style="font-size:large;" class="bg-white text-black brutal-border brutal-shadow shadow-[6px_6px_0_0_#000] font-label text-label uppercase py-md px-lg hover:bg-brutal-blue hover:text-white transition-colors flex items-center gap-xs">
+                <span class="material-symbols-outlined text-body-md">drafts</span> TASLAĞI GÜNCELLE
+            </button>
+
+            <button type="submit" formaction="@Url.Action("SendMail", "Message")" style="font-size:large;" class="text-black brutal-border brutal-shadow shadow-[6px_6px_0_0_#000] font-label text-label uppercase py-md px-lg bg-brutal-yellow transition-colors flex items-center gap-xs">
+                GÖNDER
+                <span class="material-symbols-outlined font-black">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function formatText(command) {
+        document.execCommand(command, false, null);
+        syncEditor();
+    }
+
+    function syncEditor() {
+        const editor = document.getElementById('editor');
+        if (!editor) return;
+        const hasText = editor.innerText.trim().length > 0;
+
+        if (!hasText) {
+            editor.setAttribute('data-empty', 'true');
+            document.getElementById('realBody').value = '';
+        } else {
+            editor.removeAttribute('data-empty');
+            let content = editor.innerHTML;
+            content = content.replace(/--tw-[^;]+;?/g, '').replace(/style="\s*"/g, '');
+            document.getElementById('realBody').value = content;
+        }
+    }
+
+    function handleFileSelect(input) {
+        const container = document.getElementById('selectedFilesContainer');
+        const attachText = document.getElementById('attachText');
+        container.innerHTML = '';
+
+        if (input.files && input.files.length > 0) {
+            if (attachText) attachText.innerText = `ATTACH (${input.files.length})`;
+            Array.from(input.files).forEach(file => {
+                const sizeInKB = (file.size / 1024).toFixed(1);
+                const badge = document.createElement('div');
+                badge.className = 'flex items-center gap-2 text-sm bg-brutal-yellow font-bold border-2 border-black px-3 py-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]';
+                badge.innerHTML = `<span class="material-symbols-outlined text-sm">description</span><span>${file.name} (${sizeInKB} KB)</span>`;
+                container.appendChild(badge);
+            });
+        } else {
+            if (attachText) attachText.innerText = "ATTACH";
+        }
+    }
+</script>

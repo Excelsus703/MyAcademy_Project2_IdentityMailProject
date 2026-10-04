@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EmailPro Admin - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e6e0e9",
+                        "primary-fixed-dim": "#cfbcff",
+                        "inverse-on-surface": "#f5eff7",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-surface": "#1d1b20",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-high": "#ece6ee",
+                        "on-secondary-container": "#645a7d",
+                        "on-primary-container": "#e0d2ff",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary": "#765b00",
+                        "inverse-primary": "#cfbcff",
+                        "inverse-surface": "#322f35",
+                        "secondary": "#63597c",
+                        "on-background": "#1d1b20",
+                        "surface-dim": "#ded8e0",
+                        "surface-variant": "#e6e0e9",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface": "#fdf7ff",
+                        "surface-tint": "#6750a4",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-surface-variant": "#494551",
+                        "background": "#fdf7ff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#4f378a",
+                        "surface-bright": "#fdf7ff",
+                        "on-tertiary-fixed": "#241a00",
+                        "outline": "#7a7582",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "secondary-container": "#e1d4fd",
+                        "surface-container": "#f2ecf4",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f8f2fa",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "primary-container": "#6750a4",
+                        "outline-variant": "#cbc4d2",
+                        "on-secondary-fixed": "#1f1635",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary-container": "#503d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "layout-margin": "24px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "mono": ['"Space Mono"', 'monospace'],
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light grey background for neobrutalism contrast */
+            color: #000;
+        }
+
+        .neobrutalist-shadow {
+            box-shadow: 8px 8px 0px 0px #000000;
+        }
+
+        .neobrutalist-border {
+            border: 3px solid #000000;
+        }
+
+        .neobrutalist-hover:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px 0px #000000;
+        }
+
+        .neobrutalist-active:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        /* Override dark mode text colors for neobrutalism strictly requiring black text on light backgrounds */
+        .dark .text-on-surface, .dark .text-primary-fixed-dim, .dark .text-on-surface-variant {
+            color: #000 !important;
+        }
+
+        .dark .bg-surface {
+            background-color: #fff !important;
+        }
+
+        .dark .border-primary-fixed-dim {
+            border-color: #000 !important;
+        }
+
+        .bg-neo-yellow {
+            background-color: #FBBF24; /* Vibrant yellow */
+        }
+    </style>
+</head>
+<body class="flex min-h-screen font-mono bg-gray-100">
+    <!-- SideNavBar (JSON Blueprint + Neobrutalist overrides) -->
+    <nav class="hidden md:flex fixed left-0 top-0 h-full w-[280px] bg-white border-r-[3px] border-black flex-col p-md gap-sm z-50">
+        <div class="mb-lg">
+            <h1 class="font-h1 text-h1 font-black italic text-black uppercase mb-1">EmailPro</h1>
+            <p class="font-label text-label uppercase tracking-widest text-black">System Control</p>
+        </div>
+        <button class="bg-neo-yellow text-black font-bold border-[3px] border-black p-3 mb-xl neobrutalist-shadow neobrutalist-active transition-all uppercase tracking-wider">
+            Compose System Alert
+        </button>
+        <ul class="flex flex-col gap-2 flex-grow">
+            <!-- Active: Dashboard -->
+            <li>
+                <a class="flex items-center gap-3 p-3 bg-neo-yellow text-black font-black border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase tracking-widest" href="#">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 p-3 text-black font-bold uppercase tracking-widest hover:translate-x-1 hover:bg-gray-200 transition-transform border-[3px] border-transparent hover:border-black" href="#">
+                    <span class="material-symbols-outlined">group</span>
+                    User Management
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 p-3 text-black font-bold uppercase tracking-widest hover:translate-x-1 hover:bg-gray-200 transition-transform border-[3px] border-transparent hover:border-black" href="#">
+                    <span class="material-symbols-outlined">terminal</span>
+                    Server Logs
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 p-3 text-black font-bold uppercase tracking-widest hover:translate-x-1 hover:bg-gray-200 transition-transform border-[3px] border-transparent hover:border-black" href="#">
+                    <span class="material-symbols-outlined">security</span>
+                    Spam Filters
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 p-3 text-black font-bold uppercase tracking-widest hover:translate-x-1 hover:bg-gray-200 transition-transform border-[3px] border-transparent hover:border-black" href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    System Settings
+                </a>
+            </li>
+        </ul>
+        <div class="mt-auto flex flex-col gap-2 border-t-[3px] border-black pt-4">
+            <a class="flex items-center gap-3 p-2 text-black font-bold uppercase tracking-widest hover:bg-gray-200 border-[3px] border-transparent hover:border-black" href="#">
+                <span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+            <a class="flex items-center gap-3 p-2 text-black font-bold uppercase tracking-widest hover:bg-gray-200 border-[3px] border-transparent hover:border-black" href="#">
+                <span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+        </div>
+    </nav>
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+        <!-- TopNavBar (JSON Blueprint + Neobrutalist overrides) -->
+        <header class="flex justify-between items-center w-full px-lg py-md h-20 bg-white border-b-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sticky top-0 z-40">
+            <!-- Mobile Brand -->
+            <div class="md:hidden font-h2 text-h2 font-black uppercase text-black">
+                EmailPro
+            </div>
+            <!-- Search (on_left in TopNav JSON) -->
+            <div class="hidden md:flex items-center border-[3px] border-black bg-gray-100 px-3 py-2 w-1/3 neobrutalist-focus-within">
+                <span class="material-symbols-outlined mr-2">search</span>
+                <input class="bg-transparent border-none outline-none w-full font-mono text-sm placeholder-gray-500 uppercase" placeholder="SEARCH SYSTEM..." type="text" />
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 border-[3px] border-black hover:bg-neo-yellow transition-colors neobrutalist-active">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="p-2 border-[3px] border-black hover:bg-neo-yellow transition-colors neobrutalist-active">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <div class="w-10 h-10 border-[3px] border-black bg-neo-yellow overflow-hidden neobrutalist-shadow">
+                    <img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="A pixelated, retro-style avatar of a system administrator with neon sunglasses on a yellow background, capturing a cyberpunk neobrutalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2o1f7f_oQQcI-GPCfn1A_4Gz010sRInpMzhG5m6b2uUOsITMKxwXCJez8oGf6aNcJ4MFEvm4zQY4pYBKk-e27hwcMACBdUoZ6nB0zcRtPUtudYJz6RzP7gQLS29VxhOeixvM097CHxw8kySvZ1u3c9HKUgaef3IHWJ4yhqSG0YwykLxTuZx4r20hEOM260nH2PFs_Tayu4R3Ndq56_NCQh4oWYEhgg9Uz2elhcj3-HL5PrK_v0CKP" />
+                </div>
+            </div>
+        </header>
+        <!-- Dashboard Canvas -->
+        <div class="p-xl flex-1 space-y-xl max-w-7xl mx-auto w-full">
+            <div class="flex justify-between items-end mb-8 border-b-[3px] border-black pb-4">
+                <div>
+                    <h2 class="text-4xl font-black uppercase tracking-tighter">System Overview</h2>
+                    <p class="font-bold text-gray-600 uppercase mt-2">Live Data Feed Active</p>
+                </div>
+                <div class="text-right">
+                    <span class="inline-block bg-neo-yellow border-[3px] border-black px-4 py-1 font-bold uppercase neobrutalist-shadow">Status: Nominal</span>
+                </div>
+            </div>
+            <!-- Stat Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+                <!-- Card 1 -->
+                <div class="bg-white border-[3px] border-black p-lg neobrutalist-shadow transition-transform hover:-translate-y-1 hover:bg-neo-yellow group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-6xl">group</span>
+                    </div>
+                    <h3 class="font-bold text-lg uppercase tracking-widest text-gray-700 group-hover:text-black mb-2 border-b-2 border-black pb-2 inline-block">Users</h3>
+                    <div class="text-4xl font-black mt-2">12,450</div>
+                    <div class="mt-4 font-bold text-sm bg-black text-white inline-block px-2 py-1">8,902 ACTIVE</div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-neo-yellow border-[3px] border-black p-lg neobrutalist-shadow transition-transform hover:-translate-y-1 group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-6xl">send</span>
+                    </div>
+                    <h3 class="font-bold text-lg uppercase tracking-widest text-black mb-2 border-b-2 border-black pb-2 inline-block">Sent Messages</h3>
+                    <div class="text-4xl font-black mt-2">1.2M</div>
+                    <div class="mt-4 font-bold text-sm bg-black text-white inline-block px-2 py-1">45,600 TODAY</div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white border-[3px] border-black p-lg neobrutalist-shadow transition-transform hover:-translate-y-1 hover:bg-blue-300 group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-6xl">mark_email_unread</span>
+                    </div>
+                    <h3 class="font-bold text-lg uppercase tracking-widest text-gray-700 group-hover:text-black mb-2 border-b-2 border-black pb-2 inline-block">Unread</h3>
+                    <div class="text-4xl font-black mt-2">124</div>
+                    <div class="mt-4 font-bold text-sm bg-black text-white inline-block px-2 py-1">INBOXES</div>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white border-[3px] border-black p-lg neobrutalist-shadow transition-transform hover:-translate-y-1 hover:bg-red-400 group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-6xl">delete</span>
+                    </div>
+                    <h3 class="font-bold text-lg uppercase tracking-widest text-gray-700 group-hover:text-black mb-2 border-b-2 border-black pb-2 inline-block">Trash</h3>
+                    <div class="text-4xl font-black mt-2">1,042</div>
+                    <div class="mt-4 font-bold text-sm bg-black text-white inline-block px-2 py-1">TOTAL MESSAGES</div>
+                </div>
+            </div>
+            <!-- Main Content 2 Columns Section -->
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-lg">
+                <!-- Top Senders -->
+                <div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-black uppercase tracking-tighter bg-black text-white inline-block px-4 py-2 border-[3px] border-black neobrutalist-shadow">Top Senders</h3>
+                    </div>
+                    <div class="border-[3px] border-black bg-white neobrutalist-shadow overflow-x-auto">
+                        <table class="w-full text-left font-mono">
+                            <thead class="bg-gray-200 border-b-[3px] border-black">
+                                <tr>
+                                    <th class="p-4 font-black uppercase tracking-widest border-r-[3px] border-black">Username</th>
+                                    <th class="p-4 font-black uppercase tracking-widest w-1/3">Messages</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y-[3px] divide-black">
+                                <tr class="hover:bg-neo-yellow hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all duration-75 relative z-10 bg-white">
+                                    <td class="p-4 border-r-[3px] border-black font-bold">@alex_dev</td>
+                                    <td class="p-4 font-black text-lg">1,245</td>
+                                </tr>
+                                <tr class="hover:bg-neo-yellow hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all duration-75 relative z-10 bg-white">
+                                    <td class="p-4 border-r-[3px] border-black font-bold">@sarah_mktg</td>
+                                    <td class="p-4 font-black text-lg">982</td>
+                                </tr>
+                                <tr class="hover:bg-neo-yellow hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all duration-75 relative z-10 bg-white">
+                                    <td class="p-4 border-r-[3px] border-black font-bold">@system_bot</td>
+                                    <td class="p-4 font-black text-lg">875</td>
+                                </tr>
+                                <tr class="hover:bg-neo-yellow hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all duration-75 relative z-10 bg-white">
+                                    <td class="p-4 border-r-[3px] border-black font-bold">@jdoe_99</td>
+                                    <td class="p-4 font-black text-lg">650</td>
+                                </tr>
+                                <tr class="hover:bg-neo-yellow hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all duration-75 relative z-10 bg-white">
+                                    <td class="p-4 border-r-[3px] border-black font-bold">@mike_sales</td>
+                                    <td class="p-4 font-black text-lg">430</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Most Used Categories -->
+                <div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-black uppercase tracking-tighter bg-black text-white inline-block px-4 py-2 border-[3px] border-black neobrutalist-shadow">Most Used Categories</h3>
+                    </div>
+                    <div class="border-[3px] border-black bg-white neobrutalist-shadow p-6 flex flex-wrap gap-4">
+                        <div class="bg-blue-300 border-[3px] border-black px-4 py-3 neobrutalist-shadow hover:-translate-y-1 transition-transform flex items-center justify-between w-full sm:w-auto flex-1 min-w-[200px]">
+                            <span class="font-black uppercase tracking-widest text-lg">Work</span>
+                            <span class="bg-white border-2 border-black px-2 py-1 font-bold text-sm">45,210</span>
+                        </div>
+                        <div class="bg-green-300 border-[3px] border-black px-4 py-3 neobrutalist-shadow hover:-translate-y-1 transition-transform flex items-center justify-between w-full sm:w-auto flex-1 min-w-[200px]">
+                            <span class="font-black uppercase tracking-widest text-lg">Social</span>
+                            <span class="bg-white border-2 border-black px-2 py-1 font-bold text-sm">32,840</span>
+                        </div>
+                        <div class="bg-purple-300 border-[3px] border-black px-4 py-3 neobrutalist-shadow hover:-translate-y-1 transition-transform flex items-center justify-between w-full sm:w-auto flex-1 min-w-[200px]">
+                            <span class="font-black uppercase tracking-widest text-lg">Updates</span>
+                            <span class="bg-white border-2 border-black px-2 py-1 font-bold text-sm">28,105</span>
+                        </div>
+                        <div class="bg-red-300 border-[3px] border-black px-4 py-3 neobrutalist-shadow hover:-translate-y-1 transition-transform flex items-center justify-between w-full sm:w-auto flex-1 min-w-[200px]">
+                            <span class="font-black uppercase tracking-widest text-lg">Spam</span>
+                            <span class="bg-white border-2 border-black px-2 py-1 font-bold text-sm">15,622</span>
+                        </div>
+                        <div class="bg-neo-yellow border-[3px] border-black px-4 py-3 neobrutalist-shadow hover:-translate-y-1 transition-transform flex items-center justify-between w-full sm:w-auto flex-1 min-w-[200px]">
+                            <span class="font-black uppercase tracking-widest text-lg">Personal</span>
+                            <span class="bg-white border-2 border-black px-2 py-1 font-bold text-sm">8,940</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Bottom Nav for Mobile (Neobrutalist styled) -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t-[3px] border-black z-50 flex justify-around p-2">
+        <a class="flex flex-col items-center gap-1 p-2 text-black bg-neo-yellow border-[3px] border-black neobrutalist-shadow" href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="text-[10px] font-black uppercase">Dash</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 p-2 text-gray-600 hover:text-black" href="#">
+            <span class="material-symbols-outlined">group</span>
+            <span class="text-[10px] font-bold uppercase">Users</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 p-2 text-gray-600 hover:text-black" href="#">
+            <span class="material-symbols-outlined">terminal</span>
+            <span class="text-[10px] font-bold uppercase">Logs</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 p-2 text-gray-600 hover:text-black" href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="text-[10px] font-bold uppercase">Settings</span>
+        </a>
+    </nav>
+</body>
+</html>

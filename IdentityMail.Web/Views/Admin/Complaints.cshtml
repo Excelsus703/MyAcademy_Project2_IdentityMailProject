@@ -1,0 +1,247 @@
+﻿@{
+    ViewData["Title"] = "Complaints";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<UserMessage>
+
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto" data-purpose="complaints-incidents-dashboard">
+    <div class="flex flex-col w-full">
+        <!-- Top Command Banner / Screen Header -->
+        <div class="w-full bg-white border-3 border-black shadow-brutal p-6 mb-6">
+            <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black uppercase flex items-center gap-3 tracking-tight text-black">
+                        <span class="material-symbols-outlined text-[32px] text-black font-bold">error</span>
+                        ŞİKAYETLER &amp; İHLAL BİLDİRİMLERİ
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <!-- 4 Top KPI Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+            <!-- KPI 1: Toplam Şikayet -->
+            <div class="bg-white border-3 border-black shadow-brutal p-5 relative">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-bold text-xs uppercase text-neutral-600 tracking-wider">TOPLAM ŞİKAYET</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight text-black mb-2">@ViewBag.TotalComplaints</div>
+            </div>
+            <!-- KPI 2: Çözülen / İşlenen -->
+            <div class="bg-white border-3 border-black shadow-brutal p-5 relative">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-bold text-xs uppercase text-neutral-600 tracking-wider">TOPLAM İNCELENEN</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight text-black mb-2">@ViewBag.TotalAcceptedComplaints</div>
+            </div>
+            <!-- KPI 3: Onaylanan Spam / Phishing -->
+            <div class="bg-white border-3 border-black shadow-brutal p-5 relative">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-bold text-xs uppercase text-neutral-600 tracking-wider">TOPLAM ÇÖZÜLEN ŞİKAYET</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight text-black mb-2">@ViewBag.TotalResolvedComplaints</div>
+            </div>
+            <!-- KPI 4: Asılsız Bildirimler -->
+            <div class="bg-white border-3 border-black shadow-brutal p-5 relative">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-bold text-xs uppercase text-neutral-600 tracking-wider leading-tight">ASILSIZ ŞİKAYET</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight text-black mb-2">@ViewBag.TotalFalseComplaints</div>
+            </div>
+        </div>
+        <!-- Main Complaints & Incidents Table Section -->
+        <div class="bg-white border-3 border-black shadow-brutal mb-6 overflow-hidden">
+            <!-- Table Header Info Bar -->
+            <div class="bg-neutral-100 border-b-3 border-black px-5 py-3.5 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-black text-[22px] font-bold">table_rows</span>
+                    <span class="text-base font-black text-black uppercase tracking-tight">GÜNCEL ŞİKAYET KUYRUĞU (5 AKTİF İNCELEME)</span>
+                </div>
+            </div>
+            <!-- Responsive Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-left">
+                    <thead>
+                        <tr class="bg-neutral-50 border-b-3 border-black text-xs font-black uppercase text-black tracking-wider">
+                            <th class="p-3.5">MESAJ ID &amp; ŞİKAYET ZAMANI</th>
+                            <th class="p-3.5">ŞİKAYET EDİLEN (ŞÜPHELİ)</th>
+                            <th class="p-3.5">BİLDİREN KULLANICI</th>
+                            <th class="p-3.5">ŞİKAYET DURUMU</th>
+                            <th class="p-3.5">İŞLEMLER</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y-2 divide-black text-xs font-mono">
+                        @foreach (var item in Model)
+                        {
+                            <!-- Row 1: High Phishing (Active / Selected) -->
+                            <tr class="bg-brutal-blue/5 hover:bg-neutral-100 transition-colors">
+                                <td class="p-3.5 whitespace-nowrap">
+                                    <div class="font-bold text-black text-xs"># @item.Id No'lu Mesaj</div>
+                                    <div class="text-neutral-500 text-[11px]">12 dk önce</div>
+                                </td>
+                                <td class="p-3.5">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-7 h-7 bg-white border-2 border-black flex items-center justify-center font-bold text-xs uppercase shadow-brutal-sm">
+                                            <img src="@item.Sender.ProfileImageUrl" />
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-black text-xs">@item.Sender.FirstName @item.Sender.LastName</div>
+                                            <div class="font-mono text-[11px] text-neutral-500">@item.Sender.Email</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-3.5 whitespace-nowrap font-grotesk">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-7 h-7 bg-white border-2 border-black flex items-center justify-center font-bold text-xs uppercase shadow-brutal-sm">
+                                            <img src="@item.Receiver.ProfileImageUrl" />
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-black text-xs">@item.Receiver.FirstName @item.Receiver.LastName</div>
+                                            <div class="font-mono text-[11px] text-neutral-500">@item.Receiver.Email</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-3.5 whitespace-nowrap font-grotesk">
+                                    @{
+                                        string badgeText = "BEKLEYEN ŞİKAYET";
+                                        string badgeClass = "bg-brutal-yellow text-black"; // Varsayılan: İnceleme Bekliyor
+
+                                        if (item.IsComplaintFalse)
+                                        {
+                                            badgeText = "ASILSIZ / GEÇERSİZ";
+                                            badgeClass = "bg-neutral-300 text-neutral-800";
+                                        }
+                                        else if (item.IsComplaintResolved)
+                                        {
+                                            badgeText = "ÇÖZÜLDÜ";
+                                            badgeClass = "bg-emerald-300 text-black";
+                                        }
+                                        else if (item.IsComplaintAccepted)
+                                        {
+                                            badgeText = "HAKLI / İŞLEMDE";
+                                            badgeClass = "bg-brutal-blue text-white";
+                                        }
+                                    }
+
+                                    <span class="px-2.5 py-1 border-2 border-black font-mono font-black text-xs uppercase shadow-[2px_2px_0px_#000] @badgeClass">
+                                        @badgeText
+                                    </span>
+                                </td>
+                                <td class="p-3.5 whitespace-nowrap font-grotesk">
+                                    <div class="flex items-center gap-1.5">
+                                        <button type="button"
+                                                onclick="loadComplaintDetail(@item.Id)"
+                                                class="px-2 py-1 bg-brutal-yellow text-black border-2 border-black font-label text-[14px] font-black uppercase shadow-[2px_2px_0px_#000] active:translate-y-0.5 transition-all"
+                                                title="Inspect Message Envelope">
+                                            İncele
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- PAGINATION FOOTER -->
+            <div class="p-4 bg-white border-t-3 border-black flex flex-col md:flex-row items-center justify-between gap-4 select-none">
+                <div class="flex items-center gap-4">
+                </div>
+                <!-- Page Nav Controls -->
+                <div class="flex items-center gap-1.5 flex-wrap">
+
+                    <!-- PREV Butonu -->
+                    @if (ViewBag.CurrentPage > 1)
+                    {
+                        <a asp-action="Complaints" asp-route-page="@(ViewBag.CurrentPage - 1)" class="px-3 py-1.5 bg-neutral-100 hover:bg-brutal-yellow border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">chevron_left</span> PREV
+                        </a>
+                    }
+
+                    @{
+                        int currentPage = ViewBag.CurrentPage;
+                        int totalPages = ViewBag.TotalPages;
+                        int startPage = Math.Max(1, currentPage - 1);
+                        int endPage = Math.Min(totalPages, currentPage + 1);
+                    }
+
+                    <!-- İLK SAYFA VE ÜÇ NOKTA -->
+                    @if (startPage > 1)
+                    {
+                        <a asp-action="Complaints" asp-route-page="1"
+                           class="min-w-8 h-8 px-2 bg-white text-black border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">
+                            1
+                        </a>
+                        @if (startPage > 2)
+                        {
+                            <span class="px-1 font-black text-sm">...</span>
+                        }
+                    }
+
+                    <!-- AKTİF SAYFA VE ETRAFINDAN SADECE 1 SAYFA -->
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        <a asp-action="Complaints" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "bg-brutal-yellow" : "bg-white") min-w-8 h-8 px-2  border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">@i</a>
+                    }
+
+                    <!-- SON SAYFA VE ÜÇ NOKTA -->
+                    @if (endPage < totalPages)
+                    {
+                        @if (endPage < totalPages - 1)
+                        {
+                            <span class="px-1 font-black text-sm">...</span>
+                        }
+                        <a asp-action="Complaints" asp-route-page="@totalPages"
+                           class="min-w-8 h-8 px-2 bg-white text-black border-2 border-black font-black text-xs flex items-center justify-center shadow-brutal-sm hover:bg-brutal-yellow">
+                            @totalPages
+                        </a>
+                    }
+
+                    <!-- NEXT / SONRAKİ -->
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <a asp-action="Complaints" asp-route-page="@(ViewBag.CurrentPage + 1)" class="px-3 py-1.5 bg-white hover:bg-brutal-yellow border-2 border-black font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-1">
+                            NEXT <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK INSPECTOR / PREVIEW DRAWER (EXPANDABLE DETAIL SECTION) -->
+        <section class="bg-white border-3 border-black p-5 shadow-[6px_6px_0px_#000]" id="inspectorDrawer">
+            @await Component.InvokeAsync("AdminComplaintDetail")
+        </section>
+    </div>
+
+    <script>
+        function loadComplaintDetail(messageId) {
+            const container = document.getElementById("inspectorDrawer");
+            if (!container) return;
+
+            // Yükleniyor durumu
+            container.innerHTML = `<div class="p-6 border-3 border-black bg-white shadow-[4px_4px_0px_#000] font-black font-mono">ŞİKAYET ANALİZ EDİLİYOR...</div>`;
+
+            // Detaya yumuşakça odaklan
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            const url = '@Url.Action("GetComplaintDetail", "Admin")' + '?id=' + messageId;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error("Şikayet detayı çekilemedi.");
+                    return response.text();
+                })
+                .then(html => {
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    console.error(err);
+                    container.innerHTML = `<div class="p-4 font-mono font-black text-red-600 border-3 border-black bg-white">Hata: Detay verisi alınamadı.</div>`;
+                });
+        }
+    </script>
+
+
+</main>
+<!-- END: MainContent -->

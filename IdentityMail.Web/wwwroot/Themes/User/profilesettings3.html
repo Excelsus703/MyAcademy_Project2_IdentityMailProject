@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Profil Ayarları - IdentityMail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#494551",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-highest": "#e6e0e9",
+                        "tertiary-container": "#624000",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#6750a4",
+                        "on-secondary-fixed": "#1f1635",
+                        "inverse-surface": "#322f35",
+                        "primary-container": "#4f378a",
+                        "inverse-primary": "#d0bcff",
+                        "surface-bright": "#fdf7ff",
+                        "on-tertiary-fixed": "#291800",
+                        "outline": "#7a7582",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f8f2fa",
+                        "inverse-on-surface": "#f5eff7",
+                        "on-background": "#1d1b20",
+                        "surface-dim": "#ded8e0",
+                        "tertiary": "#442b00",
+                        "secondary-fixed": "#e9ddff",
+                        "brutal-yellow": "#FFD700",
+                        "secondary": "#63597c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ece6ee",
+                        "brutal-red": "#FF2200",
+                        "on-primary-container": "#E0D2FF",
+                        "brutal-black": "#000000",
+                        "surface": "#fdf7ff",
+                        "on-secondary-container": "#645a7d",
+                        "surface-container": "#f2ecf4",
+                        "primary": "#381e72",
+                        "on-tertiary-container": "#dead66",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#cbc4d2",
+                        "on-surface": "#1d1b20",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#e1d4fd",
+                        "brutal-blue": "#0055FF",
+                        "primary-fixed": "#e9ddff",
+                        "surface-variant": "#e6e0e9",
+                        "on-primary-fixed": "#22005c",
+                        "tertiary-fixed-dim": "#f0be75",
+                        "background": "#fdf7ff",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "tertiary-fixed": "#ffddb1",
+                        "on-secondary-fixed-variant": "#4b4263"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": [
+                            "Space Grotesk"
+                        ],
+                        "headline-lg": [
+                            "Space Grotesk"
+                        ],
+                        "body-lg": [
+                            "Space Grotesk"
+                        ],
+                        "headline-md": [
+                            "Space Grotesk"
+                        ],
+                        "label-md": [
+                            "Space Grotesk"
+                        ],
+                        "label-lg": [
+                            "Space Grotesk"
+                        ]
+                    },
+                    "fontSize": {
+                        "body-md": [
+                            "16px",
+                            {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-lg": [
+                            "32px",
+                            {
+                                "lineHeight": "40px",
+                                "fontWeight": "700"
+                            }
+                        ],
+                        "body-lg": [
+                            "18px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-md": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "fontWeight": "700"
+                            }
+                        ],
+                        "label-md": [
+                            "12px",
+                            {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                            }
+                        ],
+                        "label-lg": [
+                            "14px",
+                            {
+                                "lineHeight": "20px",
+                                "fontWeight": "500"
+                            }
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .brutal-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+
+        .brutal-shadow-lg {
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+
+        .brutal-shadow-none {
+            box-shadow: none !important;
+        }
+
+        .brutal-border {
+            border: 2px solid #000000;
+        }
+
+        .brutal-border-thick {
+            border: 3px solid #000000;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row overflow-x-hidden selection:bg-brutal-yellow selection:text-brutal-black">
+    <!-- Top Navigation Bar (Mobile) -->
+    <header class="md:hidden sticky top-0 z-50 bg-surface dark:bg-surface-container-highest flex justify-between items-center w-full px-margin-mobile py-4 border-b-2 border-brutal-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="flex items-center gap-2">
+            <button class="p-2 brutal-border hover:bg-brutal-yellow hover:text-brutal-black transition-colors active:translate-x-1 active:translate-y-1 active:shadow-none bg-surface">
+                <span class="material-symbols-outlined" data-icon="menu">menu</span>
+            </button>
+            <div class="font-headline-lg text-headline-lg font-black tracking-tighter text-brutal-black dark:text-on-surface">NEO_MAIL</div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 brutal-border bg-surface hover:bg-brutal-yellow hover:text-brutal-black transition-colors active:translate-x-1 active:translate-y-1 active:shadow-none">
+                <span class="material-symbols-outlined" data-icon="search">search</span>
+            </button>
+            <img alt="User Profile" class="w-10 h-10 brutal-border object-cover bg-brutal-yellow" data-alt="Alex Turner profile avatar" src="https://lh3.googleusercontent.com/aida/AEtjO1VQAui8sYl7O_JHsZhyA0sieZOTRXtOWzkryvgZtIcEK-Uzonx2fODq300e24_CAbTu7QpBV6Yco6MiwHpyMsUY_AFV2ENnUbAHQWhkwgziaS7RAPaNTXOgY9GBpQlGZbjl-Q2KFAuDgPGDYaCjNuckxJNTTx-ZTGorU5qojsgKMPxBB4WqmUODIKcwwRaGGNNg78dLsBIVzgNUldjBWmTE8m4FAPqX-yeZkdVf5YrD4akT50zNW0ykMFA">
+        </div>
+    </header>
+    <!-- Side Navigation Bar (Desktop) -->
+    <nav class="hidden md:flex flex-col w-64 h-full fixed left-0 top-0 pt-8 bg-surface dark:bg-surface-container border-r-2 border-brutal-black z-40 pb-8 overflow-y-auto">
+        <div class="px-6 mb-8 flex flex-col items-start">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 bg-brutal-yellow brutal-border flex items-center justify-center brutal-shadow">
+                    <span class="material-symbols-outlined font-bold" data-icon="mail">mail</span>
+                </div>
+                <div class="font-headline-md text-headline-md font-black text-brutal-black">MAIL_BOX</div>
+            </div>
+            <div class="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest">V2.0.4</div>
+        </div>
+        <div class="px-6 mb-8">
+            <button class="w-full bg-primary text-on-primary font-label-lg text-label-lg uppercase font-bold py-3 brutal-border brutal-shadow hover:bg-brutal-yellow hover:text-brutal-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                COMPOSE
+            </button>
+        </div>
+        <div class="flex-1 flex flex-col gap-2 px-4">
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-surface-container-high transition-all font-label-lg text-label-lg uppercase font-bold rounded-none" href="#">
+                <span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+                Inbox
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-surface-container-high transition-all font-label-lg text-label-lg uppercase font-bold rounded-none" href="#">
+                <span class="material-symbols-outlined" data-icon="send">send</span>
+                Sent
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-surface-container-high transition-all font-label-lg text-label-lg uppercase font-bold rounded-none" href="#">
+                <span class="material-symbols-outlined" data-icon="label">label</span>
+                Categories
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-surface-container-high transition-all font-label-lg text-label-lg uppercase font-bold rounded-none" href="#">
+                <span class="material-symbols-outlined" data-icon="drafts">drafts</span>
+                Drafts
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 bg-brutal-yellow text-brutal-black border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:scale-95 duration-100 font-label-lg text-label-lg uppercase font-bold rounded-none" href="#">
+                <span class="material-symbols-outlined" data-icon="manage_accounts" data-weight="fill" style="font-variation-settings: 'FILL' 1;">manage_accounts</span>
+                Ayarlar
+            </a>
+        </div>
+        <div class="px-4 mt-auto pt-8 border-t-2 border-brutal-black mx-4">
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-brutal-red hover:text-white transition-all font-label-lg text-label-lg uppercase font-bold rounded-none brutal-border-transparent hover:brutal-border" href="#">
+                <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                Trash
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-brutal-black hover:bg-brutal-yellow transition-all font-label-lg text-label-lg uppercase font-bold rounded-none brutal-border-transparent hover:brutal-border" href="#">
+                <span class="material-symbols-outlined" data-icon="report">report</span>
+                Spam
+            </a>
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop min-h-screen flex flex-col">
+        <!-- Top App Bar for Desktop Main Area -->
+        <div class="hidden md:flex justify-between items-center mb-stack-lg bg-surface brutal-border p-4 brutal-shadow">
+            <div class="relative w-1/2 max-w-md">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input class="w-full pl-10 pr-4 py-2 brutal-border bg-surface focus:outline-none focus:bg-brutal-yellow focus:ring-0 transition-colors font-body-md" placeholder="Ayar veya hesap parametresi ara..." type="text">
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative" id="notification-container">
+                    <button id="notification-bell-btn" aria-expanded="false" aria-haspopup="true" class="w-10 h-10 brutal-border bg-surface flex items-center justify-center hover:bg-brutal-yellow transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none relative cursor-pointer" title="Bildirimler">
+                        <span class="material-symbols-outlined text-brutal-black font-bold" data-icon="notifications">notifications</span>
+                        <span class="absolute -top-2 -right-2 bg-brutal-red text-white text-xs font-black px-1.5 py-0.5 border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] select-none">3</span>
+                    </button>
+                    <div id="notification-dropdown" class="hidden absolute right-0 top-12 w-80 sm:w-96 bg-surface border-4 border-brutal-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-50 text-left font-body-md">
+                        <div class="p-3 bg-brutal-yellow border-b-4 border-brutal-black flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="font-black text-brutal-black font-headline-md text-base tracking-tight">BİLDİRİMLER</span>
+                                <span class="bg-brutal-black text-white text-xs font-black px-2 py-0.5 border border-brutal-black">3 YENİ</span>
+                            </div>
+                            <a href="#" class="text-xs font-black uppercase text-brutal-black underline hover:text-white transition-colors">Tümünü Gör</a>
+                        </div>
+                        <div class="divide-y-2 divide-brutal-black bg-surface">
+                            <a href="#" class="block p-3 hover:bg-surface-container-high transition-colors bg-surface-container-low">
+                                <div class="flex items-start justify-between gap-2">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 bg-brutal-red border border-brutal-black flex-shrink-0"></span>
+                                        <span class="font-bold text-sm text-brutal-black">Sarah Jenkins</span>
+                                    </div>
+                                    <span class="text-[11px] font-bold text-on-surface-variant uppercase">5 dk önce</span>
+                                </div>
+                                <p class="text-xs text-on-surface font-medium mt-1 line-clamp-1">Re: Asset delivery for marketing site</p>
+                            </a>
+                            <a href="#" class="block p-3 hover:bg-surface-container-high transition-colors">
+                                <div class="flex items-start justify-between gap-2">
+                                    <span class="font-bold text-sm text-brutal-black">Neo Corp Admin</span>
+                                    <span class="text-[11px] font-bold text-on-surface-variant uppercase">42 dk önce</span>
+                                </div>
+                                <p class="text-xs text-on-surface-variant font-medium mt-1 line-clamp-1">Q3 Architectural Planning &amp; System Overhaul</p>
+                            </a>
+                            <a href="#" class="block p-3 hover:bg-error-container/40 transition-colors bg-error-container/20">
+                                <div class="flex items-start justify-between gap-2">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-brutal-red text-sm font-bold">warning</span>
+                                        <span class="font-bold text-sm text-brutal-red uppercase">Sistem Uyarısı</span>
+                                    </div>
+                                    <span class="text-[11px] font-bold text-on-surface-variant uppercase">2 saat önce</span>
+                                </div>
+                                <p class="text-xs text-on-surface font-medium mt-1">Depolama alanı %90 sınırına ulaştı</p>
+                            </a>
+                        </div>
+                        <div class="p-2.5 bg-surface-container-high border-t-2 border-brutal-black text-center">
+                            <button type="button" onclick="document.getElementById('notification-dropdown').classList.add('hidden');" class="w-full py-2 bg-surface hover:bg-brutal-yellow text-brutal-black font-black text-xs uppercase border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 transition-all">
+                                Tüm Bildirimleri Okundu İşaretle
+                            </button>
+                        </div>
+                    </div>
+                </div><button class="w-10 h-10 brutal-border bg-brutal-yellow text-brutal-black flex items-center justify-center transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none" title="Ayarlar">
+                    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                </button>
+                <button class="w-10 h-10 brutal-border bg-surface flex items-center justify-center hover:bg-brutal-yellow transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none" title="Yardım">
+                    <span class="material-symbols-outlined" data-icon="help">help</span>
+                </button>
+                <img alt="User Profile" class="w-10 h-10 brutal-border object-cover cursor-pointer hover:brutal-shadow transition-shadow" data-alt="Alex Turner profile avatar" src="https://lh3.googleusercontent.com/aida/AEtjO1VQAui8sYl7O_JHsZhyA0sieZOTRXtOWzkryvgZtIcEK-Uzonx2fODq300e24_CAbTu7QpBV6Yco6MiwHpyMsUY_AFV2ENnUbAHQWhkwgziaS7RAPaNTXOgY9GBpQlGZbjl-Q2KFAuDgPGDYaCjNuckxJNTTx-ZTGorU5qojsgKMPxBB4WqmUODIKcwwRaGGNNg78dLsBIVzgNUldjBWmTE8m4FAPqX-yeZkdVf5YrD4akT50zNW0ykMFA">
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="mb-stack-lg border-b-4 border-brutal-black pb-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="font-headline-lg text-headline-lg font-black text-brutal-black uppercase tracking-tight">PROFİL AYARLARI</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mt-2 border-l-4 border-primary pl-4 py-1">Hesap bilgilerinizi, güvenlik tercihlerinizi ve görünüm ayarlarınızı yönetin.</p>
+                </div>
+                <div class="flex items-center gap-2 self-start md:self-auto">
+                    <span class="bg-brutal-yellow text-brutal-black font-black uppercase text-label-md px-3 py-1.5 brutal-border brutal-shadow">HESAP AKTİF</span>
+                    <span class="bg-primary text-white font-bold text-label-md px-3 py-1.5 brutal-border brutal-shadow">ID: #98421</span>
+                </div>
+            </div>
+        </header>
+        <!-- Profil Özeti / Avatar Kartı -->
+        <section class="bg-surface brutal-border-thick brutal-shadow p-6 mb-stack-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <div class="relative">
+                    <img alt="Alex Turner Avatar" class="w-28 h-28 object-cover brutal-border-thick brutal-shadow bg-surface-container-high" src="https://lh3.googleusercontent.com/aida/AEtjO1VQAui8sYl7O_JHsZhyA0sieZOTRXtOWzkryvgZtIcEK-Uzonx2fODq300e24_CAbTu7QpBV6Yco6MiwHpyMsUY_AFV2ENnUbAHQWhkwgziaS7RAPaNTXOgY9GBpQlGZbjl-Q2KFAuDgPGDYaCjNuckxJNTTx-ZTGorU5qojsgKMPxBB4WqmUODIKcwwRaGGNNg78dLsBIVzgNUldjBWmTE8m4FAPqX-yeZkdVf5YrD4akT50zNW0ykMFA">
+                    <span class="absolute -bottom-2 -right-2 bg-brutal-yellow text-brutal-black p-1 brutal-border text-xs flex items-center justify-center" title="Doğrulanmış Profil">
+                        <span class="material-symbols-outlined text-sm font-bold">verified</span>
+                    </span>
+                </div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <h2 class="font-headline-md text-headline-md font-black text-brutal-black">Alex Turner</h2>
+                        <span class="bg-brutal-yellow text-brutal-black font-black text-label-md uppercase px-2.5 py-0.5 brutal-border brutal-shadow-none tracking-wider">PRO PLAN</span>
+                    </div>
+                    <p class="font-body-md font-bold text-on-surface-variant">@alexturner</p>
+                    <p class="font-body-md text-on-surface mt-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">mail</span>
+                        alex@identitymail.io
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                <button class="flex-1 sm:flex-initial px-5 py-2.5 bg-brutal-yellow text-brutal-black brutal-border brutal-shadow font-bold text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-lg">photo_camera</span>
+                    Fotoğrafı Değiştir
+                </button>
+                <button class="flex-1 sm:flex-initial px-5 py-2.5 bg-surface text-brutal-red brutal-border brutal-shadow font-bold text-label-lg uppercase hover:bg-brutal-red hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-lg">delete</span>
+                    Kaldır
+                </button>
+            </div>
+        </section>
+        <!-- Form Izgarası (Grid Layout) -->
+        <div class="space-y-stack-lg">
+            <!-- Form Bölümü 1: Kişisel Bilgiler -->
+            <section class="bg-surface brutal-border-thick brutal-shadow p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-black">
+                    <div class="w-10 h-10 bg-primary text-white brutal-border flex items-center justify-center font-bold">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md font-black text-brutal-black uppercase">Kişisel Bilgiler</h3>
+                        <p class="font-label-md text-on-surface-variant">Genel kimlik ve erişim bilgilerinizi güncelleyin.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Ad</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" value="Alex">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Soyad</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" value="Turner">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Kullanıcı Adı</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 font-black text-on-surface-variant">@</span>
+                            <input class="w-full pl-9 pr-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="text" value="alexturner">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">E-posta</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <div class="relative flex-1">
+                                <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="email" value="alex@identitymail.io">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 bg-brutal-yellow text-brutal-black text-xs font-black px-2 py-0.5 brutal-border select-none">
+                                    DOĞRULANMAMIŞ
+                                </span>
+                            </div>
+                            <button type="button" class="px-4 py-3 bg-brutal-yellow text-brutal-black brutal-border-thick brutal-shadow font-bold text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer">
+                                <span class="material-symbols-outlined text-base font-bold">mark_email_read</span>
+                                Doğrula
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Telefon</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" type="tel" value="+90 555 019 2834">
+                    </div>
+                </div>
+            </section>
+            <!-- Form Bölümü 2: Güvenlik ve Şifre -->
+            <section class="bg-surface brutal-border-thick brutal-shadow p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-black">
+                    <div class="w-10 h-10 bg-brutal-blue text-white brutal-border flex items-center justify-center font-bold">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md font-black text-brutal-black uppercase">Güvenlik ve Şifre</h3>
+                        <p class="font-label-md text-on-surface-variant">Şifre değişimleri ve iki adımlı kimlik doğrulama ayarları.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Mevcut Şifre</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="••••••••••••" type="password">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Yeni Şifre</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="Yeni şifreniz" type="password">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">Şifre Tekrarı</label>
+                        <input class="w-full px-4 py-3 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" placeholder="Şifrenizi doğrulayın" type="password">
+                    </div>
+                </div>
+                <!-- 2FA Kartı -->
+                <div class="bg-surface-container-low brutal-border-thick p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-brutal-black text-brutal-yellow brutal-border flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined font-bold">verified_user</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold font-body-lg text-brutal-black">İki Adımlı Doğrulama (2FA)</h4>
+                            <p class="text-on-surface-variant text-body-md">Hesabınızı ek bir güvenlik katmanı ile koruyun (Google Authenticator veya SMS).</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer select-none">
+                        <input checked="" class="sr-only peer" type="checkbox">
+                        <div class="w-14 h-8 bg-surface-variant peer-focus:outline-none brutal-border peer peer-checked:after:translate-x-full peer-checked:after:border-brutal-black after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-brutal-black after:border-2 after:border-brutal-black after:h-6 after:w-6 after:transition-all peer-checked:bg-brutal-yellow"></div>
+                        <span class="ml-3 font-bold text-label-lg uppercase text-brutal-black">AKTİF</span>
+                    </label>
+                </div>
+            </section>
+            <!-- Form Bölümü 3: Bildirim ve İletişim Tercihleri -->
+            <section class="bg-surface brutal-border-thick brutal-shadow p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-black">
+                    <div class="w-10 h-10 bg-brutal-yellow text-brutal-black brutal-border flex items-center justify-center font-bold">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md font-black text-brutal-black uppercase">Bildirim ve İletişim Tercihleri</h3>
+                        <p class="font-label-md text-on-surface-variant">Posta bildirimlerini ve e-posta altbilgisi detaylarınızı yapılandırın.</p>
+                    </div>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <label class="flex items-center justify-between p-4 brutal-border bg-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input checked="" class="w-5 h-5 text-brutal-black brutal-border rounded-none focus:ring-0 focus:ring-offset-0" type="checkbox">
+                            <span class="font-bold text-body-md text-brutal-black">Masaüstü Bildirimleri</span>
+                        </div>
+                        <span class="text-label-md text-on-surface-variant hidden sm:inline">Anlık gelen mailler ekranda belirecektir</span>
+                    </label>
+                    <label class="flex items-center justify-between p-4 brutal-border bg-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input checked="" class="w-5 h-5 text-brutal-black brutal-border rounded-none focus:ring-0 focus:ring-offset-0" type="checkbox">
+                            <span class="font-bold text-body-md text-brutal-black">Haftalık Bülten ve Özet Raporu</span>
+                        </div>
+                        <span class="text-label-md text-on-surface-variant hidden sm:inline">Pazartesi sabahları haftalık aktivite raporu</span>
+                    </label>
+                    <label class="flex items-center justify-between p-4 brutal-border bg-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input checked="" class="w-5 h-5 text-brutal-black brutal-border rounded-none focus:ring-0 focus:ring-offset-0" type="checkbox">
+                            <span class="font-bold text-body-md text-brutal-black">Güvenlik Uyarıları ve Olağandışı Giriş Bildirimleri</span>
+                        </div>
+                        <span class="text-label-md text-on-surface-variant hidden sm:inline">Yeni cihaz oturumlarında acil SMS ve mail</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="block font-bold text-label-lg uppercase text-brutal-black mb-2">E-posta İmzası</label>
+<textarea class="w-full p-4 brutal-border-thick bg-surface font-body-md focus:bg-brutal-yellow focus:outline-none transition-colors" rows="3">--
+Alex Turner | Creative Director &amp; Technologist
+IdentityMail Pro Member
+"Keep it bold, keep it raw."</textarea>
+                </div>
+            </section>
+            <!-- Form Bölümü 4: Tehlikeli Bölge -->
+            <section class="bg-surface border-4 border-brutal-red brutal-shadow p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-brutal-red">
+                    <div class="w-10 h-10 bg-brutal-red text-white brutal-border flex items-center justify-center font-bold">
+                        <span class="material-symbols-outlined">warning</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-headline-md font-black text-brutal-red uppercase">Tehlikeli Bölge</h3>
+                        <p class="font-label-md text-on-surface-variant">Bu eylemler geri alınamaz ve kalıcı veri kaybına sebep olabilir.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-error-container/40 brutal-border border-brutal-red mb-4">
+                    <div>
+                        <h4 class="font-bold text-body-md text-brutal-black">Hesabı Geçici Olarak Dondur</h4>
+                        <p class="text-label-md text-on-surface-variant">Giriş yapana kadar tüm e-posta akışınız durdurulur ve arşivlenir.</p>
+                    </div>
+                    <button class="px-5 py-2.5 bg-surface text-brutal-black brutal-border font-bold text-label-lg uppercase hover:bg-brutal-yellow transition-all whitespace-nowrap active:translate-x-1 active:translate-y-1">
+                        Hesabı Dondur
+                    </button>
+                </div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-error-container/40 brutal-border border-brutal-red">
+                    <div>
+                        <h4 class="font-bold text-body-md text-brutal-red">Hesabı Kalıcı Olarak Sil</h4>
+                        <p class="text-label-md text-on-surface-variant">Tüm mesajlarınız, anahtarlarınız ve dosyalarınız anında silinir.</p>
+                    </div>
+                    <button class="px-5 py-2.5 bg-brutal-red text-white brutal-border font-bold text-label-lg uppercase hover:bg-red-700 transition-all whitespace-nowrap active:translate-x-1 active:translate-y-1">
+                        Hesabı Sil
+                    </button>
+                </div>
+            </section>
+            <!-- Aksiyon Butonları (Kaydet / İptal) -->
+            <div class="sticky bottom-4 z-30 bg-surface brutal-border-thick brutal-shadow-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2 text-on-surface-variant font-label-md">
+                    <span class="material-symbols-outlined text-sm">info</span>
+                    Son güncelleme: Bugün 14:23
+                </div>
+                <div class="flex items-center gap-4 w-full sm:w-auto">
+                    <button class="flex-1 sm:flex-initial px-6 py-3 bg-surface text-brutal-black brutal-border brutal-shadow font-bold text-label-lg uppercase hover:bg-surface-container-high transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
+                        İptal
+                    </button>
+                    <button class="flex-1 sm:flex-initial px-8 py-3 bg-brutal-yellow text-brutal-black brutal-border-thick brutal-shadow font-black text-label-lg uppercase hover:bg-yellow-400 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base font-black">save</span>
+                        Değişiklikleri Kaydet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        (function () {
+            const btn = document.getElementById('notification-bell-btn');
+            const dropdown = document.getElementById('notification-dropdown');
+            const container = document.getElementById('notification-container');
+            if (btn && dropdown && container) {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isHidden = dropdown.classList.contains('hidden');
+                    if (isHidden) {
+                        dropdown.classList.remove('hidden');
+                        btn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        dropdown.classList.add('hidden');
+                        btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                document.addEventListener('click', function (e) {
+                    if (!container.contains(e.target)) {
+                        dropdown.classList.add('hidden');
+                        btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

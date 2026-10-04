@@ -1,0 +1,99 @@
+﻿@*
+    Admin Complaint MessageDetail
+*@
+
+@model UserMessage
+
+<div class="border-3 border-black bg-white p-5 shadow-[6px_6px_0px_#000] my-6">
+    <!-- BAŞLIK ALANI -->
+    <div class="flex items-center justify-between pb-3 border-b-3 border-black mb-4">
+        <h2 class="font-black text-xl text-black uppercase">
+            ■ SEÇİLİ ŞİKAYET DETAYI: #SHK-@Model.Id (@(Model.Subject ?? "KONUSUZ MESAJ"))
+        </h2>
+        <div class="font-mono text-xs font-bold text-neutral-600">
+            GÜVENLİK ANALİSTİ: SEC-OP-449 | TEHDİT SEVİYESİ: SEV-1
+        </div>
+    </div>
+
+    <!-- ÜST İKİLİ KUTU (BİLDİREN VE ŞÜPHELİ) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+        <!-- BİLDİREN KULLANICI (RECEIVER) -->
+        <div class="border-3 border-black p-4 bg-neutral-50 shadow-[3px_3px_0px_#000]">
+            <span class="font-mono text-[11px] font-black uppercase bg-black text-white px-2 py-0.5 mb-3 inline-block">
+                BİLDİREN KULLANICI (ŞİKAYET EDEN)
+            </span>
+            <div class="flex items-center gap-3 mb-3">
+                <img src="@Model.Receiver.ProfileImageUrl" class="w-12 h-12 rounded-full border-2 border-black object-cover shrink-0" />
+                <div>
+                    <div class="font-black text-sm uppercase">@Model.Receiver.FirstName @Model.Receiver.LastName</div>
+                    <div class="font-mono text-xs text-neutral-600">@Model.Receiver.Email</div>
+                </div>
+            </div>
+            <div class="p-2 border-2 border-black bg-white font-mono text-xs">
+                @if (string.IsNullOrWhiteSpace(Model.ComplaintReason))
+                {
+                    <p>Şikayet Sebebi Yazılmamış</p>
+                }
+                else
+                {
+                    <p>Kullanıcı tarafından şikayet edilen mesaj metni: @Model.Body</p>
+                }
+            </div>
+        </div>
+
+        <!-- ŞÜPHELİ GÖNDERİCİ (SENDER) -->
+        <div class="border-3 border-black p-4 bg-neutral-50 shadow-[3px_3px_0px_#000]">
+            <span class="font-mono text-[11px] font-black uppercase bg-red-500 text-white px-2 py-0.5 mb-3 inline-block">
+                ŞÜPHELİ GÖNDERİCİ (ŞİKAYET EDİLEN)
+            </span>
+            <div class="flex items-center gap-3 mb-3">
+                <img src="@Model.Sender.ProfileImageUrl" class="w-12 h-12 rounded-full border-2 border-black object-cover shrink-0" />
+                <div>
+                    <div class="font-black text-sm uppercase">@Model.Sender.FirstName @Model.Sender.LastName</div>
+                    <div class="font-mono text-xs text-neutral-600">@Model.Sender.Email</div>
+                    <div class="font-mono text-xs text-neutral-600">Gönderim Tarihi: @Model.SendDate.ToString("g")</div>
+                </div>
+            </div>
+            <div class="p-2 border-2 border-black bg-white font-mono text-xs">
+                "Kullanıcı tarafından şikayet edilen mesaj metni: @Model.Body"
+            </div>
+        </div>
+
+    </div>
+    <!-- ALT AKSİYON BUTONLARI -->
+    <div class="pt-3 border-t-3 border-black flex flex-wrap items-center justify-between gap-3">
+
+        <div class="font-mono text-xs font-bold text-neutral-600">
+            🔒 Güvenlik protokolü seçilen aksiyonu derhal uygulayacaktır.
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+            <!-- ASILSIZ BİLDİRİM -->
+            <form asp-controller="Admin" asp-action="UpdateComplaintStatus" method="post" class="inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <input type="hidden" name="status" value="false" />
+                <button type="submit" class="px-3 py-1.5 bg-white hover:bg-neutral-100 text-black border-2 border-black font-mono text-xs font-black uppercase shadow-[2px_2px_0px_#000] active:translate-y-0.5 transition-all">
+                    ✕ ASILSIZ BİLDİRİM
+                </button>
+            </form>
+
+            <!-- ÇÖZÜLDÜ -->
+            <form asp-controller="Admin" asp-action="UpdateComplaintStatus" method="post" class="inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <input type="hidden" name="status" value="resolve" />
+                <button type="submit" class="px-3 py-1.5 bg-brutal-yellow hover:bg-yellow-400 text-black border-2 border-black font-mono text-xs font-black uppercase shadow-[2px_2px_0px_#000] active:translate-y-0.5 transition-all">
+                    ✓ ÇÖZÜLDÜ OLARAK İŞARETLE
+                </button>
+            </form>
+
+            <!-- KARANTİNAYA AL / KABUL ET -->
+            <form asp-controller="Admin" asp-action="UpdateComplaintStatus" method="post" class="inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <input type="hidden" name="status" value="accept" />
+                <button type="submit" class="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white border-2 border-black font-mono text-xs font-black uppercase shadow-[2px_2px_0px_#000] active:translate-y-0.5 transition-all">
+                    🛑 KARANTİNAYA AL / KABUL ET
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

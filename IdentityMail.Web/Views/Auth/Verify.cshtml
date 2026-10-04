@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+
+<div class="w-full max-w-[500px] bg-white brutal-border-4 brutal-card-shadow p-6 sm:p-9 relative z-10">
+
+    <!-- Header / Brand matching Register Screen -->
+    <div class="flex items-center gap-3 mb-2">
+        <span class="material-symbols-outlined text-3xl font-black text-black">mail</span>
+        <span class="text-2xl sm:text-3xl font-black tracking-tight text-black uppercase">CyberMail</span>
+    </div>
+    <h1 class="text-xl sm:text-2xl font-black uppercase text-black tracking-tight mb-5">
+        E-POSTA DOĞRULansın mı ?
+    </h1>
+    <div class="w-full h-[3px] bg-black mb-6"></div>
+
+    <form asp-controller="Auth" asp-action="SendCode" method="post">
+        <input type="hidden" name="email" value="@ViewBag.NewUserEmail" />
+
+        <button type="submit" class="w-full bg-[#fdd985] hover:bg-[#fed36e] active:bg-[#eec45c] text-black font-black uppercase text-base sm:text-lg py-3.5 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wider mb-3">
+            <span>DOĞRULA</span>
+            <span class="material-symbols-outlined font-black">arrow_forward</span>
+        </button>
+    </form>
+    <div class="flex flex-col gap-3 mb-5">
+        <a href="/Auth/Login/" class="w-full bg-white hover:bg-[#f0ecf4] text-black font-bold uppercase text-sm sm:text-base py-3 px-4 brutal-border brutal-btn-shadow flex items-center justify-center gap-2 tracking-wide transition-all">
+            <span>Şimdilik Atla (Daha Sonra Doğrula)</span>
+            <span class="material-symbols-outlined text-base font-bold">arrow_forward</span>
+        </a>
+        <div class="flex items-start gap-2 bg-[#f8f6fa] p-3 brutal-border text-xs text-neutral-800 leading-snug">
+            <span class="material-symbols-outlined text-base text-[#4f378a] shrink-0 font-bold">info</span>
+            <p>
+                <span class="font-bold text-black">İpucu:</span>
+                Doğrulamayı şimdi atlayabilirsiniz; gelen kutunuzu hemen inceleyebilir, hesabınızı daha sonra Ayarlar'dan doğrulayabilirsiniz.
+            </p>
+        </div>
+    </div>
+</div>

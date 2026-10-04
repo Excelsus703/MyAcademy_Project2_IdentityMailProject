@@ -1,0 +1,115 @@
+﻿@model List<UserMessage>
+@{
+    ViewData["Title"] = "Gelen Kutusu";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<main class="flex-1 mt-16 flex h-[calc(100vh-64px)] overflow-hidden">
+    <div class="w-[380px] flex flex-col brutal-border-r bg-white h-full overflow-y-auto" id="messageList">
+        <div class="p-md brutal-border-b flex justify-between items-center bg-gray-100">
+            <h2 class="font-h2 text-h2 font-bold uppercase">@ViewData["Title"]</h2>
+            <div class="relative inline-block">
+                <select onchange="location = this.value;"
+                        class="bg-white brutal-border font-bold text-sm uppercase p-1 cursor-pointer outline-none">
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "date_desc" })"
+                            selected="@(ViewBag.CurrentSort == "date_desc" || string.IsNullOrEmpty(ViewBag.CurrentSort as string) ? "selected" : null)">
+                        📅 En Yeni
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "date_asc" })"
+                            selected="@(ViewBag.CurrentSort == "date_asc" ? "selected" : null)">
+                        📅 En Eski
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "subject_asc" })"
+                            selected="@(ViewBag.CurrentSort == "subject_asc" ? "selected" : null)">
+                        🔤 Konu (A-Z)
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "subject_desc" })"
+                            selected="@(ViewBag.CurrentSort == "subject_desc" ? "selected" : null)">
+                        🔤 Konu (Z-A)
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "unread" })"
+                            selected="@(ViewBag.CurrentSort == "unread" ? "selected" : null)">
+                        ✉️ Okunmayanlar
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "read" })"
+                            selected="@(ViewBag.CurrentSort == "read" ? "selected" : null)">
+                        📖 Okunanlar
+                    </option>
+
+                    <option value="@Url.Action("Index", "Message", new { sortBy = "important" })"
+                            selected="@(ViewBag.CurrentSort == "important" ? "selected" : null)">
+                        ⭐ Önemliler
+                    </option>
+                </select>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            bool isActive = ViewBag.SelectedId != null && (int)ViewBag.SelectedId == item.Id;
+
+            string cssClass;
+
+            if (isActive)
+            {
+                cssClass = "p-md brutal-border-b bg-brutal-yellow cursor-pointer relative group border-l-[8px] border-l-black hover:shadow-[8px_8px_0_0_#000]";
+            }
+            else if (item.isRead != true)
+            {
+                cssClass = "p-md brutal-border-b bg-white hover:bg-gray-50 cursor-pointer border-l-[8px] border-l-brutal-blue hover:shadow-[4px_4px_0_0_#000]";
+            }
+            else
+            {
+                cssClass = "p-md brutal-border-b bg-gray-100 hover:bg-gray-50 cursor-pointer opacity-70 hover:shadow-[4px_4px_0_0_#000]";
+            }
+
+            <a href="@Url.Action("Index", "Message", new { id = item.Id, sortBy = ViewBag.CurrentSort })" class="@cssClass">
+                <div class="flex justify-between items-start mb-sm">
+                    <span class="font-label font-bold text-label uppercase text-black">@item.Sender.FirstName @item.Sender.LastName</span>
+                    <span class="font-label font-bold text-label text-black">@item.SendDate.ToLongDateString()</span>
+                </div>
+                @{
+                    var shortSubject = @item.Subject.Length > 30 ? @item.Subject.Substring(0, 30) + "..." : @item.Subject;
+                }
+                <h3 class="font-body-lg text-body-lg font-bold text-black leading-tight mb-xs uppercase">@shortSubject</h3>
+                <p class="font-body-sm text-body-sm font-bold text-black truncate">
+                    @{
+                        var plainText = System.Text.RegularExpressions.Regex.Replace(item.Body ?? "", "<.*?>", string.Empty);
+                        var preview = plainText.Length > 50 ? plainText.Substring(0, 30) + "..." : plainText;
+                    }
+                    @preview
+                </p>
+            </a>
+        }
+    </div>
+
+    <!-- Message View -->
+    @await Component.InvokeAsync("UserMessageDetail", new { id = ViewBag.SelectedId })
+
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const listContainer = document.getElementById("messageList");
+
+        if (listContainer) {
+            // 1. Sayfa yüklendiğinde hafızadaki scroll konumuna git
+            const savedScrollTop = sessionStorage.getItem("messageListScrollTop");
+            if (savedScrollTop !== null) {
+                listContainer.scrollTop = parseInt(savedScrollTop, 10);
+            }
+
+            // 2. Liste içindeki herhangi bir mesaj linkine tıklandığında konumu kaydet
+            listContainer.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    sessionStorage.setItem("messageListScrollTop", listContainer.scrollTop);
+                });
+            });
+        }
+    });
+</script>

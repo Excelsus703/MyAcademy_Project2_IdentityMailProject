@@ -1,0 +1,98 @@
+﻿@*
+    Notification Count
+*@
+
+@model List<UserMessage>
+
+<div class="flex items-center gap-4">
+    <div class="relative" id="notification-container">
+        <button id="notification-bell-btn" aria-expanded="false" aria-haspopup="true" class="w-10 h-10 brutal-border bg-surface flex items-center justify-center hover:bg-brutal-yellow transition-colors brutal-shadow active:translate-x-1 active:translate-y-1 active:shadow-none relative cursor-pointer" title="Bildirimler">
+            <span class="material-symbols-outlined text-brutal-black font-bold" data-icon="notifications">notifications</span>
+            @if (ViewBag.TotalUnreadCount != null && (int)ViewBag.TotalUnreadCount > 0)
+            {
+                <span class="absolute -top-2 -right-2 bg-brutal-red text-white text-xs font-black px-1.5 py-0.5 border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] select-none">@ViewBag.TotalUnreadCount</span>
+            }
+        </button>
+        <div id="notification-dropdown" class="hidden absolute right-0 top-12 w-80 sm:w-96 bg-surface border-4 border-brutal-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-50 text-left font-body-md">
+            <div class="p-3 bg-brutal-yellow border-b-4 border-brutal-black flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="font-black text-brutal-black font-headline-md text-base tracking-tight">BİLDİRİMLER</span>
+                    @if (ViewBag.TotalUnreadCount != null && (int)ViewBag.TotalUnreadCount > 0)
+                    {
+                        <span class="bg-brutal-black text-white text-xs font-black px-2 py-0.5 border border-brutal-black">@ViewBag.TotalUnreadCount Yeni Mesaj</span>
+                    }
+                </div>
+            </div>
+            <div class="divide-y-2 divide-brutal-black bg-surface">
+                @if (Model != null && Model.Count > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <a href="/Message/Index/@item.Id/" class="block p-3 hover:bg-surface-container-high transition-colors bg-surface-container-low">
+                            <div class="flex items-start justify-between gap-2">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 bg-brutal-red border border-brutal-black flex-shrink-0"></span>
+                                    <span class="font-bold text-sm text-brutal-black">@item.Sender.FirstName @item.Sender.LastName</span>
+                                </div>
+                                <span class="text-[11px] font-bold text-on-surface-variant uppercase">@item.SendDate.ToString("g")</span>
+                            </div>
+                            <p class="text-xs text-on-surface font-medium mt-1 line-clamp-1">@item.Subject</p>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <div class="p-6 text-center">
+                        <span class="material-symbols-outlined text-3xl text-brutal-black mb-1">notifications_off</span>
+                        <p class="font-black text-xs uppercase text-brutal-black tracking-wide">bildirim yok</p>
+                    </div>
+                }
+
+            </div>
+            <div class="p-2.5 bg-surface-container-high border-t-2 border-brutal-black text-center">
+                @{
+                    string text;
+
+                    if (Model.Count > 0)
+                    {
+                        text = "Bütün Mesajları Gör";
+                    }
+                    else
+                    {
+                        text = "Mesajlara Git";
+                    }
+                }
+                <a href="/Message/Index/" class="block text-center w-full py-2 bg-surface hover:bg-brutal-yellow text-brutal-black font-black text-xs uppercase border-2 border-brutal-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 transition-all">
+                    @text
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const btn = document.getElementById('notification-bell-btn');
+        const dropdown = document.getElementById('notification-dropdown');
+        const container = document.getElementById('notification-container');
+        if (btn && dropdown && container) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isHidden = dropdown.classList.contains('hidden');
+                if (isHidden) {
+                    dropdown.classList.remove('hidden');
+                    btn.setAttribute('aria-expanded', 'true');
+                } else {
+                    dropdown.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+            document.addEventListener('click', function (e) {
+                if (!container.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    })();
+</script>

@@ -1,0 +1,255 @@
+﻿@model List<RoleListViewModel>
+
+@{
+    ViewData["Title"] = "Roller";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto space-y-6 bg-white">
+    <!-- Header Controls Row -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-3 border-black pb-5">
+        <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-black uppercase tracking-tight text-black">@ViewData["Title"]</h1>
+            <span class="bg-brutal-purple text-black font-black text-xs px-3 py-1 border-3 border-black shadow-brutal-sm uppercase">@ViewBag.RoleCount ROLES</span>
+        </div>
+    </div>
+    <!-- Clean Neobrutalist Table Container -->
+    <div class="bg-white border-3 border-black shadow-brutal overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-white border-b-3 border-black text-sm font-black uppercase tracking-wider">
+                    <tr>
+                        <th class="p-4 border-r-3 border-black">Rol Adı</th>
+                        <th class="p-4 border-r-3 border-black">Kullanıcı Sayısı</th>
+                        <th class="p-4 border-r-3 border-black">Yetkileri</th>
+                        <th class="p-4 text-right">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y-3 divide-black text-sm font-bold">
+                    @{
+                        string color = "";
+                        string userCountColor = "";
+                        string roleInıtıals = "";
+                        string roleDescription = "";
+
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        switch (item.Name)
+                        {
+                            case "Süper Admin":
+                                color = "bg-[#FF6B6B]";
+                                userCountColor = "text-white";
+                                roleInıtıals = "SA";
+                                roleDescription = "Tam Yetki. Site/Uygulama Sahibi ve Rol Atama";
+                                break;
+                            case "Admin":
+                                color = "bg-brutal-yellow";
+                                userCountColor = "text-black";
+                                roleInıtıals = "AD";
+                                roleDescription = "Sınırlı Yetki. İstatistiklere Göz Atabilir ve Şikayetleri Okuyabilir.";
+                                break;
+                            case "Standart Kullanıcı":
+                                color = "bg-brutal-green";
+                                userCountColor = "text-black";
+                                roleInıtıals = "SK";
+                                roleDescription = "Hesap Oluşturulduğu Anda Varsayılan Kullanıcı.";
+                                break;
+                            default:
+                                color = "bg-brutal-blue-light";
+                                userCountColor = "text-black";
+                                break;
+                        }
+
+                        <tr class="hover:bg-neutral-50 transition-colors">
+                            <td class="p-4 border-r-3 border-black">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 @color border-3 border-black flex items-center justify-center font-black text-sm shrink-0 shadow-brutal-sm">@roleInıtıals</div>
+                                    <div>
+                                        <div class="font-black text-sm uppercase">@item.Name</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4 border-r-3 border-black">
+                                <span class="@color @userCountColor font-mono text-[14px] font-black px-2 py-0.5 border-2 border-black uppercase shadow-brutal-sm">@item.UserCount Users</span>
+                            </td>
+                            <td class="p-4 border-r-3 border-black text-[14px] text-neutral-800 font-black">@roleDescription</td>
+                            <td class="p-4 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <button class="px-3 py-1.5 bg-neutral-200 border-3 border-black text-sm font-bold uppercase cursor-not-allowed opacity-80 flex items-center gap-1 shadow-brutal-sm">
+                                        <span>Kilitli</span> <span>🔒</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<!-- END: MainContent -->
+<!-- Visual Drawer / Add Role Form Card -->
+@* <section class="mt-8 bg-white border-3 border-black p-6 shadow-brutal" data-purpose="create-role-drawer">
+    <div class="flex items-center justify-between border-b-2 border-black pb-3 mb-5">
+        <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-brutal-yellow border border-black inline-block"></span>
+            <h3 class="text-base font-black uppercase tracking-wide">QUICK CONFIGURE: CREATE NEW CUSTOM ROLE</h3>
+        </div>
+        <span class="text-[11px] font-bold text-neutral-500 uppercase">ACCESS CONTROL ENGINE v4.2</span>
+    </div>
+    <form class="space-y-6" onsubmit="event.preventDefault();">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Role Name -->
+            <div>
+                <label class="block text-xs font-black uppercase mb-1">ROLE DISPLAY NAME *</label>
+                <input class="w-full text-xs font-bold uppercase py-2 px-3 border-2 border-black brutal-input" placeholder="e.g. Compliance Auditor" type="text" />
+            </div>
+            <!-- Role Slug -->
+            <div>
+                <label class="block text-xs font-black uppercase mb-1">SYSTEM SLUG (IDENTIFIER) *</label>
+                <input class="w-full text-xs font-mono font-bold py-2 px-3 border-2 border-black brutal-input bg-neutral-50" placeholder="role:compliance_auditor" type="text" />
+            </div>
+            <!-- Role Type -->
+            <div>
+                <label class="block text-xs font-black uppercase mb-1">CATEGORY CLASSIFICATION</label>
+                <select class="w-full text-xs font-bold uppercase py-2 px-3 border-2 border-black brutal-input cursor-pointer bg-white">
+                    <option>CUSTOM HUMAN OPERATOR</option>
+                    <option>API SERVICE BOT</option>
+                    <option>PARTNER INTEGRATION</option>
+                </select>
+            </div>
+        </div>
+        <!-- Description -->
+        <div>
+            <label class="block text-xs font-black uppercase mb-1">ROLE SCOPE &amp; BUSINESS DESCRIPTION</label>
+            <input class="w-full text-xs font-medium py-2 px-3 border-2 border-black brutal-input" placeholder="State clear boundary responsibilities and who qualifies for this role assignment..." type="text" />
+        </div>
+        <!-- Permission Checkbox Matrix Categorized -->
+        <div>
+            <label class="block text-xs font-black uppercase mb-2">ASSIGN PERMISSIONS BY CATEGORY</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Category: Users -->
+                <div class="border-2 border-black p-3 bg-neutral-50">
+                    <div class="font-black text-xs uppercase border-b-2 border-black pb-1 mb-2.5 flex items-center justify-between">
+                        <span>USERS &amp; ACCOUNTS</span>
+                        <span class="text-[10px] bg-white px-1 border border-black">4 OPTS</span>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>users.read</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>users.write</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>users.delete</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>users.impersonate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Category: Mail Engine -->
+                <div class="border-2 border-black p-3 bg-neutral-50">
+                    <div class="font-black text-xs uppercase border-b-2 border-black pb-1 mb-2.5 flex items-center justify-between">
+                        <span>MAIL ENGINE</span>
+                        <span class="text-[10px] bg-white px-1 border border-black">4 OPTS</span>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>mail.broadcast</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>mail.trace</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>mail.purge_spool</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>smtp.relay_config</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Category: Security & Logs -->
+                <div class="border-2 border-black p-3 bg-neutral-50">
+                    <div class="font-black text-xs uppercase border-b-2 border-black pb-1 mb-2.5 flex items-center justify-between">
+                        <span>SECURITY &amp; LOGS</span>
+                        <span class="text-[10px] bg-white px-1 border border-black">4 OPTS</span>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>logs.view</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>security.audit</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>firewall.modify</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>dkim.regenerate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Category: Analytics & System -->
+                <div class="border-2 border-black p-3 bg-neutral-50">
+                    <div class="font-black text-xs uppercase border-b-2 border-black pb-1 mb-2.5 flex items-center justify-between">
+                        <span>ANALYTICS &amp; API</span>
+                        <span class="text-[10px] bg-white px-1 border border-black">4 OPTS</span>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input checked="" class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>metrics.realtime</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>metrics.export</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>tokens.issue</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase cursor-pointer">
+                            <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" type="checkbox" />
+                            <span>system.shutdown</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Drawer Submit Actions -->
+        <div class="flex items-center justify-between pt-4 border-t-2 border-black">
+            <div class="flex items-center gap-2">
+                <input class="rounded-none border-2 border-black text-black focus:ring-0 w-4 h-4" id="set-default" type="checkbox" />
+                <label class="text-xs font-bold uppercase cursor-pointer select-none" for="set-default">
+                    SET AS DEFAULT FOR FUTURE REGISTERED USERS
+                </label>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="px-4 py-2 bg-white border-2 border-black font-bold text-xs uppercase brutal-btn" type="reset">
+                    CLEAR ALL
+                </button>
+                <button class="px-6 py-2 bg-brutal-yellow border-2 border-black font-black text-xs uppercase shadow-brutal brutal-btn" type="submit">
+                    SAVE &amp; DEPLOY ROLE
+                </button>
+            </div>
+        </div>
+    </form>
+</section> *@
+<!-- END: CreateRoleModalSection -->

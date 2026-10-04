@@ -1,0 +1,52 @@
+﻿@*
+    Category Message List Default
+*@
+
+@model List<UserMessage>
+
+
+@if (!Model.Any())
+{
+    <div class="flex-1 flex flex-col bg-white h-full overflow-y-auto p-lg relative">
+        <div class="mb-lg pb-lg">
+            <h1 class="font-h1 text-h1 font-black uppercase text-black mb-md bg-brutal-yellow inline-block brutal-border p-2 shadow-[8px_8px_0_0_#000]">Bu Kategoride Henüz Mesaj Bulunmuyor...</h1>
+        </div>
+    </div>
+}
+else
+{
+    @foreach (var item in Model)
+    {
+        <a asp-controller="Message" asp-action="Index" asp-route-id="@item.Id" class="bg-surface brutal-border-thick brutal-shadow p-4 md:p-6 flex flex-col md:flex-row gap-4 hover:bg-brutal-yellow transition-colors group cursor-pointer active:translate-x-1 active:translate-y-1 active:brutal-shadow-none relative">
+            <div class="absolute left-0 top-0 bottom-0 w-2 bg-primary"></div>
+            <div class="flex-shrink-0 flex items-center gap-4 pl-4 md:pl-2">
+                <div class="w-12 h-12 rounded-none brutal-border bg-primary-container flex items-center justify-center text-on-primary-container font-headline-md">
+                    @{
+                        var photoPath = !string.IsNullOrEmpty(item?.Sender.ProfileImageUrl) ? item.Sender.ProfileImageUrl : "/images/default-avatar.jpg";
+                    }
+                    <img class="w-full h-full" src="@photoPath">
+                </div>
+            </div>
+            <div class="flex-grow flex flex-col justify-center min-w-0">
+                <div class="flex justify-between items-baseline mb-1">
+                    <h4 class="font-bold font-body-lg text-body-lg truncate pr-4 text-brutal-black">
+                        @item.Sender.FirstName @item.Sender.LastName
+                    </h4>
+                    <span class="text-label-md font-label-md font-bold whitespace-nowrap bg-brutal-black text-white px-2 py-0.5">
+                        @item.SendDate.ToString("HH:mm - dd/MM/yyyy")
+                    </span>
+                </div>
+                <h5 class="font-bold text-body-md font-body-md truncate mb-1">
+                    @item.Subject
+                </h5>
+                <p class="text-on-surface-variant text-body-md font-body-md truncate group-hover:text-brutal-black transition-colors">
+                    @{
+                        var plainText = System.Text.RegularExpressions.Regex.Replace(item.Body ?? "", "<.*?>", string.Empty);
+                        var preview = plainText.Length > 90 ? plainText.Substring(0, 90) + "..." : plainText;
+                    }
+                    @preview
+                </p>
+            </div>
+        </a>
+    }
+}
